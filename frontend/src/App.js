@@ -8,14 +8,16 @@ import {
 } from "react-router-dom";
 
 import Families from "./components/Families";
-import FamilyMembers from "./components/FamilyMembers";
 import FamilyTree from "./components/FamilyTree";
 import LoginForm from "./components/LoginForm";
 import Home from "./components/Home";
-import NavBar from "./components/NavigationBar";
+import NavBar from "./components/NavBar";
+import People from "./components/People";
+import Person from "./components/Person";
 
 import loginService from "./services/login";
 import personService from "./services/people";
+import NewPerson from "./components/NewPerson";
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,10 +74,21 @@ const App = () => {
     setUser(null);
   };
 
-  const addPerson = (personObject) => {
-    personService.create(personObject).then((returnedPerson) => {
-      setPeople(people.concat(returnedPerson));
-    });
+  const addPerson = async (personObject) => {
+    const returnedPerson = await personService.create(personObject);
+    setPeople(people.concat(returnedPerson));
+  };
+
+  // muuta paremmaksi window.confirmin sijaan
+  const toggleDelete = async (removedPerson) => {
+    const result = window.confirm(
+      `Delete ${removedPerson.firstName} ${removedPerson.lastName} ?`
+    );
+
+    if (result) {
+      await personService.remove(removedPerson.id);
+      setPeople(people.filter((person) => person.id !== removedPerson.id));
+    }
   };
 
   const login = () => (
@@ -96,9 +109,17 @@ const App = () => {
           <NavBar handleLogout={handleLogout} user={user} />
           <Routes>
             <Route path="/families" element={<Families />} />
-            <Route path="/familymembers" element={<FamilyMembers />} />
+            <Route
+              path="/people"
+              element={<People people={people} toggleDelete={toggleDelete} />}
+            />
+            <Route
+              path="/people/create"
+              element={<NewPerson addPerson={addPerson} />}
+            />
+            <Route path="/people/:id" element={<Person />} />
             <Route path="/familytree" element={<FamilyTree />} />
-            <Route path="/" element={<Home addPerson={addPerson} />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       )}

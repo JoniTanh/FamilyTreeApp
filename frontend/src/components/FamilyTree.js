@@ -1,6 +1,7 @@
 const FamilyTree = () => (
   <div>
-    <h1>Family Tree</h1>
+    <h1>Sukupuu</h1>
+    <div>Tähän on tulossa interaktiivinen sukupuukaavio</div>
   </div>
 );
 

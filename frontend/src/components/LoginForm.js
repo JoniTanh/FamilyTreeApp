@@ -1,4 +1,4 @@
-import { TreeIcon } from "./Icons";
+import { TreeIcon } from "../assets/Icons";
 
 const LoginForm = ({
   handleLogin,

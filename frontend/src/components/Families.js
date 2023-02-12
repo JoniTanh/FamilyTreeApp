@@ -1,6 +1,7 @@
 const Families = () => (
   <div>
-    <h1>Families</h1>
+    <h1>Suvut</h1>
+    <div>Kaikki suvut kortteina kuvien kera rinnakkain/allekkain?</div>
   </div>
 );
 
