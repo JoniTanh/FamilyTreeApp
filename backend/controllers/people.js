@@ -25,6 +25,12 @@ peopleRouter.post("/", async (req, res) => {
     birthTime: body.birthTime,
     deathPlace: body.deathPlace,
     deathTime: body.deathTime,
+    deathReason: body.deathReason,
+    godparents: body.godparents,
+    burialPlot: body.burialPlot,
+    burialTime: body.burialTime,
+    lifeStory: body.lifeStory,
+    sources: body.sources,
   });
 
   const savedPerson = await person.save();

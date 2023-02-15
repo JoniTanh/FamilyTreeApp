@@ -1,81 +1,132 @@
 import React, { useState } from "react";
 
 const PersonFrom = ({ createPerson }) => {
-  const [newFirstName, setNewFirstName] = useState("");
-  const [newLastName, setNewLastName] = useState("");
-  const [newBirthPlace, setNewBirthPlace] = useState("");
-  const [newBirthTime, setNewBirthTime] = useState("");
-  const [newDeathPlace, setNewDeathPlace] = useState("");
-  const [newDeathTime, setNewDeathTime] = useState("");
-
-  const handleFirstNameChange = (event) => {
-    setNewFirstName(event.target.value);
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    birthPlace: "",
+    birthTime: "",
+    deathPlace: "",
+    deathTime: "",
+    deathReason: "",
+    godparents: "",
+    burialPlot: "",
+    burialTime: "",
+    lifeStory: "",
+    sources: "",
   };
 
-  const handleLastNameChange = (event) => {
-    setNewLastName(event.target.value);
+  const [person, setPerson] = useState(initialState);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPerson({ ...person, [name]: value });
   };
 
-  const handleBirthPlaceChange = (event) => {
-    setNewBirthPlace(event.target.value);
-  };
-
-  const handleBirthTimeChange = (event) => {
-    setNewBirthTime(event.target.value);
-  };
-
-  const handleDeathPlaceChange = (event) => {
-    setNewDeathPlace(event.target.value);
-  };
-
-  const handleDeathTimeChange = (event) => {
-    setNewDeathTime(event.target.value);
-  };
-
-  const addPerson = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    createPerson({
-      firstName: newFirstName,
-      lastName: newLastName,
-      birthPlace: newBirthPlace,
-      birthTime: newBirthTime,
-      deathPlace: newDeathPlace,
-      deathTime: newDeathTime,
-    });
-    setNewFirstName("");
-    setNewLastName("");
-    setNewBirthPlace("");
-    setNewBirthTime("");
-    setNewDeathPlace("");
-    setNewDeathTime("");
+    createPerson(person);
+    setPerson(initialState);
   };
 
   return (
     <div>
-      <form onSubmit={addPerson}>
+      <form onSubmit={handleSubmit}>
         <div>
-          firstname:{" "}
-          <input value={newFirstName} onChange={handleFirstNameChange} />
+          kutsumanimi:{" "}
+          <input
+            name="firstName"
+            value={person.firstName}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          lastname:{" "}
-          <input value={newLastName} onChange={handleLastNameChange} />
+          sukunimi:{" "}
+          <input
+            name="lastName"
+            value={person.lastName}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          birthplace:{" "}
-          <input value={newBirthPlace} onChange={handleBirthPlaceChange} />
+          syntymäpaikka:{" "}
+          <input
+            name="birthPlace"
+            value={person.birthPlace}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          birthtime:{" "}
-          <input value={newBirthTime} onChange={handleBirthTimeChange} />
+          syntymäaika:{" "}
+          <input
+            name="birthTime"
+            value={person.birthTime}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          deathplace:{" "}
-          <input value={newDeathPlace} onChange={handleDeathPlaceChange} />
+          kuolinpaikka:{" "}
+          <input
+            name="deathPlace"
+            value={person.deathPlace}
+            onChange={handleChange}
+          />
         </div>
         <div>
-          deathtime:{" "}
-          <input value={newDeathTime} onChange={handleDeathTimeChange} />
+          kuolinaika:{" "}
+          <input
+            name="deathTime"
+            value={person.deathTime}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          kuolinsyy{" "}
+          <input
+            name="deathReason"
+            value={person.deathReason}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          kummit{" "}
+          <input
+            name="godparents"
+            value={person.godparents}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          hautapaikka{" "}
+          <input
+            name="burialPlot"
+            value={person.burialPlot}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          hautausaika{" "}
+          <input
+            name="burialTime"
+            value={person.burialTime}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          elämänkertä{" "}
+          <input
+            name="lifeStory"
+            value={person.lifeStory}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          lähteet{" "}
+          <input
+            name="sources"
+            value={person.sources}
+            onChange={handleChange}
+          />
         </div>
         <button type="submit">create</button>
       </form>

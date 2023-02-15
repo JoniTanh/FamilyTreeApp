@@ -18,6 +18,7 @@ import Person from "./components/Person";
 import loginService from "./services/login";
 import personService from "./services/people";
 import NewPerson from "./components/NewPerson";
+import FamilyTables from "./components/FamilyTables";
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,7 +36,11 @@ const App = () => {
   const navigate = useNavigate("/");
 
   useEffect(() => {
-    personService.getAll().then((people) => setPeople(people));
+    const fetchData = async () => {
+      const people = await personService.getAll();
+      setPeople(people);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -118,6 +123,7 @@ const App = () => {
               element={<NewPerson addPerson={addPerson} />}
             />
             <Route path="/people/:id" element={<Person />} />
+            <Route path="/familytables" element={<FamilyTables />} />
             <Route path="/familytree" element={<FamilyTree />} />
             <Route path="/" element={<Home />} />
           </Routes>

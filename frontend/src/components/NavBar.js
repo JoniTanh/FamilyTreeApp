@@ -40,6 +40,14 @@ const NavBar = ({ handleLogout, user }) => {
           <li className="nav-item px-2">
             <Link
               className="nav-link text-decoration-none text-dark fw-bold"
+              to="/familytables"
+            >
+              <h6>Perhetaulut</h6>
+            </Link>
+          </li>
+          <li className="nav-item px-2">
+            <Link
+              className="nav-link text-decoration-none text-dark fw-bold"
               to="/familytree"
             >
               <h6>Sukupuu</h6>
