@@ -1,0 +1,28 @@
+.linage {
+  fill: none;
+  stroke: #000;
+}
+.marriage {
+  fill: none;
+  stroke: black;
+}
+.man {
+  background-color: lightblue;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+}
+.woman {
+  background-color: pink;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+}
+.emphasis {
+  font-style: italic;
+}
+.familyTreesvg {
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px;
+}
