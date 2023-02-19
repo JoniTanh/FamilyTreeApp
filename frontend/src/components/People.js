@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
-import Person from "./Person";
 
 const CreateButton = () => (
   <Link
@@ -26,7 +25,7 @@ const People = ({ people, toggleDelete }) => {
 
   const filteredPeople = (person) =>
     (
-      person.firstName.toLowerCase() +
+      person.firstNames.toLowerCase() +
       " " +
       person.lastName.toLowerCase()
     ).includes(filter.toLowerCase());
@@ -67,15 +66,15 @@ const People = ({ people, toggleDelete }) => {
               .map((person) => (
                 <tr key={listNumber}>
                   <th scope="col">{listNumber++}</th>
-                  <th scope="col">{person.firstName}</th>
+                  <th scope="col">{person.firstNames}</th>
                   <th scope="col">{person.lastName}</th>
-                  <th scope="col">Suku, johon joku kuuluu</th>
+                  <th scope="col">{person.family}</th>
                   <th scope="col">
                     <div className="d-flex">
                       <div className="mx-1" style={{ cursor: "pointer" }}>
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
-                          to={`/people/${person.id}`}
+                          to={`/people/${person._id}`}
                           state={person}
                         >
                           <ShowPersonIcon />

@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const personSchema = new mongoose.Schema({
-  firstName: {
+  nickname: String,
+  firstNames: {
     type: String,
     required: true,
   },
@@ -15,10 +16,12 @@ const personSchema = new mongoose.Schema({
   deathTime: String,
   deathReason: String,
   godparents: String,
+  baptismDay: String,
   burialPlot: String,
   burialTime: String,
   lifeStory: String,
   sources: String,
+  family: String,
 });
 
 personSchema.set("toJSON", {

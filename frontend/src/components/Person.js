@@ -9,10 +9,14 @@ const Person = () => {
         <div className="pt-4 pb-4 px-5 w-75 shadow bg-white rounded border border-info">
           <div>
             <h1>
-              {state.firstName} {state.lastName}
+              {state.nickname ? state.nickname : state.firstNames.split(" ")[0]}{" "}
+              {state.lastName}
             </h1>
             <div>
-              <b>kutsumanimi:</b> {state.firstName}
+              <b>kutsumanimi:</b> {state.nickname}
+            </div>
+            <div>
+              <b>etunimet:</b> {state.firstNames}
             </div>
             <div className="pb-3">
               <b>sukunimi:</b> {state.lastName}

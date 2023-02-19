@@ -14,11 +14,13 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import People from "./components/People";
 import Person from "./components/Person";
-
 import loginService from "./services/login";
 import personService from "./services/people";
+import familytableService from "./services/familytables";
 import NewPerson from "./components/NewPerson";
 import FamilyTables from "./components/FamilyTables";
+import FamilyTable from "./components/FamilyTable";
+import FamilyTableForm from "./components/FamilyTableForm";
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +34,7 @@ const App = () => {
   // helpottamassa tällä hetkellä sitä, että ei joka kerta kirjaudu ulos, kun päivittää sivun yms. yms.
 
   const [people, setPeople] = useState([]);
+  const [familytables, setFamilytables] = useState([]);
 
   const navigate = useNavigate("/");
 
@@ -39,6 +42,14 @@ const App = () => {
     const fetchData = async () => {
       const people = await personService.getAll();
       setPeople(people);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const familytables = await familytableService.getAll();
+      setFamilytables(familytables);
     };
     fetchData();
   }, []);
@@ -84,15 +95,36 @@ const App = () => {
     setPeople(people.concat(returnedPerson));
   };
 
+  const addFamilytable = async (familytableObject) => {
+    const returnedFamilyTable = await familytableService.create(
+      familytableObject
+    );
+    setFamilytables(familytables.concat(returnedFamilyTable));
+  };
+
   // muuta paremmaksi window.confirmin sijaan
   const toggleDelete = async (removedPerson) => {
     const result = window.confirm(
-      `Delete ${removedPerson.firstName} ${removedPerson.lastName} ?`
+      `Delete ${removedPerson.firstNames} ${removedPerson.lastName} ?`
     );
 
     if (result) {
-      await personService.remove(removedPerson.id);
-      setPeople(people.filter((person) => person.id !== removedPerson.id));
+      await personService.remove(removedPerson._id);
+      setPeople(people.filter((person) => person._id !== removedPerson._id));
+    }
+  };
+
+  // muuta paremmaksi window.confirmin sijaan
+  const toggleDeleteFamilyTable = async (removedFamilytable) => {
+    const result = window.confirm(`Delete item?`);
+
+    if (result) {
+      await familytableService.remove(removedFamilytable._id);
+      setFamilytables(
+        familytables.filter(
+          (familytable) => familytable._id !== removedFamilytable._id
+        )
+      );
     }
   };
 
@@ -123,7 +155,25 @@ const App = () => {
               element={<NewPerson addPerson={addPerson} />}
             />
             <Route path="/people/:id" element={<Person />} />
-            <Route path="/familytables" element={<FamilyTables />} />
+            <Route
+              path="/familytables/*"
+              element={
+                <FamilyTables
+                  familytables={familytables}
+                  toggleDeleteFamilyTable={toggleDeleteFamilyTable}
+                />
+              }
+            />
+            <Route path="/familytables/:id" element={<FamilyTable />} />
+            <Route
+              path="/familytables/create"
+              element={
+                <FamilyTableForm
+                  addFamilytable={addFamilytable}
+                  people={people}
+                />
+              }
+            />
             <Route path="/familytree" element={<FamilyTree />} />
             <Route path="/" element={<Home />} />
           </Routes>

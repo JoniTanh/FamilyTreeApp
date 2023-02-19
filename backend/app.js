@@ -6,6 +6,7 @@ const cors = require("cors");
 const peopleRouter = require("./controllers/people");
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
+const familytableRouter = require("./controllers/familytables");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
@@ -30,6 +31,7 @@ app.use(middleware.requestLogger);
 app.use("/api/people", peopleRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
+app.use("/api/familytables", familytableRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

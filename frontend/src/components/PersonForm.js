@@ -2,14 +2,17 @@ import React, { useState } from "react";
 
 const PersonFrom = ({ createPerson }) => {
   const initialState = {
-    firstName: "",
+    nickname: "",
+    firstNames: "",
     lastName: "",
+    family: "",
     birthPlace: "",
     birthTime: "",
     deathPlace: "",
     deathTime: "",
     deathReason: "",
     godparents: "",
+    baptismDay: "",
     burialPlot: "",
     burialTime: "",
     lifeStory: "",
@@ -35,8 +38,16 @@ const PersonFrom = ({ createPerson }) => {
         <div>
           kutsumanimi:{" "}
           <input
-            name="firstName"
-            value={person.firstName}
+            name="nickname"
+            value={person.nickname}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          kaikki etunimet:{" "}
+          <input
+            name="firstNames"
+            value={person.firstNames}
             onChange={handleChange}
           />
         </div>
@@ -47,6 +58,10 @@ const PersonFrom = ({ createPerson }) => {
             value={person.lastName}
             onChange={handleChange}
           />
+        </div>
+        <div>
+          suku:{" "}
+          <input name="family" value={person.family} onChange={handleChange} />
         </div>
         <div>
           syntymäpaikka:{" "}
@@ -81,7 +96,7 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          kuolinsyy{" "}
+          kuolinsyy:{" "}
           <input
             name="deathReason"
             value={person.deathReason}
@@ -89,7 +104,7 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          kummit{" "}
+          kummit:{" "}
           <input
             name="godparents"
             value={person.godparents}
@@ -97,7 +112,15 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          hautapaikka{" "}
+          kastepäivä:{" "}
+          <input
+            name="baptismDay"
+            value={person.baptismDay}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          hautapaikka:{" "}
           <input
             name="burialPlot"
             value={person.burialPlot}
@@ -105,7 +128,7 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          hautausaika{" "}
+          hautausaika:{" "}
           <input
             name="burialTime"
             value={person.burialTime}
@@ -113,7 +136,7 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          elämänkertä{" "}
+          elämänkertä:{" "}
           <input
             name="lifeStory"
             value={person.lifeStory}
@@ -121,7 +144,7 @@ const PersonFrom = ({ createPerson }) => {
           />
         </div>
         <div>
-          lähteet{" "}
+          lähteet:{" "}
           <input
             name="sources"
             value={person.sources}
