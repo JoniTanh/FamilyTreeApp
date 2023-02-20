@@ -26,7 +26,7 @@ const Person = () => {
               {state.birthTime}
             </div>
             <div className="pb-3">
-              <b>kummit ja kastepäivä:</b> {state.godparents}
+              <b>kummit ja kastepäivä:</b> {state.godparents} {state.baptismDay}
             </div>
             <div>
               <b>kuollut (paikka, aika, kuolinsyy):</b> {state.deathPlace}{" "}

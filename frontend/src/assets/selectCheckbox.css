@@ -1,0 +1,7 @@
+.selectCheckbox {
+    color: hsl(0, 0%, 40%);
+    display: inline-block;
+    font-size: 12;
+    font-style: italic;
+    margin-top: 1em;
+}

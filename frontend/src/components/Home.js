@@ -11,6 +11,13 @@ const Home = () => {
       <div>
         Tieto siitä mitä on seuraavaksi odotettavissa / tehdyistä muutoksista?
       </div>
+      <div>
+        <b>Itelle muistiin:</b> muista estää henkilön poisto, jos henkilöllä on
+        lisättynä henkilötaulu tai henkilö on lisättynä henkilötaulussa tai
+        muuta vastaavaa. Perhetauluista puuttuu pari tietoa - lisää ne.
+        Perhetaululle / henkilölle omat iconit ja molemmista voi mennä kumpaan
+        vaan.
+      </div>
     </div>
   );
 };

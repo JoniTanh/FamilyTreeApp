@@ -2,7 +2,6 @@ import { Link, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
-import familytableService from "../services/familytables";
 import FamilyTableForm from "./FamilyTableForm";
 
 const CreateButton = () => (
@@ -12,14 +11,6 @@ const CreateButton = () => (
   >
     <button>Create</button>
   </Link>
-);
-
-// korjattava niin, että uuden perhetaulun lisäyksen jälkeen lista päivittyy automaattisesti
-// ja nappia ei enää tarvitse
-const RefreshButton = () => (
-  <button type="button" onClick={() => window.location.reload()}>
-    Refresh tables
-  </button>
 );
 
 const FamilyTables = ({ familytables, toggleDeleteFamilyTable }) => {
@@ -65,7 +56,6 @@ const FamilyTables = ({ familytables, toggleDeleteFamilyTable }) => {
           <h1>Perhetaulut</h1>
           <div className="d-flex p-2">
             <CreateButton />
-            <RefreshButton />
             <Filter filter={filter} handleFilterChange={handleFilterChange} />
           </div>
           <table className="table">

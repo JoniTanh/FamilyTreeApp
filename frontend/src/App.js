@@ -21,6 +21,7 @@ import NewPerson from "./components/NewPerson";
 import FamilyTables from "./components/FamilyTables";
 import FamilyTable from "./components/FamilyTable";
 import FamilyTableForm from "./components/FamilyTableForm";
+import NewFamilyTable from "./components/NewFamilyTable";
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,6 +38,7 @@ const App = () => {
   const [familytables, setFamilytables] = useState([]);
 
   const navigate = useNavigate("/");
+  const familytableNav = useNavigate("/familytables"); // korjaa sen ainakin toistaiseksi, että perhetaulut päivittyvät automaattisesti
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +54,7 @@ const App = () => {
       setFamilytables(familytables);
     };
     fetchData();
-  }, []);
+  }, [familytableNav]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedFamilyAppUser");
@@ -164,16 +166,16 @@ const App = () => {
                 />
               }
             />
-            <Route path="/familytables/:id" element={<FamilyTable />} />
             <Route
               path="/familytables/create"
               element={
-                <FamilyTableForm
+                <NewFamilyTable
                   addFamilytable={addFamilytable}
                   people={people}
                 />
               }
             />
+            <Route path="/familytables/:id" element={<FamilyTable />} />
             <Route path="/familytree" element={<FamilyTree />} />
             <Route path="/" element={<Home />} />
           </Routes>
