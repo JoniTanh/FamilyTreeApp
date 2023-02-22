@@ -16,7 +16,7 @@ const Families = () => {
       setPeople(people);
     };
     fetchData();
-  }, []);
+  }, [setPeople]);
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);

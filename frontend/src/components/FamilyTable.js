@@ -2,7 +2,7 @@ import { useLocation } from "react-router";
 
 const FamilyTable = () => {
   const { state } = useLocation();
-  console.log(state);
+  console.log("5", state);
   return (
     <>
       <div className="pt-5 pb-3 px-5 d-flex justify-content-center">
@@ -24,7 +24,7 @@ const FamilyTable = () => {
               {state.mother.firstNames} "{state.mother.nickname}"{" "}
               {state.mother.lastName} s. {state.mother.birthPlace}{" "}
               {state.mother.birthTime} k. {state.mother.deathPlace}{" "}
-              {state.mother.deathTime} {state.mother.deathReason}
+              {state.mother.deathTime} {state?.mother.deathReason}
             </div>
             <div className="pb-4">
               <b>isä: </b>

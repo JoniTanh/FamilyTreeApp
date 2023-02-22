@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Routes,
   useNavigate,
 } from "react-router-dom";
-
 import Families from "./components/Families";
 import FamilyTree from "./components/FamilyTree";
 import LoginForm from "./components/LoginForm";
@@ -15,8 +13,6 @@ import NavBar from "./components/NavBar";
 import People from "./components/People";
 import Person from "./components/Person";
 import loginService from "./services/login";
-import personService from "./services/people";
-import familytableService from "./services/familytables";
 import NewPerson from "./components/NewPerson";
 import FamilyTables from "./components/FamilyTables";
 import FamilyTable from "./components/FamilyTable";
@@ -26,7 +22,6 @@ import NewFamilyTable from "./components/NewFamilyTable";
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(() => {
@@ -35,27 +30,7 @@ const App = () => {
   // sisäänkirjautumine toteutettava eri tavalla, koska millä tahansa LocalStorage "userilla" pääsee kirjautumaan sisään konsolin kautta, jos tämä jää näin
   // helpottamassa tällä hetkellä sitä, että ei joka kerta kirjaudu ulos, kun päivittää sivun yms. yms.
 
-  const [people, setPeople] = useState([]);
-  const [familytables, setFamilytables] = useState([]);
-
   const navigate = useNavigate("/");
-  const familytableNav = useNavigate("/familytables"); // korjaa sen ainakin toistaiseksi, että perhetaulut päivittyvät automaattisesti
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const people = await personService.getAll();
-      setPeople(people);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const familytables = await familytableService.getAll();
-      setFamilytables(familytables);
-    };
-    fetchData();
-  }, [familytableNav]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedFamilyAppUser");
@@ -93,44 +68,6 @@ const App = () => {
     setUser(null);
   };
 
-  const addPerson = async (personObject) => {
-    const returnedPerson = await personService.create(personObject);
-    setPeople(people.concat(returnedPerson));
-  };
-
-  const addFamilytable = async (familytableObject) => {
-    const returnedFamilyTable = await familytableService.create(
-      familytableObject
-    );
-    setFamilytables(familytables.concat(returnedFamilyTable));
-  };
-
-  // muuta paremmaksi window.confirmin sijaan
-  const toggleDelete = async (removedPerson) => {
-    const result = window.confirm(
-      `Delete ${removedPerson.firstNames} ${removedPerson.lastName}?`
-    );
-
-    if (result) {
-      await personService.remove(removedPerson._id);
-      setPeople(people.filter((person) => person._id !== removedPerson._id));
-    }
-  };
-
-  // muuta paremmaksi window.confirmin sijaan
-  const toggleDeleteFamilyTable = async (removedFamilytable) => {
-    const result = window.confirm(`Delete item?`);
-
-    if (result) {
-      await familytableService.remove(removedFamilytable._id);
-      setFamilytables(
-        familytables.filter(
-          (familytable) => familytable._id !== removedFamilytable._id
-        )
-      );
-    }
-  };
-
   const login = () => (
     <LoginForm
       handleLogin={handleLogin}
@@ -149,38 +86,13 @@ const App = () => {
           <NavBar handleLogout={handleLogout} user={user} />
           <Routes>
             <Route path="/families" element={<Families />} />
-            <Route
-              path="/people"
-              element={<People people={people} toggleDelete={toggleDelete} />}
-            />
-            <Route
-              path="/people/create"
-              element={<NewPerson addPerson={addPerson} />}
-            />
+            <Route path="/people" element={<People />} />
+            <Route path="/people/create" element={<NewPerson />} />
             <Route path="/people/:id" element={<Person />} />
-            <Route
-              path="/familytables/*"
-              element={
-                <FamilyTables
-                  familytables={familytables}
-                  toggleDeleteFamilyTable={toggleDeleteFamilyTable}
-                />
-              }
-            />
-            <Route
-              path="/familytables/create"
-              element={
-                <NewFamilyTable
-                  addFamilytable={addFamilytable}
-                  people={people}
-                />
-              }
-            />
+            <Route path="/familytables" element={<FamilyTables />} />
+            <Route path="/familytables/create" element={<NewFamilyTable />} />
             <Route path="/familytables/:id" element={<FamilyTable />} />
-            <Route
-              path="/familytree"
-              element={<FamilyTree familytables={familytables} />}
-            />
+            <Route path="/familytree" element={<FamilyTree />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </div>

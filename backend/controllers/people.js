@@ -2,12 +2,12 @@ const peopleRouter = require("express").Router();
 const Person = require("../models/person");
 
 peopleRouter.get("/", async (req, res) => {
-  const people = await Person.find({}).lean();
+  const people = await Person.find({});
   res.json(people);
 });
 
 peopleRouter.get("/:id", async (req, res) => {
-  const person = await Person.findById(req.params.id).lean();
+  const person = await Person.findById(req.params.id);
   if (person) {
     res.json(person);
   } else {

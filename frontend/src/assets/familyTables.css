@@ -1,45 +1,26 @@
-.familiesList {
+.familyTablesOptions {
+  padding: 50px 0 20px 0;
   display: flex;
-  flex-wrap: wrap;
-  margin: 1.8rem;
+  justify-content: space-between;
 }
 
-.personContainer {
-  padding: 8px;
-  margin: 0 auto;
+.familyTablesFilter {
+  display: flex;
 }
 
-.familiesContainer {
+.familyTablesContainer {
   background: aliceblue;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid aliceblue;
   border-radius: 5px;
 }
 
-.familiesHeader {
+.familyTablesHeader {
   padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
   font-family: ui-serif;
   text-shadow: 0 0.5px 0.5px #65acc9;
-}
-
-.familiesCard {
-  background: aliceblue;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 12rem;
-  border: 1px solid ghostwhite;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-.familiesImg {
-  background: aliceblue;
-}
-
-.familiesPageButtons {
-  text-align: center;
-  margin-top: 20px;
 }
 
 .previousPageButton {
@@ -50,6 +31,17 @@
 .nextPageButton {
   margin-left: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.familyTablesFilterInput {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.familyTablesPageButtons {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .leftPageNumberInput,
@@ -66,17 +58,20 @@
   text-align: end;
 }
 
-.familiesFilter {
-  padding: 50px 0 20px 0;
-  display: flex;
-  justify-content: end;
+.familyTablesSelectOptions {
+  width: 60px;
+  border: 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1.1;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.familiesFilterInput {
+.familyTablesPageValues {
   margin-top: 5px;
-  margin-right: 5px;
 }
 
-.clearButton {
+.familyTablesCreateButton {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }

@@ -1,3 +1,5 @@
+import { useState, useEffect, useRef } from "react";
+import familytableService from "../services/familytables";
 import "../assets/familyTree.css";
 import React from "react";
 import dTree from "d3-dtree";
@@ -5,85 +7,89 @@ import _ from "lodash";
 import * as d3 from "d3";
 window.d3 = d3;
 
-// ToDO:
-// Korjaa, ettei sivu kaadu / hukkaa valittua tietoa syystä tai toisesta
-// Select, jolla pystyy valitsemaan näytettävän henkilön
-// Personin, eli "isän/äitin", siskot ja veljet myös lapsineen näkyviin?
-// Värikoodejen tilalle jotain muuta
-// Mieti, miten data käsitellään yms. yms.
+const FamilyTree = () => {
+  const [familytables, setFamilytables] = useState([]);
+  const graphContainer = useRef(null);
 
-// testiversio
+  useEffect(() => {
+    const fetchData = async () => {
+      const familytables = await familytableService.getAll();
+      setFamilytables(familytables);
+    };
+    fetchData();
+  }, []);
 
-const FamilyTree = ({ familytables }) => {
-  let person = "Person";
-  let mother = "Mother";
-  let father = "Father";
-  let spouse = "Spouse";
-  let children = ["Child1", "Child2"];
+  const person = familytables[0] ? familytables[0].person : null;
 
-  if (familytables[0]) {
-    person = familytables[0].person.firstNames;
-    mother = familytables[0].mother.firstNames;
-    father = familytables[0].father.firstNames;
-    spouse = familytables[0].spouse.firstNames;
-    children = familytables[0].children.map((child) => child.firstNames);
-  }
+  useEffect(() => {
+    if (familytables.length > 0) {
+      renderTree();
+    }
+  }, [familytables]);
 
-  let treeData = [
-    {
-      name: father,
-      class: "man",
-      textClass: "emphasis",
-      marriages: [
-        {
-          spouse: {
-            name: mother,
-            class: "woman",
-            extra: {
-              nickname: "Illi",
+  const renderTree = () => {
+    let person = "Person";
+    let mother = "Mother";
+    let father = "Father";
+    let spouse = "Spouse";
+    let children = ["Child1", "Child2"];
+
+    if (familytables[0]) {
+      person = familytables[0].person.firstNames;
+      mother = familytables[0].mother.firstNames;
+      father = familytables[0].father.firstNames;
+      spouse = familytables[0].spouse.firstNames;
+      children = familytables[0].children.map((child) => child.firstNames);
+    }
+
+    let treeData = [
+      {
+        name: father,
+        class: "man",
+        textClass: "emphasis",
+        marriages: [
+          {
+            spouse: {
+              name: mother,
+              class: "woman",
+              extra: {
+                nickname: "Illi",
+              },
             },
-          },
-          children: [
-            {
-              name: person,
-              class: "man",
-              marriages: [
-                {
-                  spouse: {
-                    name: spouse,
-                    class: "woman",
-                  },
-                  children: children.map((childName) => {
-                    return {
-                      name: childName,
-                      class: "man",
-                      marriages: [
-                        {
-                          spouse: {
-                            name: "Tyttöystävä",
-                            class: "woman",
+            children: [
+              {
+                name: person,
+                class: "man",
+                marriages: [
+                  {
+                    spouse: {
+                      name: spouse,
+                      class: "woman",
+                    },
+                    children: children.map((childName) => {
+                      return {
+                        name: childName,
+                        class: "man",
+                        marriages: [
+                          {
+                            spouse: {
+                              name: "Tyttöystävä",
+                              class: "woman",
+                            },
                           },
-                        },
-                      ],
-                    };
-                  }),
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ];
+                        ],
+                      };
+                    }),
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
 
-  console.log(treeData);
-
-  return <FamilyTreeGraph treeData={treeData} />;
-};
-
-class FamilyTreeGraph extends React.Component {
-  componentDidMount() {
-    dTree.init(this.props.treeData, {
+    dTree.init(treeData, {
       target: "#graph",
       height: 600,
       width: 1400,
@@ -104,14 +110,33 @@ class FamilyTreeGraph extends React.Component {
         return node;
       },
     });
-  }
+  };
 
+  useEffect(() => {
+    d3.select(graphContainer.current).selectAll("*").remove();
+    renderTree();
+  }, [familytables]);
+
+  return (
+    <FamilyTreeGraph
+      person={person}
+      familyTables={familytables}
+      graphContainer={graphContainer}
+    />
+  );
+};
+
+class FamilyTreeGraph extends React.Component {
   render() {
+    const { graphContainer, person } = this.props;
+    const title = `${person?.firstNames} ${person?.lastName}'s Family Tree`;
+
     return (
       <>
+        {console.log(this.props)}
         <div className="familyTreesvg">
-          <h1 style={{ textAlign: "center" }}>Henkilön xx Sukupuu</h1>
-          <div id="graph"></div>
+          <h1 style={{ textAlign: "center" }}>{title}</h1>
+          <div ref={graphContainer} id="graph"></div>
         </div>
       </>
     );

@@ -1,23 +1,48 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
+import personService from "../services/people";
+import "../assets/people.css";
 
 const CreateButton = () => (
   <Link
     className="nav-link text-decoration-none text-dark fw-bold"
     to="/people/create"
   >
-    <button>Create</button>
+    <button className="btn btn-outline-success peopleCreateButton">
+      Lisää henkilö
+    </button>
   </Link>
 );
 
-const People = ({ people, toggleDelete }) => {
+const People = () => {
   let listNumber = 1;
 
+  const [people, setPeople] = useState([]);
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const people = await personService.getAll();
+      setPeople(people);
+    };
+    fetchData();
+  }, [setPeople]);
+
+  // muuta paremmaksi window.confirmin sijaan
+  const toggleDelete = async (removedPerson) => {
+    const result = window.confirm(
+      `Delete ${removedPerson.firstNames} ${removedPerson.lastName}?`
+    );
+
+    if (result) {
+      await personService.remove(removedPerson.id);
+      setPeople(people.filter((person) => person.id !== removedPerson.id));
+    }
+  };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -38,19 +63,39 @@ const People = ({ people, toggleDelete }) => {
     setCurrentPage(value);
   };
 
+  const handleClearFilter = () => {
+    setFilter("");
+  };
+
   let totalItems = people.filter(filteredPeople).length;
   const totalPages = Math.ceil(totalItems / rows);
   const startIndex = (currentPage - 1) * rows;
   const endIndex = startIndex + rows;
 
   return (
-    <div className="container">
-      <div>
-        <h1>Henkilöt</h1>
-        <div className="d-flex p-2">
-          <Filter filter={filter} handleFilterChange={handleFilterChange} />
-          <CreateButton />
+    <>
+      <div className="container">
+        <div className="peopleOptions">
+          <div>
+            <CreateButton />
+          </div>
+          <div className="peopleFilter">
+            <Filter
+              styleName={"peopleFilterInput"}
+              filter={filter}
+              handleFilterChange={handleFilterChange}
+            />
+            <button
+              className="btn btn-outline-danger clearButton"
+              onClick={() => handleClearFilter()}
+            >
+              Tyhjennä
+            </button>
+          </div>
         </div>
+      </div>
+      <div className="container peopleContainer">
+        <h1 className="peopleHeader">Henkilöt</h1>
         <table className="table">
           <thead>
             <tr>
@@ -74,7 +119,7 @@ const People = ({ people, toggleDelete }) => {
                       <div className="mx-1" style={{ cursor: "pointer" }}>
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
-                          to={`/people/${person._id}`}
+                          to={`/people/${person.id}`}
                           state={person}
                         >
                           <ShowPersonIcon />
@@ -98,31 +143,48 @@ const People = ({ people, toggleDelete }) => {
         </table>
       </div>
       <div>
-        <div>
+        <div className="container peoplePageButtons">
           <button
+            className="btn btn-outline-dark previousPageButton"
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
           >
-            Edellinen
-          </button>{" "}
-          Sivu <input disabled value={currentPage} /> of{" "}
-          <input disabled value={totalPages} />
-          <select rows={rows} onChange={handleRowChange}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="75">75</option>
-            <option value="100">100</option>
-          </select>{" "}
+            {"<"}
+          </button>
+          <div className="peoplePageValues">
+            <input
+              className="leftPageNumberInput"
+              disabled
+              value={currentPage}
+            />{" "}
+            of{" "}
+            <input
+              className="rightPageNumberInput"
+              disabled
+              value={totalPages}
+            />
+            <select
+              className="peopleSelectOptions"
+              rows={rows}
+              onChange={handleRowChange}
+            >
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+              <option value="100">100</option>
+            </select>
+          </div>
           <button
+            className="btn btn-outline-dark nextPageButton"
             disabled={currentPage === totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
           >
-            Seuraava
+            {">"}
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

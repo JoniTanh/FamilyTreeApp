@@ -20,8 +20,8 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSearchable, setIsSearchable] = useState(true);
 
-  const selectPeopleData = people.map(({ _id, firstNames, lastName }) => ({
-    value: _id,
+  const selectPeopleData = people.map(({ id, firstNames, lastName }) => ({
+    value: id,
     label: `${firstNames} ${lastName}`,
   }));
 
