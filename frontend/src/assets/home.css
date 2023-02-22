@@ -1,0 +1,72 @@
+.homeContainer {
+  display: flex;
+  width: 85%;
+  margin: auto;
+}
+
+.homeColumn {
+  flex: 1;
+  padding: 20px;
+  margin: 50px 35px 15px 35px;
+  border-radius: 10px;
+  border: 1px solid rgb(240, 216, 138);
+  background: cornsilk;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.homeHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.homeHeader {
+  font-family: ui-serif;
+  margin-left: 35px;
+  text-shadow: 0 0.5px 0.5px #65acc9;
+  text-decoration: underline;
+}
+
+ul.list {
+  padding: 10px 40px 0 40px;
+  list-style-type: circle;
+}
+
+.noteButton,
+.noteInputButton,
+.noteDeleteModeButton {
+  background: cornsilk;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.noteButton {
+  margin-right: 5px;
+  color: green;
+}
+
+.noteInputButton {
+  margin-bottom: 6px;
+  margin-left: 5px;
+  color: green;
+}
+
+.noteDeleteModeButton {
+  color: red;
+}
+
+.noteDeleteButton {
+  margin-top: 5px;
+  color: red;
+  background: cornsilk;
+  outline: none;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin-left: 20px;
+}
+
+.homeInput {
+  margin-left: 35px;
+  background: cornsilk;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}

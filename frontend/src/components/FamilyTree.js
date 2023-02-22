@@ -5,76 +5,85 @@ import _ from "lodash";
 import * as d3 from "d3";
 window.d3 = d3;
 
-class FamilyTree extends React.Component {
-  componentDidMount() {
-    let treeData = [
-      {
-        name: "Isovaari",
-        class: "man",
-        textClass: "emphasis",
-        marriages: [
-          {
-            spouse: {
-              name: "Isomummo",
-              class: "woman",
-              extra: {
-                nickname: "Illi",
-              },
-            },
-            children: [
-              {
-                name: "Isä",
-                class: "man",
-                marriages: [
-                  {
-                    spouse: {
-                      name: "Äiti",
-                      class: "woman",
-                    },
-                    children: [
-                      {
-                        name: "Poika",
-                        class: "man",
-                        marriages: [
-                          {
-                            spouse: {
-                              name: "Tyttöystävä",
-                              class: "woman",
-                            },
-                          },
-                        ],
-                      },
-                      {
-                        name: "Tyttö",
-                        class: "woman",
-                      },
-                      {
-                        name: "Poika",
-                        class: "man",
-                      },
-                      {
-                        name: "Tyttö",
-                        class: "woman",
-                      },
-                      {
-                        name: "Tyttö",
-                        class: "woman",
-                      },
-                      {
-                        name: "Tyttö",
-                        class: "woman",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ];
+// ToDO:
+// Korjaa, ettei sivu kaadu / hukkaa valittua tietoa syystä tai toisesta
+// Select, jolla pystyy valitsemaan näytettävän henkilön
+// Personin, eli "isän/äitin", siskot ja veljet myös lapsineen näkyviin?
+// Värikoodejen tilalle jotain muuta
+// Mieti, miten data käsitellään yms. yms.
 
-    dTree.init(treeData, {
+// testiversio
+
+const FamilyTree = ({ familytables }) => {
+  let person = "Person";
+  let mother = "Mother";
+  let father = "Father";
+  let spouse = "Spouse";
+  let children = ["Child1", "Child2"];
+
+  if (familytables[0]) {
+    person = familytables[0].person.firstNames;
+    mother = familytables[0].mother.firstNames;
+    father = familytables[0].father.firstNames;
+    spouse = familytables[0].spouse.firstNames;
+    children = familytables[0].children.map((child) => child.firstNames);
+  }
+
+  let treeData = [
+    {
+      name: father,
+      class: "man",
+      textClass: "emphasis",
+      marriages: [
+        {
+          spouse: {
+            name: mother,
+            class: "woman",
+            extra: {
+              nickname: "Illi",
+            },
+          },
+          children: [
+            {
+              name: person,
+              class: "man",
+              marriages: [
+                {
+                  spouse: {
+                    name: spouse,
+                    class: "woman",
+                  },
+                  children: children.map((childName) => {
+                    return {
+                      name: childName,
+                      class: "man",
+                      marriages: [
+                        {
+                          spouse: {
+                            name: "Tyttöystävä",
+                            class: "woman",
+                          },
+                        },
+                      ],
+                    };
+                  }),
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  console.log(treeData);
+
+  return <FamilyTreeGraph treeData={treeData} />;
+};
+
+class FamilyTreeGraph extends React.Component {
+  componentDidMount() {
+    dTree.init(this.props.treeData, {
       target: "#graph",
       height: 600,
       width: 1400,

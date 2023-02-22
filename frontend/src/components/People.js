@@ -44,7 +44,7 @@ const People = ({ people, toggleDelete }) => {
   const endIndex = startIndex + rows;
 
   return (
-    <div className="px-5 pt-4">
+    <div className="container">
       <div>
         <h1>Henkilöt</h1>
         <div className="d-flex p-2">

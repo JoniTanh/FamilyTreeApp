@@ -20,8 +20,9 @@ import familytableService from "./services/familytables";
 import NewPerson from "./components/NewPerson";
 import FamilyTables from "./components/FamilyTables";
 import FamilyTable from "./components/FamilyTable";
-import FamilyTableForm from "./components/FamilyTableForm";
 import NewFamilyTable from "./components/NewFamilyTable";
+
+// App.js tyhjennettävä lähes kokonaan!
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -107,7 +108,7 @@ const App = () => {
   // muuta paremmaksi window.confirmin sijaan
   const toggleDelete = async (removedPerson) => {
     const result = window.confirm(
-      `Delete ${removedPerson.firstNames} ${removedPerson.lastName} ?`
+      `Delete ${removedPerson.firstNames} ${removedPerson.lastName}?`
     );
 
     if (result) {
@@ -176,7 +177,10 @@ const App = () => {
               }
             />
             <Route path="/familytables/:id" element={<FamilyTable />} />
-            <Route path="/familytree" element={<FamilyTree />} />
+            <Route
+              path="/familytree"
+              element={<FamilyTree familytables={familytables} />}
+            />
             <Route path="/" element={<Home />} />
           </Routes>
         </div>

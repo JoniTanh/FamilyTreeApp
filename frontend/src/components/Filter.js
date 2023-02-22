@@ -1,6 +1,11 @@
-const Filter = ({ filter, handleFilterChange }) => (
+const Filter = ({ filter, handleFilterChange, text, styleName }) => (
   <div>
-    Suodata <input value={filter} onChange={handleFilterChange} />
+    {text}{" "}
+    <input
+      className={`${styleName}`}
+      value={filter}
+      onChange={handleFilterChange}
+    />
   </div>
 );
 
