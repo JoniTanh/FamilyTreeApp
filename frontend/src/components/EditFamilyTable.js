@@ -12,18 +12,18 @@ import "../assets/familyTableForm.css";
 const EditFamilyTable = () => {
   const { state } = useLocation();
 
-  const [personId, setPersonId] = useState(state?.person._id ?? null);
-  const [motherId, setMotherId] = useState(state?.mother._id ?? null);
-  const [fatherId, setFatherId] = useState(state?.father._id ?? null);
-  const [spouseId, setSpouseId] = useState(state?.spouse._id ?? null);
+  const [personId, setPersonId] = useState(state?.person?._id ?? null);
+  const [motherId, setMotherId] = useState(state?.mother?._id ?? null);
+  const [fatherId, setFatherId] = useState(state?.father?._id ?? null);
+  const [spouseId, setSpouseId] = useState(state?.spouse?._id ?? null);
   const [spouseMotherId, setSpouseMotherId] = useState(
-    state?.spouseMother._id ?? null
+    state?.spouseMother?._id ?? null
   );
   const [spouseFatherId, setSpouseFatherId] = useState(
-    state?.spouseFather._id ?? null
+    state?.spouseFather?._id ?? null
   );
   const [childrenIds, setChildrenIds] = useState(
-    state?.children.map((child) => child._id) ?? []
+    state?.children?.map((child) => child?._id) ?? []
   );
   const [lifeStory, setLifeStory] = useState(state?.lifeStory ?? "");
   const [sources, setSources] = useState(state?.sources ?? "");

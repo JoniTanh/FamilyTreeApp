@@ -92,6 +92,7 @@ const FamiliesMembers = () => {
               <th scope="col"></th>
             </tr>
             {people
+              .sort((a, b) => a.lastName.localeCompare(b.lastName))
               .filter(filteredFamilyMembers)
               .filter(filteredPeople)
               .slice(startIndex, endIndex)

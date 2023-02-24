@@ -106,6 +106,7 @@ const People = () => {
               <th scope="col"></th>
             </tr>
             {people
+              .sort((a, b) => a.lastName.localeCompare(b.lastName))
               .filter(filteredPeople)
               .slice(startIndex, endIndex)
               .map((person) => (

@@ -65,6 +65,7 @@ const Families = () => {
         <h1 className="familiesHeader">Suvut</h1>
         <div className="familiesList">
           {uniqueFamilies
+            .sort()
             .filter((x) => x)
             .slice(startIndex, endIndex)
             .map((family, i) => (

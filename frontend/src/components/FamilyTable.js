@@ -6,6 +6,18 @@ const FamilyTable = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const {
+    person,
+    mother,
+    father,
+    spouse,
+    spouseMother,
+    spouseFather,
+    children = [],
+    lifeStory,
+    sources,
+  } = state;
+
   return (
     <>
       <div className="container">
@@ -36,90 +48,91 @@ const FamilyTable = () => {
       </div>
       <div className="container familyTableContainer">
         <h1 className="familyTableHeader">
-          Henkilön {state.person.firstNames.split(" ")[0]}{" "}
-          {state.person.lastName} perhetaulu
+          Henkilön {person.firstNames?.split(" ")[0] || person.firstNames}{" "}
+          {person.lastName} perhetaulu
         </h1>
         <div className="familyTableContent">
-          <div className="pt-4">
-            <b>kutsumanimi: </b> {state.person.nickname}
+          <div>
+            <b>kutsumanimi: </b> {person?.nickname || ""}
           </div>
           <div>
             <b>etunimet: </b>
-            {state.person.firstNames}
+            {person.firstNames}
           </div>
           <div>
             <b>sukunimi tai talonnimi (oma, ei puoliso): </b> suku arvo?
           </div>
           <div>
             <b>äiti: </b>
-            {state.mother.firstNames} "{state.mother.nickname}"{" "}
-            {state.mother.lastName} s. {state.mother.birthPlace}{" "}
-            {state.mother.birthTime} k. {state.mother.deathPlace}{" "}
-            {state.mother.deathTime} {state?.mother.deathReason}
+            {mother?.firstNames || ""} "{mother?.nickname || ""}"{" "}
+            {mother?.lastName || ""} s. {mother?.birthPlace || ""}{" "}
+            {mother?.birthTime || ""} k. {mother?.deathPlace || ""}{" "}
+            {mother?.deathTime || ""} {mother?.deathReason || ""}
           </div>
           <div className="pb-4">
             <b>isä: </b>
-            {state.father.firstNames} "{state.father.nickname}"{" "}
-            {state.father.lastName} s. {state.father.birthPlace}{" "}
-            {state.father.birthTime} k. {state.father.deathPlace}{" "}
-            {state.father.deathTime} {state.father.deathReason}
+            {father?.firstNames || ""} "{father?.nickname || ""}"{" "}
+            {father?.lastName || ""} s. {father?.birthPlace || ""}{" "}
+            {father?.birthTime || ""} k. {father?.deathPlace || ""}{" "}
+            {father?.deathTime || ""} {father?.deathReason || ""}
           </div>
           <div>
             <b>syntynyt (paikka, aika): </b>
-            {state.person.birthPlace} {state.person.birthTime}
+            {person?.birthPlace || ""} {person?.birthTime || ""}
           </div>
           <div className="pb-4">
             <b>kuollut (paikka, aika, kuolinsyy): </b>
-            {state.person.deathPlace} {state.person.deathTime}{" "}
-            {state.person.deathReason}
+            {person?.deathPlace || ""} {person?.deathTime || ""}{" "}
+            {person?.deathReason || ""}
           </div>
           <div>
             <b>vihitty (paikka, aika): </b> tekemättä vielä, muista lisätä!!
           </div>
           <div>
-            <b>puoliso: </b> {state.spouse.firstNames} "{state.spouse.nickname}"{" "}
-            {state.spouse.lastName}
+            <b>puoliso: </b> {spouse?.firstNames || ""} "
+            {spouse?.nickname || ""}" {spouse?.lastName || ""}
           </div>
           <div>
             <b>puolison äiti: </b>
-            {state.spouseMother.firstNames} "{state.spouseMother.nickname}"{" "}
-            {state.spouseMother.lastName} s. {state.spouseMother.birthPlace}{" "}
-            {state.spouseMother.birthTime} k. {state.spouseMother.deathPlace}{" "}
-            {state.spouseMother.deathTime} {state.spouseMother.deathReason}
+            {spouseMother?.firstNames || ""} "{spouseMother?.nickname || ""}"{" "}
+            {spouseMother?.lastName || ""} s. {spouseMother?.birthPlace || ""}{" "}
+            {spouseMother?.birthTime || ""} k. {spouseMother?.deathPlace || ""}{" "}
+            {spouseMother?.deathTime || ""} {spouseMother?.deathReason || ""}
           </div>
           <div className="pb-4">
             <b>puolison isä: </b>
-            {state.spouseFather.firstNames} "{state.spouseFather.nickname}"{" "}
-            {state.spouseFather.lastName} s. {state.spouseFather.birthPlace}{" "}
-            {state.spouseFather.birthTime} k. {state.spouseFather.deathPlace}{" "}
-            {state.spouseFather.deathTime} {state.spouseFather.deathReason}
+            {spouseFather?.firstNames || ""} "{spouseFather?.nickname || ""}"{" "}
+            {spouseFather?.lastName || ""} s. {spouseFather?.birthPlace || ""}{" "}
+            {spouseFather?.birthTime || ""} k. {spouseFather?.deathPlace || ""}{" "}
+            {spouseFather?.deathTime || ""} {spouseFather?.deathReason || ""}
           </div>
           <div>
             <b>syntynyt (paikka, aika): </b>
-            {state.spouse.birthPlace} {state.spouse.birthTime}
+            {spouse?.birthPlace || ""} {spouse?.birthTime || ""}
           </div>
           <div className="pb-4">
             <b>kuollut (paikka, aika, kuolinsyy): </b>
-            {state.spouse.birthPlace} {state.spouse.deathTime}{" "}
-            {state.spouse.deathReason}
+            {spouse?.birthPlace || ""} {spouse?.deathTime || ""}{" "}
+            {spouse?.deathReason || ""}
           </div>
           <div className="pb-4">
             <b>lapset: </b> LISÄÄ JOKU LISÄTIETOKENTTÄ KOSKIEN LAPSIIN!
-            {state.children.map((child, i) => (
+            {children.map((child, i) => (
               <div key={i}>
-                {child.firstNames} "{child.nickname}" {child.lastName} s.{" "}
-                {child.birthPlace} {child.birthPlace} k. {child.deathPlace}{" "}
-                {child.deathTime}
+                {child?.firstNames || ""} "{child?.nickname || ""}"{" "}
+                {child?.lastName || ""} s. {child?.birthPlace || ""}{" "}
+                {child?.birthPlace || ""} k. {child?.deathPlace || ""}{" "}
+                {child?.deathTime || ""}
               </div>
             ))}
           </div>
           <div className="pb-4">
             <b>pienoiselämänkerta: </b>
-            {state.lifeStory}
+            {lifeStory}
           </div>
           <div>
             <b>lähteet: </b>
-            {state.sources}
+            {sources}
           </div>
         </div>
       </div>

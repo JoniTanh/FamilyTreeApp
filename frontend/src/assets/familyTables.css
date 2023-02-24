@@ -13,6 +13,7 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid aliceblue;
   border-radius: 5px;
+  min-height: 565px;
 }
 
 .familyTablesHeader {

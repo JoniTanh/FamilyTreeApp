@@ -109,6 +109,9 @@ const FamilyTables = () => {
               <th scope="col"></th>
             </tr>
             {familytables
+              .sort((a, b) =>
+                a.person.lastName.localeCompare(b.person.lastName)
+              )
               .filter(filteredFamilyTables)
               .slice(startIndex, endIndex)
               .map((familytable) => (
