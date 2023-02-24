@@ -1,0 +1,50 @@
+.familyTableFormOptions {
+  padding: 50px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.familyTableFormContainer {
+  background: aliceblue;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.familyTableFormContent {
+  display: grid;
+  padding-left: 50px;
+}
+
+.familyTableFormHeader {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  font-family: ui-serif;
+  text-shadow: 0 0.5px 0.5px #65acc9;
+}
+
+.familyTableFormCreateButton {
+  margin: 20px 0 20px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.familyTableFormClearButton,
+.familyTableFormReturnButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.familyTableFormTextArea {
+  width: 40rem;
+  height: 10rem;
+}
+
+.familyTableSourceInput {
+  width: 40rem;
+}
+
+.familyTableFormValueGroup {
+  margin-right: 5rem;
+  margin-bottom: 2rem;
+}

@@ -129,7 +129,13 @@ const FamilyTables = () => {
                         </Link>
                       </div>
                       <div className="mx-1" style={{ cursor: "pointer" }}>
-                        <PencilIcon />
+                        <Link
+                          className="nav-link text-decoration-none text-dark fw-bold"
+                          to={`/familytables/edit/${familytable._id}`}
+                          state={familytable}
+                        >
+                          <PencilIcon />
+                        </Link>
                       </div>
                       <div
                         className="mx-1"

@@ -17,6 +17,7 @@ const remove = async (id) => {
 };
 
 const update = async (id, familytableObject) => {
+  console.log("ke", id, familytableObject);
   const response = await axios.put(`${baseURL}/${id}`, familytableObject);
   return response.data;
 };

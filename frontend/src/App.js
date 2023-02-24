@@ -17,6 +17,9 @@ import NewPerson from "./components/NewPerson";
 import FamilyTables from "./components/FamilyTables";
 import FamilyTable from "./components/FamilyTable";
 import NewFamilyTable from "./components/NewFamilyTable";
+import EditPerson from "./components/EditPerson";
+import FamiliesMembers from "./components/FamiliesMembers";
+import EditFamilyTable from "./components/EditFamilyTable";
 
 // App.js tyhjennettävä lähes kokonaan!
 
@@ -86,12 +89,18 @@ const App = () => {
           <NavBar handleLogout={handleLogout} user={user} />
           <Routes>
             <Route path="/families" element={<Families />} />
+            <Route path="/families/members" element={<FamiliesMembers />} />
             <Route path="/people" element={<People />} />
             <Route path="/people/create" element={<NewPerson />} />
             <Route path="/people/:id" element={<Person />} />
+            <Route path="/people/edit/:id" element={<EditPerson />} />
             <Route path="/familytables" element={<FamilyTables />} />
             <Route path="/familytables/create" element={<NewFamilyTable />} />
             <Route path="/familytables/:id" element={<FamilyTable />} />
+            <Route
+              path="/familytables/edit/:id"
+              element={<EditFamilyTable />}
+            />
             <Route path="/familytree" element={<FamilyTree />} />
             <Route path="/" element={<Home />} />
           </Routes>

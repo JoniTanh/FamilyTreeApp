@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import personService from "../services/people";
 import { useState, useEffect } from "react";
 import FamilyBanner from "../assets/FamilyBanner.svg";
@@ -30,13 +31,18 @@ const Families = () => {
     setFilter("");
   };
 
-  const filteredPeople = (person) =>
-    person.family.toLowerCase().includes(filter.toLowerCase());
+  const filteredPeople = (person, index, self) =>
+    person.family.toLowerCase().includes(filter.toLowerCase()) &&
+    index === self.findIndex((p) => p.family === person.family);
 
-  let totalItems = people.map((person) => person.family).filter(Boolean).length;
+  const uniqueFamilies = people
+    .filter(filteredPeople)
+    .map((person) => person.family);
+
+  let totalItems = uniqueFamilies.filter(Boolean).length;
   const totalPages = Math.ceil(totalItems / rows);
   const startIndex = (currentPage - 1) * rows;
-  const endIndex = startIndex + rows + 1;
+  const endIndex = startIndex + rows;
 
   return (
     <>
@@ -58,28 +64,28 @@ const Families = () => {
       <div className="container familiesContainer">
         <h1 className="familiesHeader">Suvut</h1>
         <div className="familiesList">
-          {people
-            .filter(filteredPeople)
+          {uniqueFamilies
+            .filter((x) => x)
             .slice(startIndex, endIndex)
-            .map((person, i) => (
-              <>
-                {person.family.length > 0 ? (
-                  <div key={i} className="personContainer">
-                    <div className="card familiesCard">
-                      <img
-                        className="card-img-top"
-                        src={FamilyBanner}
-                        alt="Card image cap"
-                      />
-                      <div className="card-body">
-                        <p className="card-text">{person.family}</p>
-                      </div>
+            .map((family, i) => (
+              <div key={i} className="familiesPersonContainer">
+                <Link
+                  className="nav-link text-decoration-none text-dark fw-bold"
+                  to={`/families/members`}
+                  state={family}
+                >
+                  <div className="card familiesCard">
+                    <img
+                      className="card-img-top"
+                      src={FamilyBanner}
+                      alt="Card image cap"
+                    />
+                    <div className="card-body">
+                      <p className="card-text">{family}</p>
                     </div>
                   </div>
-                ) : (
-                  ""
-                )}
-              </>
+                </Link>
+              </div>
             ))}
         </div>
       </div>

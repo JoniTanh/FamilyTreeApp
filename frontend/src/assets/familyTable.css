@@ -1,0 +1,31 @@
+.familyTableContainer {
+  background: aliceblue;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+}
+
+.familyTableEndOptions {
+  margin-top: 20px;
+  display: flex;
+}
+
+.familyTableOptions {
+  padding: 50px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.familyTableHeader {
+  padding: 40px 20px 20px 30px;
+  font-family: ui-serif;
+  text-shadow: 0 0.5px 0.5px #65acc9;
+}
+
+.familyTableContent {
+  padding: 0 20px 50px 40px;
+}
+
+.familyTableButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

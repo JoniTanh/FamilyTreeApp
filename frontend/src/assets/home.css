@@ -1,13 +1,13 @@
 .homeContainer {
   display: flex;
-  width: 85%;
+  width: 65%;
   margin: auto;
 }
 
 .homeColumn {
   flex: 1;
   padding: 20px;
-  margin: 50px 35px 15px 35px;
+  margin: 110px 35px 15px 35px;
   border-radius: 10px;
   border: 1px solid rgb(240, 216, 138);
   background: cornsilk;

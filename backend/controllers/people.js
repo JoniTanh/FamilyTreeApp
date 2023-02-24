@@ -46,6 +46,35 @@ peopleRouter.delete("/:id", async (req, res) => {
   res.status(204).end();
 });
 
-// app.put 3C/4B end /:id
+peopleRouter.put("/:id", async (req, res) => {
+  const body = req.body;
+
+  const person = {
+    nickname: body.nickname,
+    firstNames: body.firstNames,
+    lastName: body.lastName,
+    family: body.family,
+    birthPlace: body.birthPlace,
+    birthTime: body.birthTime,
+    deathPlace: body.deathPlace,
+    deathTime: body.deathTime,
+    deathReason: body.deathReason,
+    godparents: body.godparents,
+    baptismDay: body.baptismDay,
+    burialPlot: body.burialPlot,
+    burialTime: body.burialTime,
+    lifeStory: body.lifeStory,
+    sources: body.sources,
+  };
+
+  const updatedPerson = await Person.findByIdAndUpdate(req.params.id, person, {
+    new: true,
+  });
+  if (updatedPerson) {
+    res.json(updatedPerson);
+  } else {
+    res.status(404).end();
+  }
+});
 
 module.exports = peopleRouter;

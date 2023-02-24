@@ -5,3 +5,8 @@
     font-style: italic;
     margin-top: 1em;
 }
+
+input {
+    margin-right: 5px;
+    margin-left: 5px;
+}

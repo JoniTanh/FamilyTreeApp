@@ -1,22 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import Filter from "./Filter";
-import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
+import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import personService from "../services/people";
-import "../assets/people.css";
+import "../assets/familiesMembers.css";
 
-const CreateButton = () => (
-  <Link
-    className="nav-link text-decoration-none text-dark fw-bold"
-    to="/people/create"
-  >
-    <button className="btn btn-outline-success peopleCreateButton">
-      Lisää henkilö
-    </button>
-  </Link>
-);
-
-const People = () => {
+const FamiliesMembers = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
   let listNumber = 1;
 
   const [people, setPeople] = useState([]);
@@ -32,21 +24,11 @@ const People = () => {
     fetchData();
   }, [setPeople]);
 
-  // muuta paremmaksi window.confirmin sijaan
-  const toggleDelete = async (removedPerson) => {
-    const result = window.confirm(
-      `Delete ${removedPerson.firstNames} ${removedPerson.lastName}?`
-    );
-
-    if (result) {
-      await personService.remove(removedPerson.id);
-      setPeople(people.filter((person) => person.id !== removedPerson.id));
-    }
-  };
-
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
+
+  const filteredFamilyMembers = (person) => person.family.includes(state);
 
   const filteredPeople = (person) =>
     (
@@ -75,13 +57,18 @@ const People = () => {
   return (
     <>
       <div className="container">
-        <div className="peopleOptions">
+        <div className="familiesMembersOptions">
           <div>
-            <CreateButton />
+            <button
+              className="btn btn-outline-warning personButton"
+              onClick={() => navigate(-1)}
+            >
+              {"<- Takaisin"}
+            </button>
           </div>
-          <div className="peopleFilter">
+          <div className="familiesMembersFilter">
             <Filter
-              styleName={"peopleFilterInput"}
+              styleName={"familiesMembersFilterInput"}
               filter={filter}
               handleFilterChange={handleFilterChange}
             />
@@ -94,18 +81,18 @@ const People = () => {
           </div>
         </div>
       </div>
-      <div className="container peopleContainer">
-        <h1 className="peopleHeader">Henkilöt</h1>
+      <div className="container familiesMembersContainer">
+        <h1 className="familiesMembersHeader">Suvun {state} jäsenet</h1>
         <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Etunimet</th>
               <th scope="col">Sukunimi</th>
-              <th scope="col">Suku</th>
               <th scope="col"></th>
             </tr>
             {people
+              .filter(filteredFamilyMembers)
               .filter(filteredPeople)
               .slice(startIndex, endIndex)
               .map((person) => (
@@ -113,7 +100,6 @@ const People = () => {
                   <th scope="col">{listNumber++}</th>
                   <th scope="col">{person.firstNames}</th>
                   <th scope="col">{person.lastName}</th>
-                  <th scope="col">{person.family}</th>
                   <th scope="col">
                     <div className="d-flex">
                       <div className="mx-1" style={{ cursor: "pointer" }}>
@@ -134,13 +120,6 @@ const People = () => {
                           <PencilIcon />
                         </Link>
                       </div>
-                      <div
-                        className="mx-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => toggleDelete(person)}
-                      >
-                        <TrashIcon />
-                      </div>
                     </div>
                   </th>
                 </tr>
@@ -149,7 +128,7 @@ const People = () => {
         </table>
       </div>
       <div>
-        <div className="container peoplePageButtons">
+        <div className="container familiesMembersPageButtons">
           <button
             className="btn btn-outline-dark previousPageButton"
             disabled={currentPage === 1}
@@ -157,7 +136,7 @@ const People = () => {
           >
             {"<"}
           </button>
-          <div className="peoplePageValues">
+          <div className="familiesMembersPageValues">
             <input
               className="leftPageNumberInput"
               disabled
@@ -170,7 +149,7 @@ const People = () => {
               value={totalPages}
             />
             <select
-              className="peopleSelectOptions"
+              className="familiesMembersSelectOptions"
               rows={rows}
               onChange={handleRowChange}
             >
@@ -194,4 +173,4 @@ const People = () => {
   );
 };
 
-export default People;
+export default FamiliesMembers;

@@ -4,15 +4,15 @@
   margin: 1.8rem;
 }
 
-.personContainer {
+.familiesPersonContainer {
   padding: 8px;
   margin: 0 auto;
 }
 
 .familiesContainer {
-  background: aliceblue;
+  background: mintcream;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid aliceblue;
+  border: 1px solid mintcream;
   border-radius: 5px;
 }
 
@@ -24,17 +24,18 @@
 }
 
 .familiesCard {
-  background: aliceblue;
+  background: mintcream;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 12rem;
   border: 1px solid ghostwhite;
   font-family: sans-serif;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .familiesImg {
-  background: aliceblue;
+  background: mintcream;
 }
 
 .familiesPageButtons {

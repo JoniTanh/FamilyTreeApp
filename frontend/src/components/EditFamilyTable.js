@@ -1,31 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import SingleSelect from "./SingleSelect";
 import Checkbox from "./Checkbox";
+import familyTableService from "../services/familytables";
+import peopleService from "../services/people";
 import "../assets/selectCheckbox.css";
 import "../assets/familyTableForm.css";
 
-const FamilyTableForm = ({ addFamilytable, people }) => {
-  const [personId, setPersonId] = useState(null);
-  const [motherId, setMotherId] = useState(null);
-  const [fatherId, setFatherId] = useState(null);
-  const [spouseId, setSpouseId] = useState(null);
-  const [spouseMotherId, setSpouseMotherId] = useState(null);
-  const [spouseFatherId, setSpouseFatherId] = useState(null);
-  const [childrenIds, setChildrenIds] = useState([]);
-  const [lifeStory, setLifeStory] = useState("");
-  const [sources, setSources] = useState("");
+const EditFamilyTable = () => {
+  const { state } = useLocation();
+
+  const [personId, setPersonId] = useState(state?.person._id ?? null);
+  const [motherId, setMotherId] = useState(state?.mother._id ?? null);
+  const [fatherId, setFatherId] = useState(state?.father._id ?? null);
+  const [spouseId, setSpouseId] = useState(state?.spouse._id ?? null);
+  const [spouseMotherId, setSpouseMotherId] = useState(
+    state?.spouseMother._id ?? null
+  );
+  const [spouseFatherId, setSpouseFatherId] = useState(
+    state?.spouseFather._id ?? null
+  );
+  const [childrenIds, setChildrenIds] = useState(
+    state?.children.map((child) => child._id) ?? []
+  );
+  const [lifeStory, setLifeStory] = useState(state?.lifeStory ?? "");
+  const [sources, setSources] = useState(state?.sources ?? "");
 
   // multiselect
   const [isClearable, setIsClearable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSearchable, setIsSearchable] = useState(true);
 
+  const [people, setPeople] = useState([]);
+  const [children, setChildren] = useState(state?.children ?? []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const people = await peopleService.getAll();
+      setPeople(people);
+    };
+    fetchData();
+  }, [setPeople]);
+
   const navigate = useNavigate();
 
   const selectPeopleData = people.map(({ id, firstNames, lastName }) => ({
     value: id,
+    label: `${firstNames} ${lastName}`,
+  }));
+
+  const childrenOptions = children.map(({ _id, firstNames, lastName }) => ({
+    value: _id,
     label: `${firstNames} ${lastName}`,
   }));
 
@@ -68,7 +95,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (personId) {
-      addFamilytable({
+      const updatedFamilyTable = {
         personId,
         motherId,
         fatherId,
@@ -78,29 +105,21 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
         childrenIds,
         lifeStory,
         sources,
-      });
-      setPersonId(null);
-      setMotherId(null);
-      setFatherId(null);
-      setSpouseId(null);
-      setSpouseMotherId(null);
-      setSpouseFatherId(null);
-      setChildrenIds(null);
-      setLifeStory("");
-      setSources("");
+      };
+      familyTableService.update(state._id, updatedFamilyTable);
     }
   };
 
   const handleClearInputs = () => {
-    setPersonId(null);
-    setMotherId(null);
-    setFatherId(null);
-    setSpouseId(null);
-    setSpouseMotherId(null);
-    setSpouseFatherId(null);
-    setChildrenIds(null);
-    setLifeStory("");
-    setSources("");
+    setPersonId(state?.person._id ?? null);
+    setMotherId(state?.mother._id ?? null);
+    setFatherId(state?.father._id ?? null);
+    setSpouseId(state?.spouse._id ?? null);
+    setSpouseMotherId(state?.spouseMother._id ?? null);
+    setSpouseFatherId(state?.spouseFather._id ?? null);
+    setChildrenIds(state?.children.map((child) => child._id) ?? []);
+    setLifeStory(state?.lifeStory ?? "");
+    setSources(state?.sources ?? "");
   };
 
   return (
@@ -120,7 +139,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
               className="btn btn-outline-danger familyTableFormClearButton"
               onClick={() => handleClearInputs()}
             >
-              Nollaa
+              Kumoa muutokset
             </button>
           </div>
         </div>
@@ -209,12 +228,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
                   onChange={(selectedOption) =>
                     handleSelectChange("children", selectedOption)
                   }
-                  value={
-                    childrenIds &&
-                    selectPeopleData.find(
-                      (option) => option.value === childrenIds
-                    )
-                  }
+                  defaultValue={childrenOptions}
                 />
                 <div className="selectCheckbox">
                   <Checkbox
@@ -262,7 +276,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
               className="btn btn-outline-success familyTableFormCreateButton"
               type="submit"
             >
-              Luo perhetaulu
+              Päivitä
             </button>
           </form>
         </div>
@@ -271,4 +285,4 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
   );
 };
 
-export default FamilyTableForm;
+export default EditFamilyTable;

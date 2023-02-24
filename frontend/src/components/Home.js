@@ -122,6 +122,10 @@ const Home = () => {
                 pitää karsia perhetauluihin tallennettavaa dataa ja/tai
                 palautettavaa dataa, koska kaikella ei tee yhtään mitään
               </li>
+              <li>
+                lisää tähän ominaisuus, että admin voi kirjoittaa tähän suoraan
+                ilman, että tarvitsee kovakoodata
+              </li>
             </ul>
           </div>
         </div>

@@ -20,7 +20,6 @@ const NewPerson = () => {
 
   return (
     <div>
-      <h1>Lisää</h1>
       <PersonFrom createPerson={addPerson} />
     </div>
   );

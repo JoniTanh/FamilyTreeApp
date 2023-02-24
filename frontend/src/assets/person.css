@@ -1,0 +1,31 @@
+.personContainer {
+  background: ivory;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid ivory;
+  border-radius: 5px;
+}
+
+.personEndOptions {
+  margin-top: 20px;
+  display: flex;
+}
+
+.personOptions {
+  padding: 50px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.personHeader {
+  padding: 40px 20px 20px 30px;
+  font-family: ui-serif;
+  text-shadow: 0 0.5px 0.5px #65acc9;
+}
+
+.personContent {
+  padding: 0 20px 50px 40px;
+}
+
+.personButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
