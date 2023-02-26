@@ -153,7 +153,7 @@ const People = () => {
         <div className="container peoplePageButtons">
           <button
             className="btn btn-outline-dark previousPageButton"
-            disabled={currentPage === 1}
+            disabled={currentPage === 1 || !totalItems}
             onClick={() => handlePageChange(currentPage - 1)}
           >
             {"<"}
@@ -162,7 +162,13 @@ const People = () => {
             <input
               className="leftPageNumberInput"
               disabled
-              value={currentPage}
+              value={
+                !totalItems
+                  ? 0
+                  : totalPages < currentPage
+                  ? totalPages
+                  : currentPage
+              }
             />{" "}
             of{" "}
             <input
@@ -184,7 +190,7 @@ const People = () => {
           </div>
           <button
             className="btn btn-outline-dark nextPageButton"
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || !totalItems}
             onClick={() => handlePageChange(currentPage + 1)}
           >
             {">"}

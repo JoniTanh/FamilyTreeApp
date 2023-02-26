@@ -93,17 +93,27 @@ const Families = () => {
       <div className="container familiesPageButtons">
         <button
           className="btn btn-outline-dark previousPageButton"
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || !totalItems}
           onClick={() => handlePageChange(currentPage - 1)}
         >
           {"<"}
         </button>
-        <input className="leftPageNumberInput" disabled value={currentPage} />{" "}
+        <input
+          className="leftPageNumberInput"
+          disabled
+          value={
+            !totalItems
+              ? 0
+              : totalPages < currentPage
+              ? totalPages
+              : currentPage
+          }
+        />{" "}
         of{" "}
         <input className="rightPageNumberInput" disabled value={totalPages} />
         <button
           className="btn btn-outline-dark nextPageButton"
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || !totalItems}
           onClick={() => handlePageChange(currentPage + 1)}
         >
           {">"}

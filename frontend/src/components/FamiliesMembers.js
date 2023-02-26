@@ -49,7 +49,7 @@ const FamiliesMembers = () => {
     setFilter("");
   };
 
-  let totalItems = people.filter(filteredPeople).length;
+  let totalItems = people.filter(filteredFamilyMembers).length;
   const totalPages = Math.ceil(totalItems / rows);
   const startIndex = (currentPage - 1) * rows;
   const endIndex = startIndex + rows;
@@ -132,7 +132,7 @@ const FamiliesMembers = () => {
         <div className="container familiesMembersPageButtons">
           <button
             className="btn btn-outline-dark previousPageButton"
-            disabled={currentPage === 1}
+            disabled={currentPage === 1 || !totalItems}
             onClick={() => handlePageChange(currentPage - 1)}
           >
             {"<"}
@@ -141,7 +141,7 @@ const FamiliesMembers = () => {
             <input
               className="leftPageNumberInput"
               disabled
-              value={currentPage}
+              value={!totalItems ? 0 : currentPage}
             />{" "}
             of{" "}
             <input
@@ -163,7 +163,7 @@ const FamiliesMembers = () => {
           </div>
           <button
             className="btn btn-outline-dark nextPageButton"
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || !totalItems}
             onClick={() => handlePageChange(currentPage + 1)}
           >
             {">"}

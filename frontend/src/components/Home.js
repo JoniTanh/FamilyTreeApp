@@ -75,15 +75,17 @@ const Home = () => {
             <ul className="list">
               {notes.map((note) => (
                 <li key={note.id}>
-                  {note.text}{" "}
-                  {deleteMode && (
-                    <button
-                      onClick={() => removeNote(note)}
-                      className="noteDeleteButton"
-                    >
-                      x
-                    </button>
-                  )}
+                  <div className="noteContainer">
+                    {note.text}{" "}
+                    {deleteMode && (
+                      <button
+                        onClick={() => removeNote(note)}
+                        className="noteDeleteButton"
+                      >
+                        x
+                      </button>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

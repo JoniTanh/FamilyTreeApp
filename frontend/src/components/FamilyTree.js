@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import familytableService from "../services/familytables";
+import SingleSelect from "./SingleSelect";
 import "../assets/familyTree.css";
 import React from "react";
 import dTree from "d3-dtree";
@@ -9,7 +10,9 @@ window.d3 = d3;
 
 const FamilyTree = () => {
   const [familytables, setFamilytables] = useState([]);
+  const [selectedFamilyTable, setSelectedFamilyTable] = useState("");
   const graphContainer = useRef(null);
+  const result = familytables.find(({ _id }) => _id === selectedFamilyTable);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,27 +22,46 @@ const FamilyTree = () => {
     fetchData();
   }, []);
 
-  const person = familytables[0] ? familytables[0].person : null;
-
   useEffect(() => {
-    if (familytables.length > 0) {
+    if (familytables.length > 0 && result) {
       renderTree();
     }
-  }, [familytables]);
+  }, [familytables, result]);
+
+  const selectPeopleData = familytables.map(({ _id, person }) => ({
+    value: _id,
+    label: `${person.firstNames} ${person.lastName}`,
+  }));
+
+  const handleSelectChange = (field, selectedOption) => {
+    setSelectedFamilyTable(selectedOption.value);
+  };
 
   const renderTree = () => {
     let person = "Person";
     let mother = "Mother";
     let father = "Father";
     let spouse = "Spouse";
-    let children = ["Child1", "Child2"];
+    let children = [];
 
-    if (familytables[0]) {
-      person = familytables[0].person.firstNames;
-      mother = familytables[0].mother.firstNames;
-      father = familytables[0].father.firstNames;
-      spouse = familytables[0].spouse.firstNames;
-      children = familytables[0].children.map((child) => child.firstNames);
+    if (result) {
+      person = result.person
+        ? `${result?.person.firstNames} ${result?.person.lastName}`
+        : "Tuntematon";
+      mother = result.mother
+        ? `${result?.mother.firstNames} ${result?.mother.lastName}`
+        : "Tuntematon";
+      father = result.father
+        ? `${result?.father.firstNames} ${result?.father.lastName}`
+        : "Tuntematon";
+      spouse = result.spouse
+        ? `${result?.spouse.firstNames} ${result?.spouse.lastName}`
+        : "Tuntematon";
+      children = result.children
+        ? result?.children.map(
+            (child) => `${child?.firstNames} ${child?.lastName}`
+          )
+        : "";
     }
 
     let treeData = [
@@ -115,26 +137,34 @@ const FamilyTree = () => {
   useEffect(() => {
     d3.select(graphContainer.current).selectAll("*").remove();
     renderTree();
-  }, [familytables]);
+  }, [familytables, result]);
 
   return (
     <FamilyTreeGraph
-      person={person}
+      result={result ? result.person : ""}
       familyTables={familytables}
       graphContainer={graphContainer}
+      selectPeopleData={selectPeopleData}
+      handleSelectChange={handleSelectChange}
     />
   );
 };
 
 class FamilyTreeGraph extends React.Component {
   render() {
-    const { graphContainer, person } = this.props;
-    const title = `${person?.firstNames} ${person?.lastName}'s Family Tree`;
+    const { graphContainer, result, selectPeopleData, handleSelectChange } =
+      this.props;
+    const title = result
+      ? `${result?.firstNames} ${result?.lastName}'s Family Tree`
+      : "Valitse henkilö";
 
     return (
       <>
-        {console.log(this.props)}
         <div className="familyTreesvg">
+          <SingleSelect
+            selectPeopleData={selectPeopleData}
+            handleSelectChange={handleSelectChange}
+          />
           <h1 style={{ textAlign: "center" }}>{title}</h1>
           <div ref={graphContainer} id="graph"></div>
         </div>
