@@ -2,27 +2,32 @@
   fill: none;
   stroke: #000;
 }
+
 .marriage {
   fill: none;
   stroke: black;
 }
-.man {
-  background-color: lightblue;
+
+.human {
+  background-color: white;
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
 }
-.woman {
-  background-color: pink;
-  border-style: solid;
-  border-width: 1px;
-  box-sizing: border-box;
-}
-.emphasis {
+
+.person {
   font-style: italic;
+  color: rgb(221, 59, 59);
 }
+
 .familyTreesvg {
+  background-color: mintcream;
   border-style: solid;
   border-width: 1px;
   margin: 10px;
+}
+
+p {
+  padding: 8px;
+  margin-bottom: 0;
 }

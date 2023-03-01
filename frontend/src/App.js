@@ -27,11 +27,9 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(() => {
-    return JSON.parse(localStorage.getItem("loggedFamilyAppUser")) || null;
-  });
-  // sisäänkirjautumine toteutettava eri tavalla, koska millä tahansa LocalStorage "userilla" pääsee kirjautumaan sisään konsolin kautta, jos tämä jää näin
-  // helpottamassa tällä hetkellä sitä, että ei joka kerta kirjaudu ulos, kun päivittää sivun yms. yms.
+  const [user, setUser] = useState(null);
+
+  // testaile vielä kirjautumista konsolista yms. yms.
 
   const navigate = useNavigate("/");
 
@@ -39,7 +37,11 @@ const App = () => {
     const loggedUserJSON = window.localStorage.getItem("loggedFamilyAppUser");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+      if (user) {
+        setUser(user);
+      } else {
+        window.localStorage.removeItem("loggedFamilyAppUser");
+      }
     }
   }, [navigate]);
 
@@ -52,11 +54,20 @@ const App = () => {
         password,
       });
 
-      window.localStorage.setItem("loggedFamilyAppUser", JSON.stringify(user));
-
-      setUser(user);
-      setUsername("");
-      setPassword("");
+      if (user) {
+        window.localStorage.setItem(
+          "loggedFamilyAppUser",
+          JSON.stringify(user)
+        );
+        setUser(user);
+        setUsername("");
+        setPassword("");
+      } else {
+        setErrorMessage("wrong credentials");
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
+      }
     } catch (exception) {
       setErrorMessage("wrong credentials");
       setTimeout(() => {

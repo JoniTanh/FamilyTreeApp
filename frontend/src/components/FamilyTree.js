@@ -46,20 +46,28 @@ const FamilyTree = () => {
 
     if (result) {
       person = result.person
-        ? `${result?.person.firstNames} ${result?.person.lastName}`
-        : "Tuntematon";
+        ? `${result?.person.firstNames.split(" ")[0]} ${
+            result?.person.lastName
+          }`
+        : "tuntematon";
       mother = result.mother
-        ? `${result?.mother.firstNames} ${result?.mother.lastName}`
-        : "Tuntematon";
+        ? `${result?.mother.firstNames.split(" ")[0]} ${
+            result?.mother.lastName
+          }`
+        : "tuntematon";
       father = result.father
-        ? `${result?.father.firstNames} ${result?.father.lastName}`
-        : "Tuntematon";
+        ? `${result?.father.firstNames.split(" ")[0]} ${
+            result?.father.lastName
+          }`
+        : "tuntematon";
       spouse = result.spouse
-        ? `${result?.spouse.firstNames} ${result?.spouse.lastName}`
-        : "Tuntematon";
+        ? `${result?.spouse.firstNames.split(" ")[0]} ${
+            result?.spouse.lastName
+          }`
+        : "tuntematon";
       children = result.children
         ? result?.children.map(
-            (child) => `${child?.firstNames} ${child?.lastName}`
+            (child) => `${child?.firstNames.split(" ")[0]} ${child?.lastName}`
           )
         : "";
     }
@@ -67,13 +75,12 @@ const FamilyTree = () => {
     let treeData = [
       {
         name: father,
-        class: "man",
-        textClass: "emphasis",
+        class: "human",
         marriages: [
           {
             spouse: {
               name: mother,
-              class: "woman",
+              class: "human",
               extra: {
                 nickname: "Illi",
               },
@@ -81,22 +88,23 @@ const FamilyTree = () => {
             children: [
               {
                 name: person,
-                class: "man",
+                class: "human",
+                textClass: "person",
                 marriages: [
                   {
                     spouse: {
                       name: spouse,
-                      class: "woman",
+                      class: "human",
                     },
                     children: children.map((childName) => {
                       return {
                         name: childName,
-                        class: "man",
+                        class: "human",
                         marriages: [
                           {
                             spouse: {
                               name: "Tyttöystävä",
-                              class: "woman",
+                              class: "human",
                             },
                           },
                         ],
@@ -114,11 +122,12 @@ const FamilyTree = () => {
     dTree.init(treeData, {
       target: "#graph",
       height: 600,
-      width: 1400,
-      debug: true,
+      width: 2000,
+      debug: false,
+      nodeWidth: 150,
       textRenderer: function (name, textClass) {
         return (
-          "<p align='center' className='" + textClass + "'>" + name + "</p>"
+          "<div align='center' className='" + textClass + "'>" + name + "</div>"
         );
       },
       nodeRenderer: function (id, textRenderer, name, textClass, nodeClass) {
