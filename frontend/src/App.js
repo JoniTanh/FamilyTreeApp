@@ -49,7 +49,7 @@ const App = () => {
     event.preventDefault();
 
     try {
-      const user = await loginService.login({
+      const { token, ...user } = await loginService.login({
         username,
         password,
       });
@@ -57,9 +57,9 @@ const App = () => {
       if (user) {
         window.localStorage.setItem(
           "loggedFamilyAppUser",
-          JSON.stringify(user)
+          JSON.stringify({ token, ...user })
         );
-        setUser(user);
+        setUser({ token, ...user });
         setUsername("");
         setPassword("");
       } else {
@@ -113,7 +113,7 @@ const App = () => {
               element={<EditFamilyTable />}
             />
             <Route path="/familytree" element={<FamilyTree />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home user={user} />} />
           </Routes>
         </div>
       )}

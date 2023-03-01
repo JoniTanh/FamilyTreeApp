@@ -11,6 +11,7 @@ const familytableRouter = require("./controllers/familytables");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
+const { authRequired } = require("./utils/authRequired");
 
 mongoose.set("strictQuery", false);
 
@@ -29,11 +30,11 @@ app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
 
-app.use("/api/people", peopleRouter);
-app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
-app.use("/api/familytables", familytableRouter);
-app.use("/api/notes", notesRouter);
+app.use("/api/people", authRequired, peopleRouter);
+app.use("/api/users", authRequired, usersRouter);
+app.use("/api/familytables", authRequired, familytableRouter);
+app.use("/api/notes", authRequired, notesRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
