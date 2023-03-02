@@ -1,32 +1,34 @@
 import axios from "axios";
 const baseURL = "/api/notes";
 
-const authAxios = axios.create({
-  baseURL,
-  headers: {
-    Authorization: `Bearer ${
-      JSON.parse(localStorage.getItem("loggedFamilyAppUser"))?.token
-    }`,
-  },
-});
+const getHeaders = () => {
+  const token = JSON.parse(localStorage.getItem("token"))?.token;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 const getAll = async () => {
-  const response = await authAxios.get("/");
+  const response = await axios.get(baseURL, { headers: getHeaders() });
   return response.data;
 };
 
 const create = async (noteObject) => {
-  const response = await authAxios.post("/", noteObject);
+  const response = await axios.post(baseURL, noteObject, {
+    headers: getHeaders(),
+  });
   return response.data;
 };
 
 const remove = async (id) => {
-  const response = await authAxios.delete(`/${id}`);
+  const response = await axios.delete(`${baseURL}/${id}`, {
+    headers: getHeaders(),
+  });
   return response.data;
 };
 
 const update = async (id, noteObject) => {
-  const response = await authAxios.put(`/${id}`, noteObject);
+  const response = await axios.put(`${baseURL}/${id}`, noteObject, {
+    headers: getHeaders(),
+  });
   return response.data;
 };
 

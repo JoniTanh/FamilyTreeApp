@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Search from "./Search";
+import Logout from "./Logout";
 
-const NavBar = ({ handleLogout, user }) => {
+const NavBar = () => {
   const [search, setSearch] = useState("");
+
+  const user = JSON.parse(localStorage.getItem("token"))?.name;
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
@@ -61,14 +64,9 @@ const NavBar = ({ handleLogout, user }) => {
       <div className="px-5">
         <span className="px-3">
           Olet kirjautunut sisään käyttäjällä{" "}
-          <span className="fw-bold">{user.name}</span>
+          <span className="fw-bold">{user}</span>
         </span>
-        <button
-          className="btn btn-outline-danger fw-bold"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        <Logout />
       </div>
     </nav>
   );
