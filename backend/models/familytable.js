@@ -33,6 +33,9 @@ const familytableSchema = new mongoose.Schema({
   },
   lifeStory: String,
   sources: String,
+  marriedTime: String,
+  marriedPlace: String,
+  childrenInformation: String,
 });
 
 familytableSchema.set("toJSON", {

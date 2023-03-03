@@ -1,16 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Search from "./Search";
 import Logout from "./Logout";
 
 const NavBar = () => {
-  const [search, setSearch] = useState("");
-
   const user = JSON.parse(localStorage.getItem("token"))?.name;
-
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-  };
 
   return (
     <nav className="navbar navbar-expand bg-info bg-gradient text-dark shadow-lg p-3 mb-2 border-bottom border-secondary">
@@ -59,7 +52,7 @@ const NavBar = () => {
         </ul>
       </div>
       <div>
-        <Search search={search} handleSearchChange={handleSearchChange} />
+        <Search />
       </div>
       <div className="px-5">
         <span className="px-3">

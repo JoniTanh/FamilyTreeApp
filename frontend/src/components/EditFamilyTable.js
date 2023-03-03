@@ -27,6 +27,9 @@ const EditFamilyTable = () => {
   );
   const [lifeStory, setLifeStory] = useState(state?.lifeStory ?? "");
   const [sources, setSources] = useState(state?.sources ?? "");
+  const [marriedTime, setMarriedTime] = useState("");
+  const [marriedPlace, setMarriedPlace] = useState("");
+  const [childrenInformation, setChildrenInformation] = useState("");
 
   // multiselect
   const [isClearable, setIsClearable] = useState(true);
@@ -92,6 +95,18 @@ const EditFamilyTable = () => {
     setSources(event.target.value);
   };
 
+  const handleMarriedTimeChange = (event) => {
+    setMarriedTime(event.target.value);
+  };
+
+  const handleMarriedPlaceChange = (event) => {
+    setMarriedPlace(event.target.value);
+  };
+
+  const handleChildrenInformationChange = (event) => {
+    setChildrenInformation(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (personId) {
@@ -105,6 +120,9 @@ const EditFamilyTable = () => {
         childrenIds,
         lifeStory,
         sources,
+        marriedTime,
+        marriedPlace,
+        childrenInformation,
       };
       familyTableService.update(state._id, updatedFamilyTable);
     }
@@ -120,6 +138,9 @@ const EditFamilyTable = () => {
     setChildrenIds(state?.children.map((child) => child._id) ?? []);
     setLifeStory(state?.lifeStory ?? "");
     setSources(state?.sources ?? "");
+    setMarriedTime(state?.marriedTime ?? "");
+    setMarriedPlace(state?.marriedPlace ?? "");
+    setChildrenInformation(state.childrenInformation ?? "");
   };
 
   return (
@@ -145,7 +166,7 @@ const EditFamilyTable = () => {
         </div>
       </div>
       <div className="container familyTableFormContainer">
-        <h1 className="familyTableFormHeader">Uusi perhetaulu</h1>
+        <h1 className="familyTableFormHeader">Muokkaa perhetaulua</h1>
         <div className="familyTableFormContent">
           <form onSubmit={handleSubmit}>
             <div className="familyTableFormValueGroup">
@@ -189,6 +210,19 @@ const EditFamilyTable = () => {
                   handleSelectChange={handleSelectChange}
                   text={"spouse"}
                   id={spouseId}
+                />
+              </div>
+            </div>
+            <div className="familyTableFormValueGroup">
+              <div>
+                <div>vihkimisaika:</div>
+                <input value={marriedTime} onChange={handleMarriedTimeChange} />
+              </div>
+              <div>
+                <div>vihkimispaikka:</div>
+                <input
+                  value={marriedPlace}
+                  onChange={handleMarriedPlaceChange}
                 />
               </div>
             </div>
@@ -250,6 +284,16 @@ const EditFamilyTable = () => {
                     Disabled
                   </Checkbox>
                 </div>
+              </div>
+            </div>
+            <div className="familyTableFormValueGroup">
+              <div>lisätietoa lapsista:</div>
+              <div>
+                <input
+                  className="familyTableSourceInput"
+                  value={childrenInformation}
+                  onChange={handleChildrenInformationChange}
+                />
               </div>
             </div>
             <div className="familyTableFormValueGroup">

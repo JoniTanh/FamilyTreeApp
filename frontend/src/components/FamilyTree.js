@@ -28,10 +28,12 @@ const FamilyTree = () => {
     }
   }, [familytables, result]);
 
-  const selectPeopleData = familytables.map(({ _id, person }) => ({
-    value: _id,
-    label: `${person.firstNames} ${person.lastName}`,
-  }));
+  const selectPeopleData = familytables
+    .filter(({ person }) => person)
+    .map(({ _id, person }) => ({
+      value: _id,
+      label: `${person?.firstNames} ${person?.lastName}`,
+    }));
 
   const handleSelectChange = (field, selectedOption) => {
     setSelectedFamilyTable(selectedOption.value);

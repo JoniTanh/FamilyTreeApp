@@ -54,6 +54,8 @@
   background: white;
   font-weight: bold;
   font-family: ui-serif;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .leftPageNumberInput {

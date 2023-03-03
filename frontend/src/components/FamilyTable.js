@@ -16,6 +16,9 @@ const FamilyTable = () => {
     children = [],
     lifeStory,
     sources,
+    marriedTime,
+    marriedPlace,
+    childrenInformation,
   } = state;
 
   return (
@@ -48,8 +51,8 @@ const FamilyTable = () => {
       </div>
       <div className="container familyTableContainer">
         <h1 className="familyTableHeader">
-          Henkilön {person.firstNames?.split(" ")[0] || person.firstNames}{" "}
-          {person.lastName} perhetaulu
+          Henkilön {person?.firstNames?.split(" ")[0] || person?.firstNames}{" "}
+          {person?.lastName} perhetaulu
         </h1>
         <div className="familyTableContent">
           <div>
@@ -57,10 +60,10 @@ const FamilyTable = () => {
           </div>
           <div>
             <b>etunimet: </b>
-            {person.firstNames}
+            {person?.firstNames}
           </div>
           <div>
-            <b>sukunimi tai talonnimi (oma, ei puoliso): </b> suku arvo?
+            <b>sukunimi tai talonnimi (oma, ei puoliso): </b> suku arvo
           </div>
           <div>
             <b>äiti: </b>
@@ -86,7 +89,8 @@ const FamilyTable = () => {
             {person?.deathReason || ""}
           </div>
           <div>
-            <b>vihitty (paikka, aika): </b> tekemättä vielä, muista lisätä!!
+            <b>vihitty (paikka, aika): </b>
+            {marriedPlace} {marriedTime}
           </div>
           <div>
             <b>puoliso: </b> {spouse?.firstNames || ""} "
@@ -115,8 +119,12 @@ const FamilyTable = () => {
             {spouse?.birthPlace || ""} {spouse?.deathTime || ""}{" "}
             {spouse?.deathReason || ""}
           </div>
+          <div>
+            <b>lisätietoa lapsista: </b>
+            {childrenInformation}
+          </div>
           <div className="pb-4">
-            <b>lapset: </b> LISÄÄ JOKU LISÄTIETOKENTTÄ KOSKIEN LAPSIIN!
+            <b>lapset: </b>
             {children.map((child, i) => (
               <div key={i}>
                 {child?.firstNames || ""} "{child?.nickname || ""}"{" "}

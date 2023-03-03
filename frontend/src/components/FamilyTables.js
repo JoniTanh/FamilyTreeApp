@@ -51,7 +51,7 @@ const FamilyTables = () => {
   };
 
   const filteredFamilyTables = (familytable) => {
-    if (!familytable.person.firstNames || !familytable.person.lastName)
+    if (!familytable.person?.firstNames || !familytable.person?.lastName)
       return "";
 
     const fullName = `${familytable.person.firstNames.toLowerCase()} ${familytable.person.lastName.toLowerCase()}`;
@@ -110,16 +110,16 @@ const FamilyTables = () => {
             </tr>
             {familytables
               .sort((a, b) =>
-                a.person.lastName.localeCompare(b.person.lastName)
+                a.person?.lastName.localeCompare(b.person?.lastName)
               )
               .filter(filteredFamilyTables)
               .slice(startIndex, endIndex)
               .map((familytable) => (
                 <tr key={listNumber}>
                   <th scope="col">{listNumber++}</th>
-                  <th scope="col">{familytable.person.firstNames}</th>
-                  <th scope="col">{familytable.person.lastName}</th>
-                  <th scope="col">{familytable.person.family}</th>
+                  <th scope="col">{familytable.person?.firstNames}</th>
+                  <th scope="col">{familytable.person?.lastName}</th>
+                  <th scope="col">{familytable.person?.family}</th>
                   <th scope="col">
                     <div className="d-flex">
                       <div className="mx-1" style={{ cursor: "pointer" }}>

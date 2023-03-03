@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-const login = async (request, response) => {
+const auth = async (request, response) => {
   const { username, password } = request.body;
 
   const user = await User.findOne({ username });
@@ -27,4 +27,4 @@ const login = async (request, response) => {
     .send({ token, username: user.username, name: user.name });
 };
 
-module.exports = { login };
+module.exports = { auth };

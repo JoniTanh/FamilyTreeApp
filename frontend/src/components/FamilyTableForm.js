@@ -16,6 +16,9 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
   const [childrenIds, setChildrenIds] = useState([]);
   const [lifeStory, setLifeStory] = useState("");
   const [sources, setSources] = useState("");
+  const [marriedTime, setMarriedTime] = useState("");
+  const [marriedPlace, setMarriedPlace] = useState("");
+  const [childrenInformation, setChildrenInformation] = useState("");
 
   // multiselect
   const [isClearable, setIsClearable] = useState(true);
@@ -65,6 +68,18 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
     setSources(event.target.value);
   };
 
+  const handleMarriedTimeChange = (event) => {
+    setMarriedTime(event.target.value);
+  };
+
+  const handleMarriedPlaceChange = (event) => {
+    setMarriedPlace(event.target.value);
+  };
+
+  const handleChildrenInformationChange = (event) => {
+    setChildrenInformation(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (personId) {
@@ -78,6 +93,9 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
         childrenIds,
         lifeStory,
         sources,
+        marriedTime,
+        marriedPlace,
+        childrenInformation,
       });
       setPersonId(null);
       setMotherId(null);
@@ -88,6 +106,9 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
       setChildrenIds(null);
       setLifeStory("");
       setSources("");
+      setMarriedTime("");
+      setMarriedPlace("");
+      setChildrenInformation("");
     }
   };
 
@@ -101,6 +122,9 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
     setChildrenIds(null);
     setLifeStory("");
     setSources("");
+    setMarriedTime("");
+    setMarriedPlace("");
+    setChildrenInformation("");
   };
 
   return (
@@ -174,6 +198,19 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
               </div>
             </div>
             <div className="familyTableFormValueGroup">
+              <div>
+                <div>vihkimisaika:</div>
+                <input value={marriedTime} onChange={handleMarriedTimeChange} />
+              </div>
+              <div>
+                <div>vihkimispaikka:</div>
+                <input
+                  value={marriedPlace}
+                  onChange={handleMarriedPlaceChange}
+                />
+              </div>
+            </div>
+            <div className="familyTableFormValueGroup">
               <div>puolison äiti:</div>
               <div>
                 <SingleSelect
@@ -236,6 +273,16 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
                     Disabled
                   </Checkbox>
                 </div>
+              </div>
+            </div>
+            <div className="familyTableFormValueGroup">
+              <div>lisätietoa lapsista:</div>
+              <div>
+                <input
+                  className="familyTableSourceInput"
+                  value={childrenInformation}
+                  onChange={handleChildrenInformationChange}
+                />
               </div>
             </div>
             <div className="familyTableFormValueGroup">

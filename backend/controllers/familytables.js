@@ -27,6 +27,9 @@ familytableRouter.post("/", async (req, res) => {
     spouseFatherId,
     lifeStory,
     sources,
+    marriedTime,
+    marriedPlace,
+    childrenInformation,
   } = req.body;
 
   const person = await Person.findById(personId);
@@ -53,6 +56,9 @@ familytableRouter.post("/", async (req, res) => {
     spouseFather: spouseFather ? spouseFather._id : undefined,
     lifeStory,
     sources,
+    marriedTime,
+    marriedPlace,
+    childrenInformation,
   });
 
   const savedFamilytable = await familytable.save();
@@ -86,6 +92,9 @@ familytableRouter.put("/:id", async (req, res) => {
       spouseFatherId,
       lifeStory,
       sources,
+      marriedTime,
+      marriedPlace,
+      childrenInformation,
     } = req.body;
 
     const person = await Person.findById(personId);
@@ -112,6 +121,9 @@ familytableRouter.put("/:id", async (req, res) => {
       spouseFather: spouseFather ? spouseFather._id : undefined,
       lifeStory,
       sources,
+      marriedTime,
+      marriedPlace,
+      childrenInformation,
     };
 
     const updated = await Familytable.findByIdAndUpdate(
