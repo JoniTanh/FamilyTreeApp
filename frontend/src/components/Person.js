@@ -1,15 +1,26 @@
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
+import peopleService from "../services/people";
 import "../assets/person.css";
 
 const Person = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [person, setPerson] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const person = await peopleService.getById(state);
+      setPerson(person);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
       <div className="container">
-        <div className="personOptions">
+        <div className="topOptions">
           <div>
             <button
               className="btn btn-outline-warning personButton"
@@ -21,7 +32,7 @@ const Person = () => {
           <div>
             <Link
               className="nav-link text-decoration-none text-dark fw-bold"
-              to={`/people/edit/${state.id}`}
+              to={`/people/edit/${state}`}
               state={state}
             >
               <button
@@ -34,44 +45,53 @@ const Person = () => {
           </div>
         </div>
       </div>
-      <div className="container personContainer">
-        <h1 className="personHeader">
-          {state.nickname ? state.nickname : state.firstNames.split(" ")[0]}{" "}
-          {state.lastName}
-        </h1>
-        <div className="personContent">
-          <div>
-            <b>kutsumanimi:</b> {state.nickname}
-          </div>
-          <div>
-            <b>etunimet:</b> {state.firstNames}
-          </div>
-          <div>
-            <b>sukunimi:</b> {state.lastName}
-          </div>
-          <div className="pb-3">
-            <b>oma suku:</b> {state.family}
-          </div>
-          <div>
-            <b>syntynyt (paikka, aika):</b> {state.birthPlace} {state.birthTime}
-          </div>
-          <div className="pb-3">
-            <b>kummit ja kastepäivä:</b> {state.godparents} {state.baptismDay}
-          </div>
-          <div>
-            <b>kuollut (paikka, aika, kuolinsyy):</b> {state.deathPlace}{" "}
-            {state.deathTime} {state.deathReason}
-          </div>
-          <div className="pb-3">
-            <b>hautauspaikka- ja aika:</b> {state.burialPlot} {state.burialTime}
-          </div>
-          <div className="pb-3">
-            <b>pienoiselämänkerta:</b> {state.lifeStory}
-          </div>
-          <div>
-            <b>lähteet:</b> {state.sources}
-          </div>
-        </div>
+      <div className="container personContainer pageContainer">
+        {person && (
+          <>
+            <h1 className="personHeader">
+              {person.nickname
+                ? person.nickname
+                : person.firstNames.split(" ")[0]}{" "}
+              {person.lastName}
+            </h1>
+            <div className="personContent">
+              <div>
+                <b>kutsumanimi:</b> {person.nickname}
+              </div>
+              <div>
+                <b>etunimet:</b> {person.firstNames}
+              </div>
+              <div>
+                <b>sukunimi:</b> {person.lastName}
+              </div>
+              <div className="pb-3">
+                <b>oma suku:</b> {person.family}
+              </div>
+              <div>
+                <b>syntynyt (paikka, aika):</b> {person.birthPlace}{" "}
+                {person.birthTime}
+              </div>
+              <div className="pb-3">
+                <b>kummit ja kastepäivä:</b> {person.godparents}{" "}
+                {person.baptismDay}
+              </div>
+              <div>
+                <b>kuollut (paikka, aika, kuolinsyy):</b> {person.deathPlace}{" "}
+                {person.deathTime} {person.deathReason}
+              </div>
+              <div className="pb-3">
+                <b>hautauspaikka- ja aika:</b> {person.burialPlot}{" "}
+                {person.burialTime}
+              </div>
+              <div className="pb-3">
+                <b>pienoiselämänkerta:</b> {person.lifeStory}
+              </div>
+              <div>
+                <b>lähteet:</b> {person.sources}
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="container">
         <div className="personEndOptions">

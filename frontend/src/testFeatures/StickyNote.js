@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { TrashIcon } from "../../assets/Icons";
+import { TrashIcon } from "../assets/Icons";
 
 const StickyNote = ({ text, x, y, onMove, onDelete }) => {
   const [dragging, setDragging] = useState(false);

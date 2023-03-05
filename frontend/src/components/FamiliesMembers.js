@@ -5,6 +5,7 @@ import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import personService from "../services/people";
 import "../assets/familiesMembers.css";
+import PageOptions from "./PageOptions";
 
 const FamiliesMembers = () => {
   const { state } = useLocation();
@@ -36,14 +37,6 @@ const FamiliesMembers = () => {
       " " +
       person.lastName.toLowerCase()
     ).includes(filter.toLowerCase());
-
-  const handleRowChange = (event) => {
-    setRows(Number(event.target.value));
-  };
-
-  const handlePageChange = (value) => {
-    setCurrentPage(value);
-  };
 
   const handleClearFilter = () => {
     setFilter("");
@@ -129,46 +122,15 @@ const FamiliesMembers = () => {
         </table>
       </div>
       <div>
-        <div className="container familiesMembersPageButtons">
-          <button
-            className="btn btn-outline-dark previousPageButton"
-            disabled={currentPage === 1 || !totalItems}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            {"<"}
-          </button>
-          <div className="familiesMembersPageValues">
-            <input
-              className="leftPageNumberInput"
-              disabled
-              value={!totalItems ? 0 : currentPage}
-            />{" "}
-            of{" "}
-            <input
-              className="rightPageNumberInput"
-              disabled
-              value={totalPages}
-            />
-            <select
-              className="familiesMembersSelectOptions"
-              rows={rows}
-              onChange={handleRowChange}
-            >
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-              <option value="100">100</option>
-            </select>
-          </div>
-          <button
-            className="btn btn-outline-dark nextPageButton"
-            disabled={currentPage === totalPages || !totalItems}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            {">"}
-          </button>
-        </div>
+        <PageOptions
+          currentPage={currentPage}
+          totalItems={totalItems}
+          totalPages={totalPages}
+          rows={rows}
+          setRows={setRows}
+          setCurrentPage={setCurrentPage}
+          selectOption={true}
+        />
       </div>
     </>
   );

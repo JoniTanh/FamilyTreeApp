@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import FamilyBanner from "../assets/FamilyBanner.svg";
 import "../assets/families.css";
 import Filter from "./Filter";
+import PageOptions from "./PageOptions";
 
 const Families = () => {
   const [people, setPeople] = useState([]);
@@ -21,10 +22,6 @@ const Families = () => {
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
-  };
-
-  const handlePageChange = (value) => {
-    setCurrentPage(value);
   };
 
   const handleClearFilter = () => {
@@ -90,35 +87,13 @@ const Families = () => {
             ))}
         </div>
       </div>
-      <div className="container familiesPageButtons">
-        <button
-          className="btn btn-outline-dark previousPageButton"
-          disabled={currentPage === 1 || !totalItems}
-          onClick={() => handlePageChange(currentPage - 1)}
-        >
-          {"<"}
-        </button>
-        <input
-          className="leftPageNumberInput"
-          disabled
-          value={
-            !totalItems
-              ? 0
-              : totalPages < currentPage
-              ? totalPages
-              : currentPage
-          }
-        />{" "}
-        of{" "}
-        <input className="rightPageNumberInput" disabled value={totalPages} />
-        <button
-          className="btn btn-outline-dark nextPageButton"
-          disabled={currentPage === totalPages || !totalItems}
-          onClick={() => handlePageChange(currentPage + 1)}
-        >
-          {">"}
-        </button>
-      </div>
+      <PageOptions
+        currentPage={currentPage}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        rows={rows}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

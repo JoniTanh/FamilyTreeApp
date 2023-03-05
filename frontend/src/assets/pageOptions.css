@@ -1,0 +1,51 @@
+.pageButtons {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.previousPageButton {
+  margin-right: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pageValues {
+  margin-top: 5px;
+}
+
+.nextPageButton {
+  margin-left: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.leftPageNumberInput,
+.rightPageNumberInput {
+  border: none;
+  outline: none;
+  width: 100px;
+  background: white;
+  font-weight: bold;
+  font-family: ui-serif;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.leftPageNumberInput {
+  text-align: end;
+}
+
+.selectOptions {
+  width: 60px;
+  border: 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1.1;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nextPageButtons {
+  margin-left: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

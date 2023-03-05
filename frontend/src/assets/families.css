@@ -39,35 +39,6 @@
   background: mintcream;
 }
 
-.familiesPageButtons {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.previousPageButton {
-  margin-right: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.nextPageButton {
-  margin-left: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.leftPageNumberInput,
-.rightPageNumberInput {
-  border: none;
-  outline: none;
-  width: 100px;
-  background: white;
-  font-weight: bold;
-  font-family: ui-serif;
-}
-
-.leftPageNumberInput {
-  text-align: end;
-}
-
 .familiesFilter {
   padding: 50px 0 20px 0;
   display: flex;

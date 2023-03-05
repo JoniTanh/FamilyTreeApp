@@ -11,7 +11,7 @@ const Notification = ({ message, hasErrors, type }) => {
         className={`${
           hasErrors || type === "delete"
             ? "error"
-            : "changed"
+            : type === "changed"
             ? "edit"
             : "success"
         }Message`}

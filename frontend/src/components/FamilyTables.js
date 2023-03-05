@@ -5,17 +5,8 @@ import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
 import familytableService from "../services/familytables";
 import Notification from "../components/Notification";
 import "../assets/familyTables.css";
-
-const CreateButton = () => (
-  <Link
-    className="nav-link text-decoration-none text-dark fw-bold"
-    to="/familytables/create"
-  >
-    <button className="btn btn-outline-success familyTablesCreateButton">
-      Lisää perhetaulu
-    </button>
-  </Link>
-);
+import PageOptions from "./PageOptions";
+import NewTableButton from "./NewTableButton";
 
 const FamilyTables = () => {
   let listNumber = 1;
@@ -83,14 +74,6 @@ const FamilyTables = () => {
     return fullName.includes(filter.toLowerCase());
   };
 
-  const handleRowChange = (event) => {
-    setRows(Number(event.target.value));
-  };
-
-  const handlePageChange = (value) => {
-    setCurrentPage(value);
-  };
-
   const handleClearFilter = () => {
     setFilter("");
   };
@@ -110,7 +93,7 @@ const FamilyTables = () => {
       <div className="container">
         <div className="familyTablesOptions">
           <div>
-            <CreateButton />
+            <NewTableButton />
           </div>
           <div className="familyTablesFilter">
             <Filter
@@ -185,52 +168,15 @@ const FamilyTables = () => {
         </table>
       </div>
       <div>
-        <div className="container familyTablesPageButtons">
-          <button
-            className="btn btn-outline-dark previousPageButton"
-            disabled={currentPage === 1 || !totalItems}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            {"<"}
-          </button>
-          <div className="familyTablesPageValues">
-            <input
-              className="leftPageNumberInput"
-              disabled
-              value={
-                !totalItems
-                  ? 0
-                  : totalPages < currentPage
-                  ? totalPages
-                  : currentPage
-              }
-            />{" "}
-            of{" "}
-            <input
-              className="rightPageNumberInput"
-              disabled
-              value={totalPages}
-            />
-            <select
-              className="familyTablesSelectOptions"
-              rows={rows}
-              onChange={handleRowChange}
-            >
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-              <option value="100">100</option>
-            </select>
-          </div>
-          <button
-            className="btn btn-outline-dark nextPageButton"
-            disabled={currentPage === totalPages || !totalItems}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            {">"}
-          </button>
-        </div>
+        <PageOptions
+          currentPage={currentPage}
+          totalItems={totalItems}
+          totalPages={totalPages}
+          rows={rows}
+          setRows={setRows}
+          setCurrentPage={setCurrentPage}
+          selectOption={true}
+        />
       </div>
     </>
   );

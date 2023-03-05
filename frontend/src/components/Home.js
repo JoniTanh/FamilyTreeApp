@@ -108,25 +108,23 @@ const Home = () => {
           <div>
             <ul className="list">
               <li>
-                <b>itselle muistiin:</b>
+                <b>To do:</b>
               </li>
+              <li>Footer?</li>
+              <li>Sukupuu - perhetaulujen mukaan vai laajemmin?</li>
+              <li>Tulostus</li>
+              <li>Etsi toimintakuntoon</li>
+              <li>Responsiivisuus/mobiili?</li>
+              <li>Ylipitkät nimet, vaikka niitä ei tod.näk. ole</li>
+              <li>Iconit?</li>
+              <li>Tarviiko taulukkoja säätää?</li>
+              <li>Siivoa koodi/tyylittely yms. yms.</li>
+              <li>Required tiedot front/backend</li>
+              <li>Virheenkäsittely</li>
+              <li>Login virheilmotukset</li>
               <li>
-                muista estää henkilön poisto, jos henkilöllä on lisättynä
-                henkilötaulu tai henkilö on lisättynä henkilötaulussa tai muuta
-                vastaavaa
-              </li>
-              <li>perhetauluista puuttuu pari tietoa - lisää ne</li>
-              <li>
-                perhetaululle / henkilölle omat iconit ja molemmista voi mennä
-                kumpaan vaan
-              </li>
-              <li>
-                pitää karsia perhetauluihin tallennettavaa dataa ja/tai
-                palautettavaa dataa, koska kaikella ei tee yhtään mitään
-              </li>
-              <li>
-                lisää tähän ominaisuus, että admin voi kirjoittaa tähän suoraan
-                ilman, että tarvitsee kovakoodata
+                Lisää tähän ominaisuus, että admin voi kirjoittaa tähän suoraan
+                ilman, että tarvitsee kovakoodata. Tarvinneeko?
               </li>
             </ul>
           </div>
