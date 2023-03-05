@@ -1,0 +1,23 @@
+.errorMessage,
+.successMessage,
+.editMessage {
+  color: green;
+  background: ghostwhite;
+  font-size: 20px;
+  border: 1px solid;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.editMessage {
+  color: orange;
+}

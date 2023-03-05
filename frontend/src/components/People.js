@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
 import personService from "../services/people";
+import Notification from "../components/Notification";
 import "../assets/people.css";
 
 const CreateButton = () => (
@@ -19,6 +20,7 @@ const CreateButton = () => (
 const People = () => {
   let listNumber = 1;
 
+  const [message, setMessage] = useState();
   const [people, setPeople] = useState([]);
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(10);
@@ -32,6 +34,20 @@ const People = () => {
     fetchData();
   }, [setPeople]);
 
+  if (localStorage.getItem("newPerson")) {
+    const addedPerson = JSON.parse(localStorage.getItem("newPerson"));
+    setMessage({
+      type: "success",
+      text: `Henkilö ${addedPerson.firstNames.split(" ")[0]} ${
+        addedPerson.lastName
+      } lisätty.`,
+    });
+    localStorage.removeItem("newPerson");
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
+  }
+
   // muuta paremmaksi window.confirmin sijaan
   const toggleDelete = async (removedPerson) => {
     const result = window.confirm(
@@ -41,6 +57,15 @@ const People = () => {
     if (result) {
       await personService.remove(removedPerson.id);
       setPeople(people.filter((person) => person.id !== removedPerson.id));
+      setMessage({
+        type: "delete",
+        text: `Henkilö ${removedPerson.firstNames.split(" ")[0]} ${
+          removedPerson.lastName
+        } poistettu.`,
+      });
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 5000);
     }
   };
 
@@ -74,6 +99,11 @@ const People = () => {
 
   return (
     <>
+      <Notification
+        hasErrors={message?.hasErrors}
+        message={message?.text}
+        type={message?.type}
+      />
       <div className="container">
         <div className="peopleOptions">
           <div>

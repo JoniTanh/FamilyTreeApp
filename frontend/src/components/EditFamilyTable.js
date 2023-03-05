@@ -6,6 +6,7 @@ import SingleSelect from "./SingleSelect";
 import Checkbox from "./Checkbox";
 import familyTableService from "../services/familytables";
 import peopleService from "../services/people";
+import Notification from "../components/Notification";
 import "../assets/selectCheckbox.css";
 import "../assets/familyTableForm.css";
 
@@ -38,6 +39,8 @@ const EditFamilyTable = () => {
 
   const [people, setPeople] = useState([]);
   const [children, setChildren] = useState(state?.children ?? []);
+
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -125,6 +128,20 @@ const EditFamilyTable = () => {
         childrenInformation,
       };
       familyTableService.update(state._id, updatedFamilyTable);
+
+      const personData = people.find(
+        (obj) => obj.id === updatedFamilyTable.personId
+      );
+
+      setMessage({
+        type: "edit",
+        text: `Henkilön ${personData.firstNames.split(" ")[0]} ${
+          personData.lastName
+        } perhetaulu päivitetty.`,
+      });
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 5000);
     }
   };
 
@@ -145,6 +162,11 @@ const EditFamilyTable = () => {
 
   return (
     <>
+      <Notification
+        hasErrors={message?.hasErrors}
+        message={message?.text}
+        type={message?.type}
+      />
       <div className="container">
         <div className="familyTableFormOptions">
           <div>

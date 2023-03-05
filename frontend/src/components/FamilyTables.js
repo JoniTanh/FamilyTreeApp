@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
 import familytableService from "../services/familytables";
+import Notification from "../components/Notification";
 import "../assets/familyTables.css";
 
 const CreateButton = () => (
@@ -19,6 +20,7 @@ const CreateButton = () => (
 const FamilyTables = () => {
   let listNumber = 1;
 
+  const [message, setMessage] = useState();
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,6 +34,20 @@ const FamilyTables = () => {
     fetchData();
   }, []);
 
+  if (localStorage.getItem("newTable")) {
+    const addedTable = JSON.parse(localStorage.getItem("newTable"));
+    setMessage({
+      type: "success",
+      text: `Henkilön ${addedTable.firstNames.split(" ")[0]} ${
+        addedTable.lastName
+      } perhetaulu lisätty.`,
+    });
+    localStorage.removeItem("newTable");
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
+  }
+
   // muuta paremmaksi window.confirmin sijaan
   const toggleDeleteFamilyTable = async (removedFamilytable) => {
     const result = window.confirm(`Delete item?`);
@@ -43,6 +59,15 @@ const FamilyTables = () => {
           (familytable) => familytable._id !== removedFamilytable._id
         )
       );
+      setMessage({
+        type: "delete",
+        text: `Henkilön ${removedFamilytable.person.firstNames.split(" ")[0]} ${
+          removedFamilytable.person.lastName
+        } perhetaulu poistettu.`,
+      });
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 5000);
     }
   };
 
@@ -77,6 +102,11 @@ const FamilyTables = () => {
 
   return (
     <>
+      <Notification
+        hasErrors={message?.hasErrors}
+        message={message?.text}
+        type={message?.type}
+      />
       <div className="container">
         <div className="familyTablesOptions">
           <div>

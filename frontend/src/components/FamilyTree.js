@@ -108,12 +108,80 @@ const FamilyTree = () => {
                               name: "Tyttöystävä",
                               class: "human",
                             },
+                            children: [
+                              {
+                                name: "lapsi1",
+                                class: "human",
+                              },
+                              {
+                                name: "lapsi2",
+                                class: "human",
+                              },
+                            ],
+                          },
+                          {
+                            spouse: {
+                              name: "lapsen ex",
+                              class: "human",
+                            },
+                            children: [
+                              {
+                                name: "lapsi",
+                                class: "human",
+                              },
+                            ],
                           },
                         ],
                       };
                     }),
                   },
+                  {
+                    spouse: {
+                      name: "ex",
+                      class: "human",
+                    },
+                    children: [
+                      {
+                        name: "ex lapsi1",
+                        class: "human",
+                        marriages: [
+                          {
+                            spouse: {
+                              name: "lapsen kumppani",
+                              class: "human",
+                            },
+                            children: [
+                              {
+                                name: "lapsi",
+                                class: "human",
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    spouse: {
+                      name: "ex2",
+                      class: "human",
+                    },
+                    children: [
+                      {
+                        name: "ex lapsi2",
+                        class: "human",
+                      },
+                    ],
+                  },
                 ],
+              },
+              {
+                name: "veli1",
+                class: "human",
+              },
+              {
+                name: "sisko1",
+                class: "human",
               },
             ],
           },

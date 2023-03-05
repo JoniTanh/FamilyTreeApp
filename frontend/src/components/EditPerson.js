@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import peopleService from "../services/people";
+import Notification from "../components/Notification";
 import "../assets/editPerson.css";
 
 const EditPerson = () => {
@@ -26,6 +27,7 @@ const EditPerson = () => {
   };
 
   const [person, setPerson] = useState(initialState);
+  const [message, setMessage] = useState();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -36,6 +38,15 @@ const EditPerson = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     peopleService.update(state.id, person);
+    setMessage({
+      type: "edit",
+      text: `Henkilö ${person.firstNames.split(" ")[0]} ${
+        person.lastName
+      } päivitetty.`,
+    });
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
   };
 
   const handleClearInputs = () => {
@@ -44,6 +55,11 @@ const EditPerson = () => {
 
   return (
     <>
+      <Notification
+        hasErrors={message?.hasErrors}
+        message={message?.text}
+        type={message?.type}
+      />
       <div className="container">
         <div className="editPersonOptions">
           <div>
