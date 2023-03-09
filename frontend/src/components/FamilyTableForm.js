@@ -1,131 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import SingleSelect from "./SingleSelect";
 import Checkbox from "./Checkbox";
-import "../assets/selectCheckbox.css";
-import "../assets/familyTableForm.css";
 
-const FamilyTableForm = ({ addFamilytable, people }) => {
-  const [personId, setPersonId] = useState(null);
-  const [motherId, setMotherId] = useState(null);
-  const [fatherId, setFatherId] = useState(null);
-  const [spouseId, setSpouseId] = useState(null);
-  const [spouseMotherId, setSpouseMotherId] = useState(null);
-  const [spouseFatherId, setSpouseFatherId] = useState(null);
-  const [childrenIds, setChildrenIds] = useState([]);
-  const [lifeStory, setLifeStory] = useState("");
-  const [sources, setSources] = useState("");
-  const [marriedTime, setMarriedTime] = useState("");
-  const [marriedPlace, setMarriedPlace] = useState("");
-  const [childrenInformation, setChildrenInformation] = useState("");
+const FamilyTableForm = ({
+  handleClearInputs,
+  handleSubmit,
+  selectPeopleData,
+  handleSelectChange,
+  personId,
+  motherId,
+  fatherId,
+  spouseId,
+  marriedTime,
+  handleMarriedTimeChange,
+  marriedPlace,
+  handleMarriedPlaceChange,
+  spouseMotherId,
+  spouseFatherId,
+  childrenIds,
+  childrenInformation,
+  handleChildrenInformationChange,
+  lifeStory,
+  handleLifeStoryChange,
+  sources,
+  handleSourcesChange,
+  headerText,
+  text,
+  editMode,
+  childrenOptions,
+}) => {
+  const navigate = useNavigate();
 
   // multiselect
   const [isClearable, setIsClearable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSearchable, setIsSearchable] = useState(true);
-
-  const navigate = useNavigate();
-
-  const selectPeopleData = people.map(({ id, firstNames, lastName }) => ({
-    value: id,
-    label: `${firstNames} ${lastName}`,
-  }));
-
-  const handleSelectChange = (field, selectedOption) => {
-    switch (field) {
-      case "person":
-        setPersonId(selectedOption ? selectedOption.value : null);
-        break;
-      case "mother":
-        setMotherId(selectedOption ? selectedOption.value : null);
-        break;
-      case "father":
-        setFatherId(selectedOption ? selectedOption.value : null);
-        break;
-      case "spouse":
-        setSpouseId(selectedOption ? selectedOption.value : null);
-        break;
-      case "spouseMother":
-        setSpouseMotherId(selectedOption ? selectedOption.value : null);
-        break;
-      case "spouseFather":
-        setSpouseFatherId(selectedOption ? selectedOption.value : null);
-        break;
-      case "children":
-        setChildrenIds(selectedOption.map((option) => option.value));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleLifeStoryChange = (event) => {
-    setLifeStory(event.target.value);
-  };
-
-  const handleSourcesChange = (event) => {
-    setSources(event.target.value);
-  };
-
-  const handleMarriedTimeChange = (event) => {
-    setMarriedTime(event.target.value);
-  };
-
-  const handleMarriedPlaceChange = (event) => {
-    setMarriedPlace(event.target.value);
-  };
-
-  const handleChildrenInformationChange = (event) => {
-    setChildrenInformation(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (personId) {
-      addFamilytable({
-        personId,
-        motherId,
-        fatherId,
-        spouseId,
-        spouseMotherId,
-        spouseFatherId,
-        childrenIds,
-        lifeStory,
-        sources,
-        marriedTime,
-        marriedPlace,
-        childrenInformation,
-      });
-      setPersonId(null);
-      setMotherId(null);
-      setFatherId(null);
-      setSpouseId(null);
-      setSpouseMotherId(null);
-      setSpouseFatherId(null);
-      setChildrenIds(null);
-      setLifeStory("");
-      setSources("");
-      setMarriedTime("");
-      setMarriedPlace("");
-      setChildrenInformation("");
-    }
-  };
-
-  const handleClearInputs = () => {
-    setPersonId(null);
-    setMotherId(null);
-    setFatherId(null);
-    setSpouseId(null);
-    setSpouseMotherId(null);
-    setSpouseFatherId(null);
-    setChildrenIds(null);
-    setLifeStory("");
-    setSources("");
-    setMarriedTime("");
-    setMarriedPlace("");
-    setChildrenInformation("");
-  };
 
   return (
     <>
@@ -150,7 +61,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
         </div>
       </div>
       <div className="container familyTableFormContainer">
-        <h1 className="familyTableFormHeader">Uusi perhetaulu</h1>
+        <h1 className="familyTableFormHeader">{headerText}</h1>
         <div className="familyTableFormContent">
           <form onSubmit={handleSubmit}>
             <div className="familyTableFormValueGroup">
@@ -235,24 +146,41 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
             <div className="familyTableFormValueGroup">
               <div>lapset:</div>
               <div>
-                <Select
-                  isMulti={true}
-                  isDisabled={isDisabled}
-                  isClearable={isClearable}
-                  isSearchable={isSearchable}
-                  options={selectPeopleData}
-                  getOptionValue={(option) => option.value}
-                  getOptionLabel={(option) => option.label}
-                  onChange={(selectedOption) =>
-                    handleSelectChange("children", selectedOption)
-                  }
-                  value={
-                    childrenIds &&
-                    selectPeopleData.find(
-                      (option) => option.value === childrenIds
-                    )
-                  }
-                />
+                {editMode ? (
+                  <Select
+                    isMulti={true}
+                    isDisabled={isDisabled}
+                    isClearable={isClearable}
+                    isSearchable={isSearchable}
+                    options={selectPeopleData}
+                    getOptionValue={(option) => option.value}
+                    getOptionLabel={(option) => option.label}
+                    onChange={(selectedOption) =>
+                      handleSelectChange("children", selectedOption)
+                    }
+                    defaultValue={childrenOptions}
+                  />
+                ) : (
+                  <Select
+                    isMulti={true}
+                    isDisabled={isDisabled}
+                    isClearable={isClearable}
+                    isSearchable={isSearchable}
+                    options={selectPeopleData}
+                    getOptionValue={(option) => option.value}
+                    getOptionLabel={(option) => option.label}
+                    onChange={(selectedOption) =>
+                      handleSelectChange("children", selectedOption)
+                    }
+                    value={
+                      childrenIds &&
+                      selectPeopleData.find(
+                        (option) => option.value === childrenIds
+                      )
+                    }
+                  />
+                )}
+
                 <div className="selectCheckbox">
                   <Checkbox
                     checked={isClearable}
@@ -309,7 +237,7 @@ const FamilyTableForm = ({ addFamilytable, people }) => {
               className="btn btn-outline-success familyTableFormCreateButton"
               type="submit"
             >
-              Luo perhetaulu
+              {text}
             </button>
           </form>
         </div>

@@ -11,6 +11,13 @@ const getAll = async () => {
   return response.data;
 };
 
+const getById = async (id) => {
+  const response = await axios.get(`${baseURL}/${id}`, {
+    headers: getHeaders(),
+  });
+  return response.data;
+};
+
 const create = async (familytableObject) => {
   const response = await axios.post(baseURL, familytableObject, {
     headers: getHeaders(),
@@ -34,6 +41,7 @@ const update = async (id, familytableObject) => {
 
 export default {
   getAll,
+  getById,
   create,
   remove,
   update,
