@@ -5,30 +5,16 @@ import SingleSelect from "./SingleSelect";
 import Checkbox from "./Checkbox";
 
 const FamilyTableForm = ({
+  selectPeopleData,
   handleClearInputs,
   handleSubmit,
-  selectPeopleData,
-  handleSelectChange,
-  personId,
-  motherId,
-  fatherId,
-  spouseId,
-  marriedTime,
-  handleMarriedTimeChange,
-  marriedPlace,
-  handleMarriedPlaceChange,
-  spouseMotherId,
-  spouseFatherId,
-  childrenIds,
-  childrenInformation,
-  handleChildrenInformationChange,
-  lifeStory,
-  handleLifeStoryChange,
-  sources,
-  handleSourcesChange,
+  handleChange,
+  familytable,
   headerText,
   text,
   editMode,
+  handleSelectChange,
+  handleMultiSelectChange,
   childrenOptions,
 }) => {
   const navigate = useNavigate();
@@ -68,10 +54,12 @@ const FamilyTableForm = ({
               <div>henkilö:</div>
               <div>
                 <SingleSelect
+                  name="personId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"person"}
-                  id={personId}
+                  value={familytable.personId}
+                  text={"personId"}
+                  id={familytable.personId}
                 />
               </div>
             </div>
@@ -79,10 +67,12 @@ const FamilyTableForm = ({
               <div>henkilön äiti:</div>
               <div>
                 <SingleSelect
+                  name="motherId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"mother"}
-                  id={motherId}
+                  value={familytable.motherId}
+                  text={"motherId"}
+                  id={familytable.motherId}
                 />
               </div>
             </div>
@@ -90,10 +80,12 @@ const FamilyTableForm = ({
               <div>henkilön isä:</div>
               <div>
                 <SingleSelect
+                  name="fathedId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"father"}
-                  id={fatherId}
+                  value={familytable.fatherId}
+                  text={"fatherId"}
+                  id={familytable.fatherId}
                 />
               </div>
             </div>
@@ -101,23 +93,30 @@ const FamilyTableForm = ({
               <div>henkilön puoliso:</div>
               <div>
                 <SingleSelect
+                  name="spouseId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"spouse"}
-                  id={spouseId}
+                  value={familytable.spouseId}
+                  text={"spouseId"}
+                  id={familytable.spouseId}
                 />
               </div>
             </div>
             <div className="familyTableFormValueGroup">
               <div>
                 <div>vihkimisaika:</div>
-                <input value={marriedTime} onChange={handleMarriedTimeChange} />
+                <input
+                  value={familytable.marriedTime}
+                  onChange={handleChange}
+                  name="marriedTime"
+                />
               </div>
               <div>
                 <div>vihkimispaikka:</div>
                 <input
-                  value={marriedPlace}
-                  onChange={handleMarriedPlaceChange}
+                  value={familytable.marriedPlace}
+                  onChange={handleChange}
+                  name="marriedPlace"
                 />
               </div>
             </div>
@@ -125,10 +124,11 @@ const FamilyTableForm = ({
               <div>puolison äiti:</div>
               <div>
                 <SingleSelect
+                  name="spouseMotherId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"spouseMother"}
-                  id={spouseMotherId}
+                  text={"spouseMotherId"}
+                  id={familytable.spouseMotherId}
                 />
               </div>
             </div>
@@ -136,10 +136,11 @@ const FamilyTableForm = ({
               <div>puolison isä:</div>
               <div>
                 <SingleSelect
+                  name="spouseFatherId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  text={"spouseFather"}
-                  id={spouseFatherId}
+                  text={"spouseFatherId"}
+                  id={familytable.spouseFatherId}
                 />
               </div>
             </div>
@@ -156,9 +157,10 @@ const FamilyTableForm = ({
                     getOptionValue={(option) => option.value}
                     getOptionLabel={(option) => option.label}
                     onChange={(selectedOption) =>
-                      handleSelectChange("children", selectedOption)
+                      handleMultiSelectChange("childrenIds", selectedOption)
                     }
                     defaultValue={childrenOptions}
+                    name="childrenIds"
                   />
                 ) : (
                   <Select
@@ -170,14 +172,17 @@ const FamilyTableForm = ({
                     getOptionValue={(option) => option.value}
                     getOptionLabel={(option) => option.label}
                     onChange={(selectedOption) =>
-                      handleSelectChange("children", selectedOption)
+                      handleMultiSelectChange("childrenIds", selectedOption)
                     }
                     value={
-                      childrenIds &&
-                      selectPeopleData.find(
-                        (option) => option.value === childrenIds
+                      familytable.childrenIds &&
+                      familytable.childrenIds.map((childId) =>
+                        selectPeopleData.find(
+                          (option) => option.value === childId
+                        )
                       )
                     }
+                    name="childrenIds"
                   />
                 )}
 
@@ -208,8 +213,9 @@ const FamilyTableForm = ({
               <div>
                 <input
                   className="familyTableSourceInput"
-                  value={childrenInformation}
-                  onChange={handleChildrenInformationChange}
+                  name="childrenInformation"
+                  value={familytable.childrenInformation}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -218,8 +224,9 @@ const FamilyTableForm = ({
               <div>
                 <textarea
                   className="familyTableFormTextArea"
-                  value={lifeStory}
-                  onChange={handleLifeStoryChange}
+                  name="lifeStory"
+                  value={familytable.lifeStory}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -228,8 +235,9 @@ const FamilyTableForm = ({
               <div>
                 <input
                   className="familyTableSourceInput"
-                  value={sources}
-                  onChange={handleSourcesChange}
+                  name="sources"
+                  value={familytable.sources}
+                  onChange={handleChange}
                 />
               </div>
             </div>
