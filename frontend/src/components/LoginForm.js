@@ -1,4 +1,5 @@
 import { TreeIcon } from "../assets/Icons";
+import "../assets/home.css";
 
 const LoginForm = ({
   handleLogin,
@@ -6,6 +7,7 @@ const LoginForm = ({
   password,
   setUsername,
   setPassword,
+  message,
 }) => (
   <section className="vh-100 gradient-custom bg-light">
     <div className="container py-5 h-100">
@@ -16,13 +18,18 @@ const LoginForm = ({
               Tervetuloa! <TreeIcon />
             </h2>
             <p className="text-black-50 mb-5 text-center">
-              Syötä käyttäjätunnus ja salasana.
+              {message ? (
+                <label className="loginErrorMessage">{message.text}!</label>
+              ) : (
+                "Syötä käyttäjätunnus ja salasana."
+              )}
             </p>
             <form onSubmit={handleLogin}>
               <div className="mb-3">
                 <label className="form-label">Käyttäjätunnus</label>
                 <input
                   type="text"
+                  required
                   className="form-control"
                   value={username}
                   onChange={({ target }) => setUsername(target.value)}
@@ -32,6 +39,7 @@ const LoginForm = ({
                 <label className="form-label">Salasana</label>
                 <input
                   type="password"
+                  required
                   className="form-control"
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}

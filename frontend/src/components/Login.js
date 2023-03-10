@@ -4,10 +4,10 @@ import loginService from "../services/login";
 import LoginForm from "./LoginForm";
 
 const Login = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   const navigate = useNavigate();
 
@@ -43,13 +43,16 @@ const Login = () => {
       setPassword("");
       navigate("/");
     } catch (error) {
-      setErrorMessage("Wrong credentials");
-      setTimeout(() => setErrorMessage(null), 5000);
+      setMessage({
+        text: "Käyttäjätunnus tai salasana väärin",
+      });
+      setTimeout(() => setMessage(undefined), 5000);
     }
   };
 
   return (
     <LoginForm
+      message={message}
       handleLogin={handleLogin}
       username={username}
       setUsername={setUsername}

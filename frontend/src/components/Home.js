@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/home.css";
 import notesService from "../services/notes";
+import DeleteModal from "./DeleteModal";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
@@ -30,14 +31,9 @@ const Home = () => {
     setNewNote(event.target.value);
   };
 
-  // muuta paremmaksi window.confirmin sijaan
   const removeNote = async (removedNote) => {
-    const result = window.confirm(`Delete ${removedNote.text}?`);
-
-    if (result) {
-      await notesService.remove(removedNote.id);
-      setNotes(notes.filter((note) => note.id !== removedNote.id));
-    }
+    await notesService.remove(removedNote.id);
+    setNotes(notes.filter((note) => note.id !== removedNote.id));
   };
 
   return (
@@ -76,14 +72,13 @@ const Home = () => {
               {notes.map((note) => (
                 <li key={note.id}>
                   <div className="noteContainer">
-                    {note.text}{" "}
+                    {note.text}
                     {deleteMode && (
-                      <button
-                        onClick={() => removeNote(note)}
-                        className="noteDeleteButton"
-                      >
-                        x
-                      </button>
+                      <DeleteModal
+                        headerTextPart={"muistiinpanon"}
+                        removeNote={removeNote}
+                        note={note}
+                      />
                     )}
                   </div>
                 </li>
@@ -121,7 +116,6 @@ const Home = () => {
               <li>Siivoa koodi/tyylittely yms. yms.</li>
               <li>Required tiedot front/backend</li>
               <li>Virheenkäsittely</li>
-              <li>Login virheilmotukset</li>
               <li>
                 Lisää tähän ominaisuus, että admin voi kirjoittaa tähän suoraan
                 ilman, että tarvitsee kovakoodata. Tarvinneeko?

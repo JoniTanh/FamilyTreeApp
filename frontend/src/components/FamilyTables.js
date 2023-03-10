@@ -7,6 +7,7 @@ import Notification from "../components/Notification";
 import "../assets/familyTables.css";
 import PageOptions from "./PageOptions";
 import NewTableButton from "./NewTableButton";
+import DeleteModal from "./DeleteModal";
 
 const FamilyTables = () => {
   let listNumber = 1;
@@ -39,27 +40,22 @@ const FamilyTables = () => {
     }, 5000);
   }
 
-  // muuta paremmaksi window.confirmin sijaan
-  const toggleDeleteFamilyTable = async (removedFamilytable) => {
-    const result = window.confirm(`Delete item?`);
-
-    if (result) {
-      await familytableService.remove(removedFamilytable._id);
-      setFamilytables(
-        familytables.filter(
-          (familytable) => familytable._id !== removedFamilytable._id
-        )
-      );
-      setMessage({
-        type: "delete",
-        text: `Henkilön ${removedFamilytable.person.firstNames.split(" ")[0]} ${
-          removedFamilytable.person.lastName
-        } perhetaulu poistettu.`,
-      });
-      setTimeout(() => {
-        setMessage(undefined);
-      }, 5000);
-    }
+  const removeFamilyTable = async (removedFamilytable) => {
+    await familytableService.remove(removedFamilytable._id);
+    setFamilytables(
+      familytables.filter(
+        (familytable) => familytable._id !== removedFamilytable._id
+      )
+    );
+    setMessage({
+      type: "delete",
+      text: `Henkilön ${removedFamilytable.person.firstNames.split(" ")[0]} ${
+        removedFamilytable.person.lastName
+      } perhetaulu poistettu.`,
+    });
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
   };
 
   const handleFilterChange = (event) => {
@@ -153,13 +149,11 @@ const FamilyTables = () => {
                           <PencilIcon />
                         </Link>
                       </div>
-                      <div
-                        className="mx-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => toggleDeleteFamilyTable(familytable)}
-                      >
-                        <TrashIcon />
-                      </div>
+                      <DeleteModal
+                        headerTextPart={"henkilön perhetaulun"}
+                        removeFamilyTable={removeFamilyTable}
+                        familytable={familytable}
+                      />
                     </div>
                   </th>
                 </tr>

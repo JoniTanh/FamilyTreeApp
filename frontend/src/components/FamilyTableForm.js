@@ -8,16 +8,36 @@ const FamilyTableForm = ({
   selectPeopleData,
   handleClearInputs,
   handleSubmit,
-  handleChange,
   familytable,
   headerText,
   text,
   editMode,
-  handleSelectChange,
-  handleMultiSelectChange,
   childrenOptions,
+  setFamilytable,
 }) => {
   const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFamilytable({ ...familytable, [name]: value });
+  };
+
+  const handleSelectChange = (name, selectedOption) => {
+    setFamilytable({
+      ...familytable,
+      [name]: selectedOption ? selectedOption.value : null,
+    });
+  };
+
+  const handleMultiSelectChange = (name, selectedOption) => {
+    const selectedValues = selectedOption
+      ? selectedOption.map((option) => option.value)
+      : [];
+    setFamilytable({
+      ...familytable,
+      [name]: selectedValues,
+    });
+  };
 
   // multiselect
   const [isClearable, setIsClearable] = useState(true);

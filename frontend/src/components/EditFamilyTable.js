@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
 import FamilyTableForm from "./FamilyTableForm";
 import familyTableService from "../services/familytables";
 import peopleService from "../services/people";
@@ -42,28 +41,6 @@ const EditFamilyTable = () => {
     fetchData();
   }, [setPeople]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFamilytable({ ...familytable, [name]: value });
-  };
-
-  const handleSelectChange = (name, selectedOption) => {
-    setFamilytable({
-      ...familytable,
-      [name]: selectedOption ? selectedOption.value : null,
-    });
-  };
-
-  const handleMultiSelectChange = (name, selectedOption) => {
-    const selectedValues = selectedOption
-      ? selectedOption.map((option) => option.value)
-      : [];
-    setFamilytable({
-      ...familytable,
-      [name]: selectedValues,
-    });
-  };
-
   const selectPeopleData = people.map(({ id, firstNames, lastName }) => ({
     value: id,
     label: `${firstNames} ${lastName}`,
@@ -77,7 +54,6 @@ const EditFamilyTable = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     familyTableService.update(state._id, familytable);
-
     const personData = people.find((obj) => obj.id === familytable.personId);
 
     setMessage({
@@ -107,11 +83,9 @@ const EditFamilyTable = () => {
           <FamilyTableForm
             selectPeopleData={selectPeopleData}
             childrenOptions={childrenOptions}
+            setFamilytable={setFamilytable}
             handleClearInputs={handleClearInputs}
-            handleMultiSelectChange={handleMultiSelectChange}
-            handleSelectChange={handleSelectChange}
             handleSubmit={handleSubmit}
-            handleChange={handleChange}
             familytable={familytable}
             headerText={"Muokkaa perhetaulua"}
             text={"Päivitä"}

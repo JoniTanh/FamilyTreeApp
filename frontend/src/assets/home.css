@@ -53,16 +53,6 @@ ul.list {
   color: red;
 }
 
-.noteDeleteButton {
-  margin-top: 5px;
-  color: red;
-  background: cornsilk;
-  outline: none;
-  border: none;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  margin-left: 20px;
-}
-
 .homeInput {
   margin-left: 35px;
   background: cornsilk;
@@ -73,4 +63,9 @@ ul.list {
 
 .noteContainer {
   word-break: break-word;
+}
+
+.loginErrorMessage {
+  color: red;
+  font-weight: bold;
 }

@@ -7,6 +7,7 @@ import Notification from "../components/Notification";
 import NewPersonButton from "./NewPersonButton";
 import "../assets/people.css";
 import PageOptions from "./PageOptions";
+import DeleteModal from "./DeleteModal";
 
 const People = () => {
   let listNumber = 1;
@@ -39,25 +40,18 @@ const People = () => {
     }, 5000);
   }
 
-  // muuta paremmaksi window.confirmin sijaan
-  const toggleDelete = async (removedPerson) => {
-    const result = window.confirm(
-      `Delete ${removedPerson.firstNames} ${removedPerson.lastName}?`
-    );
-
-    if (result) {
-      await peopleService.remove(removedPerson.id);
-      setPeople(people.filter((person) => person.id !== removedPerson.id));
-      setMessage({
-        type: "delete",
-        text: `Henkilö ${removedPerson.firstNames.split(" ")[0]} ${
-          removedPerson.lastName
-        } poistettu.`,
-      });
-      setTimeout(() => {
-        setMessage(undefined);
-      }, 5000);
-    }
+  const removePerson = async (removedPerson) => {
+    await peopleService.remove(removedPerson.id);
+    setPeople(people.filter((person) => person.id !== removedPerson.id));
+    setMessage({
+      type: "delete",
+      text: `Henkilö ${removedPerson.firstNames.split(" ")[0]} ${
+        removedPerson.lastName
+      } poistettu.`,
+    });
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
   };
 
   const handleFilterChange = (event) => {
@@ -148,13 +142,11 @@ const People = () => {
                           <PencilIcon />
                         </Link>
                       </div>
-                      <div
-                        className="mx-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => toggleDelete(person)}
-                      >
-                        <TrashIcon />
-                      </div>
+                      <DeleteModal
+                        headerTextPart={"henkilön"}
+                        removePerson={removePerson}
+                        person={person}
+                      />
                     </div>
                   </th>
                 </tr>

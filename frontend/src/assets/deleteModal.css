@@ -1,0 +1,30 @@
+.modalXButton {
+  margin-top: 5px;
+  color: red;
+  background: cornsilk;
+  outline: none;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin-left: 20px;
+}
+
+.modalDeleteButton,
+.modalCancelButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+.modalDeleteButton {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.modalHeader {
+  color: red;
+  margin-left: 10px;
+}
+
+.modalText {
+  width: 500px;
+  margin-left: 5px;
+}

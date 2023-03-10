@@ -38,28 +38,6 @@ const NewFamilyTable = () => {
     fetchData();
   }, [setPeople, setFamilytables]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFamilytable({ ...familytable, [name]: value });
-  };
-
-  const handleSelectChange = (name, selectedOption) => {
-    setFamilytable({
-      ...familytable,
-      [name]: selectedOption ? selectedOption.value : null,
-    });
-  };
-
-  const handleMultiSelectChange = (name, selectedOption) => {
-    const selectedValues = selectedOption
-      ? selectedOption.map((option) => option.value)
-      : [];
-    setFamilytable({
-      ...familytable,
-      [name]: selectedValues,
-    });
-  };
-
   const selectPeopleData = people.map(({ id, firstNames, lastName }) => ({
     value: id,
     label: `${firstNames} ${lastName}`,
@@ -92,10 +70,8 @@ const NewFamilyTable = () => {
       <FamilyTableForm
         selectPeopleData={selectPeopleData}
         handleClearInputs={handleClearInputs}
-        handleMultiSelectChange={handleMultiSelectChange}
-        handleSelectChange={handleSelectChange}
         handleSubmit={handleSubmit}
-        handleChange={handleChange}
+        setFamilytable={setFamilytable}
         familytable={familytable}
         headerText={"Uusi perhetaulu"}
         text={"Luo perhetaulu"}
