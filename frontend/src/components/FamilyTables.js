@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Filter from "./Filter";
-import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
+import Filter from "../components/filter/Filter";
+import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import familytableService from "../services/familytables";
-import Notification from "../components/Notification";
+import Notification from "../components/notification/Notification";
 import "../assets/familyTables.css";
-import PageOptions from "./PageOptions";
-import NewTableButton from "./NewTableButton";
-import DeleteModal from "./DeleteModal";
+import PageOptions from "./options/PageOptions";
+import NewTableButton from "./buttons/NewTableButton";
+import DeleteModal from "./modal/DeleteModal";
 
 const FamilyTables = () => {
   let listNumber = 1;
@@ -58,16 +58,16 @@ const FamilyTables = () => {
     }, 5000);
   };
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
-  };
-
   const filteredFamilyTables = (familytable) => {
     if (!familytable.person?.firstNames || !familytable.person?.lastName)
       return "";
 
     const fullName = `${familytable.person.firstNames.toLowerCase()} ${familytable.person.lastName.toLowerCase()}`;
     return fullName.includes(filter.toLowerCase());
+  };
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
   };
 
   const handleClearFilter = () => {
@@ -96,13 +96,8 @@ const FamilyTables = () => {
               styleName={"familyTablesFilterInput"}
               filter={filter}
               handleFilterChange={handleFilterChange}
+              handleClearFilter={handleClearFilter}
             />
-            <button
-              className="btn btn-outline-danger clearButton"
-              onClick={() => handleClearFilter()}
-            >
-              Tyhjennä
-            </button>
           </div>
         </div>
       </div>

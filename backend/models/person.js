@@ -22,6 +22,7 @@ const personSchema = new mongoose.Schema({
   lifeStory: String,
   sources: String,
   family: String,
+  allFamilies: String,
 });
 
 personSchema.set("toJSON", {

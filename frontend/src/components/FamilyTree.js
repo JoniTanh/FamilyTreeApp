@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import familytableService from "../services/familytables";
-import SingleSelect from "./SingleSelect";
+import SingleSelect from "../components/singleSelect/SingleSelect";
 import "../assets/familyTree.css";
 import React from "react";
 import dTree from "d3-dtree";

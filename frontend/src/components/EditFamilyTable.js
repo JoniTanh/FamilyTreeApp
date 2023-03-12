@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import FamilyTableForm from "./FamilyTableForm";
 import familyTableService from "../services/familytables";
 import peopleService from "../services/people";
-import Notification from "../components/Notification";
+import Notification from "../components/notification/Notification";
 import "../assets/selectCheckbox.css";
 import "../assets/familyTableForm.css";
 
@@ -28,6 +28,7 @@ const EditFamilyTable = () => {
     []
   );
 
+  const [error, setError] = useState();
   const [message, setMessage] = useState();
   const [people, setPeople] = useState([]);
   const [children, setChildren] = useState(state?.children ?? []);
@@ -53,17 +54,22 @@ const EditFamilyTable = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    familyTableService.update(state._id, familytable);
-    const personData = people.find((obj) => obj.id === familytable.personId);
+    try {
+      familyTableService.update(state._id, familytable);
+      const personData = people.find((obj) => obj.id === familytable.personId);
 
-    setMessage({
-      type: "edit",
-      text: `Henkilön ${personData.firstNames.split(" ")[0]} ${
-        personData.lastName
-      } perhetaulu päivitetty.`,
-    });
+      setMessage({
+        type: "edit",
+        text: `Henkilön ${personData.firstNames.split(" ")[0]} ${
+          personData.lastName
+        } perhetaulu päivitetty.`,
+      });
+    } catch (error) {
+      setError("Tarkista, että olet valinnut henkilön!");
+    }
     setTimeout(() => {
       setMessage(undefined);
+      setError(undefined);
     }, 5000);
   };
 
@@ -90,6 +96,7 @@ const EditFamilyTable = () => {
             headerText={"Muokkaa perhetaulua"}
             text={"Päivitä"}
             editMode={true}
+            error={error}
           />
         </>
       )}

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import peopleService from "../services/people";
 import "../assets/person.css";
+import ReturnButton from "./buttons/ReturnButton";
 
 const Person = () => {
   const { state } = useLocation();
-  const navigate = useNavigate();
   const [person, setPerson] = useState();
 
   useEffect(() => {
@@ -22,12 +22,7 @@ const Person = () => {
       <div className="container">
         <div className="topOptions">
           <div>
-            <button
-              className="btn btn-outline-warning personButton"
-              onClick={() => navigate(-1)}
-            >
-              {"<- Takaisin"}
-            </button>
+            <ReturnButton />
           </div>
           <div>
             <Link
@@ -52,7 +47,8 @@ const Person = () => {
               {person.nickname
                 ? person.nickname
                 : person.firstNames.split(" ")[0]}{" "}
-              {person.lastName}
+              {person.lastName}{" "}
+              {person.lastName !== person.family && `o.s. ${person.family}`}
             </h1>
             <div className="personContent">
               <div>
@@ -64,8 +60,11 @@ const Person = () => {
               <div>
                 <b>sukunimi:</b> {person.lastName}
               </div>
-              <div className="pb-3">
+              <div>
                 <b>oma suku:</b> {person.family}
+              </div>
+              <div className="pb-3">
+                <b>muut suvut, joihin kuuluu:</b> {person.allFamilies}
               </div>
               <div>
                 <b>syntynyt (paikka, aika):</b> {person.birthPlace}{" "}

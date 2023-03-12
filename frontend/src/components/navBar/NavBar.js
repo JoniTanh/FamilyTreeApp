@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Search from "./Search";
-import Logout from "./Logout";
+import Search from "../Search";
+import Logout from "../Logout";
 
 const NavBar = () => {
   const user = JSON.parse(localStorage.getItem("token"))?.name;

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Select from "react-select";
-import SingleSelect from "./SingleSelect";
-import Checkbox from "./Checkbox";
+import SingleSelect from "./singleSelect/SingleSelect";
+import Checkbox from "../components/checkboxes/Checkbox";
+import ReturnButton from "./buttons/ReturnButton";
 
 const FamilyTableForm = ({
   selectPeopleData,
@@ -14,9 +14,8 @@ const FamilyTableForm = ({
   editMode,
   childrenOptions,
   setFamilytable,
+  error,
 }) => {
-  const navigate = useNavigate();
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFamilytable({ ...familytable, [name]: value });
@@ -49,12 +48,7 @@ const FamilyTableForm = ({
       <div className="container">
         <div className="familyTableFormOptions">
           <div>
-            <button
-              className="btn btn-outline-warning familyTableFormReturnButton"
-              onClick={() => navigate(-1)}
-            >
-              {"<- Takaisin"}
-            </button>
+            <ReturnButton />
           </div>
           <div>
             <button
@@ -123,21 +117,23 @@ const FamilyTableForm = ({
               </div>
             </div>
             <div className="familyTableFormValueGroup">
-              <div>
-                <div>vihkimisaika:</div>
-                <input
-                  value={familytable.marriedTime}
-                  onChange={handleChange}
-                  name="marriedTime"
-                />
-              </div>
-              <div>
-                <div>vihkimispaikka:</div>
-                <input
-                  value={familytable.marriedPlace}
-                  onChange={handleChange}
-                  name="marriedPlace"
-                />
+              <div className="marriageInputFields">
+                <div>
+                  <div>vihkimisaika:</div>
+                  <input
+                    value={familytable.marriedTime}
+                    onChange={handleChange}
+                    name="marriedTime"
+                  />
+                </div>
+                <div>
+                  <div>vihkimispaikka:</div>
+                  <input
+                    value={familytable.marriedPlace}
+                    onChange={handleChange}
+                    name="marriedPlace"
+                  />
+                </div>
               </div>
             </div>
             <div className="familyTableFormValueGroup">
@@ -211,19 +207,19 @@ const FamilyTableForm = ({
                     checked={isClearable}
                     onChange={() => setIsClearable((state) => !state)}
                   >
-                    Clearable
+                    Tyhjennettävissä
                   </Checkbox>
                   <Checkbox
                     checked={isSearchable}
                     onChange={() => setIsSearchable((state) => !state)}
                   >
-                    Searchable
+                    Hakuominaisuus
                   </Checkbox>
                   <Checkbox
                     checked={isDisabled}
                     onChange={() => setIsDisabled((state) => !state)}
                   >
-                    Disabled
+                    Lukitse
                   </Checkbox>
                 </div>
               </div>
@@ -261,6 +257,7 @@ const FamilyTableForm = ({
                 />
               </div>
             </div>
+            {error && <div className="familyFormError">{error}</div>}
             <button
               className="btn btn-outline-success familyTableFormCreateButton"
               type="submit"

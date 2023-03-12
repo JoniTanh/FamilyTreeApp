@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import Checkbox from "./Checkbox";
-import "../assets/selectCheckbox.css";
+import Checkbox from "../checkbox/Checkbox";
+import "../../assets/selectCheckbox.css";
 
 const SingleSelect = ({ selectPeopleData, handleSelectChange, text, id }) => {
   const [isClearable, setIsClearable] = useState(true);
@@ -25,19 +25,19 @@ const SingleSelect = ({ selectPeopleData, handleSelectChange, text, id }) => {
           checked={isClearable}
           onChange={() => setIsClearable((state) => !state)}
         >
-          Clearable
+          Tyhjennettävissä
         </Checkbox>
         <Checkbox
           checked={isSearchable}
           onChange={() => setIsSearchable((state) => !state)}
         >
-          Searchable
+          Hakuominaisuus
         </Checkbox>
         <Checkbox
           checked={isDisabled}
           onChange={() => setIsDisabled((state) => !state)}
         >
-          Disabled
+          Lukitse
         </Checkbox>
       </div>
     </>

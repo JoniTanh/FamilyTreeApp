@@ -3,8 +3,8 @@ import personService from "../services/people";
 import { useState, useEffect } from "react";
 import FamilyBanner from "../assets/FamilyBanner.svg";
 import "../assets/families.css";
-import Filter from "./Filter";
-import PageOptions from "./PageOptions";
+import Filter from "../components/filter/Filter";
+import PageOptions from "../components/options/PageOptions";
 
 const Families = () => {
   const [people, setPeople] = useState([]);
@@ -49,13 +49,8 @@ const Families = () => {
             styleName={"familiesFilterInput"}
             filter={filter}
             handleFilterChange={handleFilterChange}
+            handleClearFilter={handleClearFilter}
           />
-          <button
-            className="btn btn-outline-danger clearButton"
-            onClick={() => handleClearFilter()}
-          >
-            Tyhjennä
-          </button>
         </div>
       </div>
       <div className="container familiesContainer">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../assets/people.css";
+import "../../assets/people.css";
 
 const NewPersonButton = () => (
   <Link

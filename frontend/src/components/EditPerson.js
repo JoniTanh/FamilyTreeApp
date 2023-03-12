@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
 import peopleService from "../services/people";
-import Notification from "../components/Notification";
+import Notification from "../components/notification/Notification";
 import PersonForm from "./PersonForm";
 import "../assets/person.css";
+import ReturnButton from "./buttons/ReturnButton";
 
 const EditPerson = () => {
   const { state } = useLocation();
@@ -13,7 +13,6 @@ const EditPerson = () => {
   const [initialPerson, setInitialPerson] = useState();
 
   const [message, setMessage] = useState();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,12 +56,7 @@ const EditPerson = () => {
       <div className="container">
         <div className="topOptions">
           <div>
-            <button
-              className="btn btn-outline-warning returnButton"
-              onClick={() => navigate(-1)}
-            >
-              {"<- Takaisin"}
-            </button>
+            <ReturnButton />
           </div>
           <div>
             <button

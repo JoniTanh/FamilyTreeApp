@@ -34,6 +34,7 @@ peopleRouter.post("/", async (req, res) => {
     burialTime: body.burialTime,
     lifeStory: body.lifeStory,
     sources: body.sources,
+    allFamilies: body.allFamilies,
   });
 
   const savedPerson = await person.save();
@@ -65,6 +66,7 @@ peopleRouter.put("/:id", async (req, res) => {
     burialTime: body.burialTime,
     lifeStory: body.lifeStory,
     sources: body.sources,
+    allFamilies: body.allFamilies,
   };
 
   const updatedPerson = await Person.findByIdAndUpdate(req.params.id, person, {

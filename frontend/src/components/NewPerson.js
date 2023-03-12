@@ -3,6 +3,7 @@ import personService from "../services/people";
 import { useNavigate } from "react-router-dom";
 import PersonForm from "./PersonForm";
 import "../assets/person.css";
+import ReturnButton from "./buttons/ReturnButton";
 
 const NewPerson = () => {
   const initialState = useMemo(
@@ -22,6 +23,7 @@ const NewPerson = () => {
       burialTime: "",
       lifeStory: "",
       sources: "",
+      allFamilies: "",
     }),
     []
   );
@@ -68,12 +70,7 @@ const NewPerson = () => {
       <div className="container">
         <div className="topOptions">
           <div>
-            <button
-              className="btn btn-outline-warning returnButton"
-              onClick={() => navigate(-1)}
-            >
-              {"<- Takaisin"}
-            </button>
+            <ReturnButton />
           </div>
           <div>
             <button

@@ -28,6 +28,7 @@ const NewFamilyTable = () => {
   const [familytables, setFamilytables] = useState([]);
   const [people, setPeople] = useState([]);
   const [familytable, setFamilytable] = useState(initialState);
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,10 +56,17 @@ const NewFamilyTable = () => {
     navigate("/familytables");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    addFamilytable(familytable);
-    setFamilytable(initialState);
+    try {
+      await addFamilytable(familytable);
+      setFamilytable(initialState);
+    } catch (error) {
+      setError("Tarkista, että olet valinnut henkilön!");
+    }
+    setTimeout(() => {
+      setError(undefined);
+    }, 5000);
   };
 
   const handleClearInputs = () => {
@@ -75,6 +83,7 @@ const NewFamilyTable = () => {
         familytable={familytable}
         headerText={"Uusi perhetaulu"}
         text={"Luo perhetaulu"}
+        error={error}
       />
     </>
   );

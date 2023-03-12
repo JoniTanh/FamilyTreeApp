@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../assets/familyTables.css";
+import "../../assets/familyTables.css";
 
 const NewTableButton = () => (
   <Link

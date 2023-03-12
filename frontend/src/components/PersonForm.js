@@ -23,9 +23,12 @@ const PersonForm = ({ handleSubmit, handleChange, person, buttonText }) => (
               name="firstNames"
               value={person.firstNames}
               onChange={handleChange}
+              required
             />
           </div>
         </div>
+      </div>
+      <div className="formValueGroup">
         <div>
           <div>sukunimi: </div>
           <div>
@@ -34,8 +37,10 @@ const PersonForm = ({ handleSubmit, handleChange, person, buttonText }) => (
               name="lastName"
               value={person.lastName}
               onChange={handleChange}
+              required
             />
           </div>
+          <div className="inputInfoText">Henkilön nykyinen sukunimi</div>
         </div>
         <div>
           <div>oma suku: </div>
@@ -46,6 +51,22 @@ const PersonForm = ({ handleSubmit, handleChange, person, buttonText }) => (
               value={person.family}
               onChange={handleChange}
             />
+          </div>
+          <div className="inputInfoText">Suku, johon henkilö syntynyt</div>
+        </div>
+        <div>
+          <div>muut omat suvut: </div>
+          <div>
+            <input
+              className="formInput"
+              name="allFamilies"
+              value={person.allFamilies}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="inputInfoText">
+            Muut suvut, joihin henkilö kuuluu. Erota suvut pilkulla. Esim.
+            Suku1, Suku2
           </div>
         </div>
       </div>

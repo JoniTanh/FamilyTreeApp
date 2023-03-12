@@ -1,4 +1,4 @@
-import "../assets/pageOptions.css";
+import "../../assets/pageOptions.css";
 
 const PageOptions = ({
   totalItems,

@@ -1,21 +1,23 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import Filter from "./Filter";
+import Filter from "../components/filter/Filter";
 import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import personService from "../services/people";
 import "../assets/familiesMembers.css";
-import PageOptions from "./PageOptions";
+import PageOptions from "../components/options/PageOptions";
+import ReturnButton from "./buttons/ReturnButton";
+import ShowAllFamiliesButton from "./buttons/ShowAllFamiliesButton";
 
 const FamiliesMembers = () => {
   const { state } = useLocation();
-  const navigate = useNavigate();
   let listNumber = 1;
 
   const [people, setPeople] = useState([]);
   const [filter, setFilter] = useState("");
   const [rows, setRows] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filterBornIntoFamily, setFilterBornIntoFamily] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +31,19 @@ const FamiliesMembers = () => {
     setFilter(event.target.value);
   };
 
-  const filteredFamilyMembers = (person) => person.family.includes(state);
+  const filteredFamilyMembers = (person) => {
+    if (filterBornIntoFamily) {
+      return person.family.includes(state);
+    } else {
+      return (
+        person.family.includes(state) || person.allFamilies?.includes(state)
+      );
+    }
+  };
+
+  const hasAllFamilies = people.some((person) =>
+    person.allFamilies?.includes(state)
+  );
 
   const filteredPeople = (person) =>
     (
@@ -42,6 +56,10 @@ const FamiliesMembers = () => {
     setFilter("");
   };
 
+  const handleAllFamiliesButton = () => {
+    setFilterBornIntoFamily(!filterBornIntoFamily);
+  };
+
   let totalItems = people.filter(filteredFamilyMembers).length;
   const totalPages = Math.ceil(totalItems / rows);
   const startIndex = (currentPage - 1) * rows;
@@ -52,25 +70,21 @@ const FamiliesMembers = () => {
       <div className="container">
         <div className="familiesMembersOptions">
           <div>
-            <button
-              className="btn btn-outline-warning personButton"
-              onClick={() => navigate(-1)}
-            >
-              {"<- Takaisin"}
-            </button>
+            <ReturnButton />
+            {hasAllFamilies && (
+              <ShowAllFamiliesButton
+                handleAllFamiliesButton={handleAllFamiliesButton}
+                filterBornIntoFamily={filterBornIntoFamily}
+              />
+            )}
           </div>
           <div className="familiesMembersFilter">
             <Filter
               styleName={"familiesMembersFilterInput"}
               filter={filter}
               handleFilterChange={handleFilterChange}
+              handleClearFilter={handleClearFilter}
             />
-            <button
-              className="btn btn-outline-danger clearButton"
-              onClick={() => handleClearFilter()}
-            >
-              Tyhjennä
-            </button>
           </div>
         </div>
       </div>

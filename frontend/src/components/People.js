@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Filter from "./Filter";
-import { PencilIcon, ShowPersonIcon, TrashIcon } from "../assets/Icons";
+import Filter from "../components/filter/Filter";
+import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import peopleService from "../services/people";
-import Notification from "../components/Notification";
-import NewPersonButton from "./NewPersonButton";
+import Notification from "../components/notification/Notification";
+import NewPersonButton from "./buttons/NewPersonButton";
 import "../assets/people.css";
-import PageOptions from "./PageOptions";
-import DeleteModal from "./DeleteModal";
+import PageOptions from "./options/PageOptions";
+import DeleteModal from "./modal/DeleteModal";
 
 const People = () => {
   let listNumber = 1;
@@ -91,13 +91,8 @@ const People = () => {
               styleName={"peopleFilterInput"}
               filter={filter}
               handleFilterChange={handleFilterChange}
+              handleClearFilter={handleClearFilter}
             />
-            <button
-              className="btn btn-outline-danger clearButton"
-              onClick={() => handleClearFilter()}
-            >
-              Tyhjennä
-            </button>
           </div>
         </div>
       </div>
