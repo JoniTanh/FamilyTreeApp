@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import SingleSelect from "./singleSelect/SingleSelect";
-import Checkbox from "../components/checkboxes/Checkbox";
+import Checkbox from "../components/checkbox/Checkbox";
 import ReturnButton from "./buttons/ReturnButton";
 
 const FamilyTableForm = ({

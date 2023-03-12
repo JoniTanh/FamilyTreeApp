@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/home.css";
 import notesService from "../services/notes";
-import DeleteModal from "./modals/DeleteModal";
+import DeleteModal from "./modal/DeleteModal";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
