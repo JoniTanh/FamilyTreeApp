@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import peopleService from "../services/people";
@@ -30,13 +31,21 @@ const SearchResults = () => {
   });
 
   const filteredFamilyTables = familyTables.filter((familyTable) => {
+    if (!familyTable.person?.firstNames || !familyTable.person?.lastName)
+      return "";
+
     return searchWords?.every((word) =>
       JSON.stringify(familyTable).toLowerCase().includes(word)
     );
   });
 
+  const highlightSearchWords = (text, searchWords) => {
+    const regex = new RegExp(`(${searchWords.join("|")})`, "gi");
+    return text.replace(regex, '<span class="highlight">$1</span>');
+  };
+
   return (
-    <>
+    <div className="searchPage">
       <div className="container">
         <div className="topOptions">
           <div>
@@ -45,25 +54,84 @@ const SearchResults = () => {
         </div>
       </div>
       <div className="container searchContainer">
-        <div>Hakusana: {state}</div>
+        <div className="searchWords">
+          <b>Hakusanat: </b>
+          {state}
+        </div>
         <div>
-          {filteredPeople.length > 0 && <div>Henkilöt</div>}
+          {filteredPeople.length > 0 && (
+            <div className="searchHeader">Henkilöt</div>
+          )}
           {filteredPeople.map((person, i) => (
             <div className="card cardContent" key={i}>
-              {JSON.stringify(person)}
+              <div className="shortInformation">
+                <div className="searchIdContainer">
+                  <div>
+                    <b>Henkilön ID-tunnus: </b>
+                    {person.id}
+                  </div>
+                  <Link to={`/people/${person.id}`} state={person.id}>
+                    <button className="btn btn-outline-primary searchPageButton">
+                      Näytä henkilö
+                    </button>
+                  </Link>
+                </div>
+                <div className="mb-1">
+                  <b>Henkilön nimi: </b>
+                  {person.firstNames} {person?.nickname} {person.lastName}
+                </div>
+              </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: highlightSearchWords(
+                    JSON.stringify(person),
+                    searchWords
+                  ),
+                }}
+              />
             </div>
           ))}
         </div>
         <div>
-          {filteredFamilyTables.length > 0 && <div>Henkilötaulut</div>}
+          {filteredFamilyTables.length > 0 && (
+            <div className="searchHeader">Henkilötaulut</div>
+          )}
           {filteredFamilyTables.map((familyTable, i) => (
             <div className="card cardContent" key={i}>
-              {JSON.stringify(familyTable)}
+              <div className="shortInformation">
+                <div className="searchIdContainer">
+                  <div>
+                    <b>Perhetaulun ID-tunnus: </b>
+                    {familyTable._id}
+                  </div>
+                  <Link
+                    to={`/familytables/${familyTable._id}`}
+                    state={familyTable}
+                  >
+                    <button className="btn btn-outline-primary searchPageButton">
+                      Näytä perhetaulu
+                    </button>
+                  </Link>
+                </div>
+                <div className="mb-1">
+                  <b>Perhetaulun henkilön nimi: </b>
+                  {familyTable.person.firstNames} {familyTable.person?.nickname}{" "}
+                  {familyTable.person.lastName}
+                </div>
+              </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: highlightSearchWords(
+                    JSON.stringify(familyTable),
+                    searchWords
+                  ),
+                }}
+              />
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

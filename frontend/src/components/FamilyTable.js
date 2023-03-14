@@ -19,6 +19,7 @@ const FamilyTable = () => {
     marriedTime,
     marriedPlace,
     childrenInformation,
+    family,
   } = state;
 
   return (
@@ -58,7 +59,10 @@ const FamilyTable = () => {
             {person?.firstNames}
           </div>
           <div>
-            <b>sukunimi tai talonnimi (oma, ei puoliso): </b> suku arvo
+            <b>nykyinen sukunimi: </b> {person?.lastName}
+          </div>
+          <div>
+            <b>sukunimi tai talonnimi (oma, ei puoliso): </b> {person?.family}
           </div>
           <div>
             <b>äiti: </b>

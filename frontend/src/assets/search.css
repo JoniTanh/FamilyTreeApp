@@ -9,6 +9,7 @@
   border: 1px solid ghostwhite;
   border-radius: 5px;
   min-height: 565px;
+  padding-bottom: 20px;
 }
 
 .cardContent {
@@ -19,4 +20,35 @@
 
 .searchPageButton {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+.searchPage {
+  margin-bottom: 50px;
+}
+
+.searchHeader {
+  margin-top: 20px;
+  padding-left: 5px;
+  font-family: ui-serif;
+  font-size: 30px;
+}
+
+.searchWords {
+  margin-top: 20px;
+  padding-left: 5px;
+  font-size: 18px;
+}
+
+.shortInformation {
+  padding-bottom: 10px;
+}
+
+.searchIdContainer {
+  display: flex;
+  justify-content: space-between;
 }
