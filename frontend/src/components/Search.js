@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import SearchButton from "./buttons/SearchButton";
+import "../assets/search.css";
 
 const Search = () => {
-  const [search, setSearch] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const searchRef = useRef(null);
 
   const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearch = () => {
+    navigate("/search", { state: searchValue });
+    setSearchValue("");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13 && searchRef.current === document.activeElement) {
+      handleSearch();
+    }
   };
 
   return (
     <div>
-      <button type="button" className="btn btn-outline-dark">
-        Etsi
-      </button>{" "}
+      <SearchButton handleSearch={handleSearch} />
       <input
-        style={{ marginLeft: "0", marginRight: "0" }}
-        value={search}
+        className="searchInput"
+        value={searchValue}
         onChange={handleSearchChange}
+        ref={searchRef}
+        onKeyDown={handleKeyDown}
       />
     </div>
   );

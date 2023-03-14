@@ -105,7 +105,6 @@ const Home = () => {
               <li>
                 <b>To do:</b>
               </li>
-              <li>Footer?</li>
               <li>Sukupuu - perhetaulujen mukaan vai laajemmin?</li>
               <li>Tulostus</li>
               <li>Etsi toimintakuntoon</li>

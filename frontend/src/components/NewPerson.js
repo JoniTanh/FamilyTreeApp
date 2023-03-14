@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PersonForm from "./PersonForm";
 import "../assets/person.css";
 import ReturnButton from "./buttons/ReturnButton";
+import ResetButton from "./buttons/ResetButton";
 
 const NewPerson = () => {
   const initialState = useMemo(
@@ -73,12 +74,7 @@ const NewPerson = () => {
             <ReturnButton />
           </div>
           <div>
-            <button
-              className="btn btn-outline-danger clearButton"
-              onClick={() => handleClearInputs()}
-            >
-              Nollaa
-            </button>
+            <ResetButton handleClearInputs={handleClearInputs} />
           </div>
         </div>
       </div>

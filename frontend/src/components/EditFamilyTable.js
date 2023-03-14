@@ -4,6 +4,8 @@ import FamilyTableForm from "./FamilyTableForm";
 import familyTableService from "../services/familytables";
 import peopleService from "../services/people";
 import Notification from "../components/notification/Notification";
+import ReturnButton from "./buttons/ReturnButton";
+import ResetButton from "./buttons/ResetButton";
 import "../assets/selectCheckbox.css";
 import "../assets/familyTableForm.css";
 
@@ -84,6 +86,16 @@ const EditFamilyTable = () => {
         message={message?.text}
         type={message?.type}
       />
+      <div className="container">
+        <div className="familyTableFormOptions">
+          <div>
+            <ReturnButton />
+          </div>
+          <div>
+            <ResetButton handleClearInputs={handleClearInputs} editMode />
+          </div>
+        </div>
+      </div>
       {familytable && (
         <>
           <FamilyTableForm

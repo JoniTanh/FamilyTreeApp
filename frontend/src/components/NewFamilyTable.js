@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import familytableService from "../services/familytables";
 import personService from "../services/people";
 import FamilyTableForm from "./FamilyTableForm";
+import ReturnButton from "./buttons/ReturnButton";
+import ResetButton from "./buttons/ResetButton";
 import "../assets/selectCheckbox.css";
 import "../assets/familyTableForm.css";
 
@@ -75,6 +77,16 @@ const NewFamilyTable = () => {
 
   return (
     <>
+      <div className="container">
+        <div className="familyTableFormOptions">
+          <div>
+            <ReturnButton />
+          </div>
+          <div>
+            <ResetButton handleClearInputs={handleClearInputs} />
+          </div>
+        </div>
+      </div>
       <FamilyTableForm
         selectPeopleData={selectPeopleData}
         handleClearInputs={handleClearInputs}

@@ -5,13 +5,13 @@ import Notification from "../components/notification/Notification";
 import PersonForm from "./PersonForm";
 import "../assets/person.css";
 import ReturnButton from "./buttons/ReturnButton";
+import ResetButton from "./buttons/ResetButton";
 
 const EditPerson = () => {
   const { state } = useLocation();
 
   const [person, setPerson] = useState();
   const [initialPerson, setInitialPerson] = useState();
-
   const [message, setMessage] = useState();
 
   useEffect(() => {
@@ -59,12 +59,7 @@ const EditPerson = () => {
             <ReturnButton />
           </div>
           <div>
-            <button
-              className="btn btn-outline-danger clearButton"
-              onClick={() => handleClearInputs()}
-            >
-              Kumoa muutokset
-            </button>
+            <ResetButton handleClearInputs={handleClearInputs} editMode />
           </div>
         </div>
       </div>

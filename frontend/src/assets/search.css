@@ -1,0 +1,22 @@
+.searchInput {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+.searchContainer {
+  background: ghostwhite;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid ghostwhite;
+  border-radius: 5px;
+  min-height: 565px;
+}
+
+.cardContent {
+  margin-top: 20px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.searchPageButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

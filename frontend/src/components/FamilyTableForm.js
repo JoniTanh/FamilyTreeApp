@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "react-select";
 import SingleSelect from "./singleSelect/SingleSelect";
 import Checkbox from "../components/checkbox/Checkbox";
-import ReturnButton from "./buttons/ReturnButton";
 
 const FamilyTableForm = ({
   selectPeopleData,
@@ -45,21 +44,6 @@ const FamilyTableForm = ({
 
   return (
     <>
-      <div className="container">
-        <div className="familyTableFormOptions">
-          <div>
-            <ReturnButton />
-          </div>
-          <div>
-            <button
-              className="btn btn-outline-danger familyTableFormClearButton"
-              onClick={() => handleClearInputs()}
-            >
-              Nollaa
-            </button>
-          </div>
-        </div>
-      </div>
       <div className="container familyTableFormContainer">
         <h1 className="familyTableFormHeader">{headerText}</h1>
         <div className="familyTableFormContent">

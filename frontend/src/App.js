@@ -13,6 +13,7 @@ import EditPerson from "./components/EditPerson";
 import FamiliesMembers from "./components/FamiliesMembers";
 import EditFamilyTable from "./components/EditFamilyTable";
 import Login from "./components/Login";
+import SearchResults from "./components/SearchResults";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
             element={<EditFamilyTable />}
           />
           <Route path="/familytree" exact element={<FamilyTree />} />
+          <Route path="/search" exact element={<SearchResults />} />
           <Route path="/" exact element={<Home />} />
         </Route>
         <Route path="/login" exact element={<Login />} />
