@@ -19,7 +19,6 @@ const FamilyTable = () => {
     marriedTime,
     marriedPlace,
     childrenInformation,
-    family,
   } = state;
 
   return (
@@ -128,7 +127,7 @@ const FamilyTable = () => {
           </div>
           <div className="pb-4">
             <b>kuollut (paikka, aika, kuolinsyy): </b>
-            {spouse?.birthPlace} {spouse?.deathTime} {spouse?.deathReason}
+            {spouse?.deathPlace} {spouse?.deathTime} {spouse?.deathReason}
           </div>
           <div className="pb-4">
             <b>lapset: </b>

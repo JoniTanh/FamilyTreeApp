@@ -105,9 +105,11 @@ const Home = () => {
               <li>
                 <b>To do:</b>
               </li>
-              <li>Sukupuu - perhetaulujen mukaan vai laajemmin?</li>
+              <li>
+                Sukupuu - perhetaulujen mukaan ja ehkä myöhemmin perhetauluja
+                yhdistellen
+              </li>
               <li>Tulostus</li>
-              <li>Etsi toimintakuntoon</li>
               <li>Responsiivisuus/mobiili?</li>
               <li>Ylipitkät nimet, vaikka niitä ei tod.näk. ole</li>
               <li>Iconit?</li>
