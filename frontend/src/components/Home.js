@@ -113,22 +113,12 @@ const Home = () => {
               <li>
                 <b>To do:</b>
               </li>
-              <li>
-                Sukupuu - perhetaulujen mukaan ja ehkä myöhemmin perhetauluja
-                yhdistellen
-              </li>
               <li>Tulostus</li>
-              <li>Responsiivisuus/mobiili?</li>
+              <li>Responsiivisuus paremmaksi</li>
               <li>Ylipitkät nimet, vaikka niitä ei tod.näk. ole</li>
-              <li>Iconit?</li>
-              <li>Tarviiko taulukkoja säätää?</li>
-              <li>Siivoa koodi/tyylittely yms. yms.</li>
+              <li>Siivoa koodi/tyylittely</li>
               <li>Required tiedot front/backend</li>
               <li>Virheenkäsittely</li>
-              <li>
-                Lisää tähän ominaisuus, että admin voi kirjoittaa tähän suoraan
-                ilman, että tarvitsee kovakoodata. Tarvinneeko?
-              </li>
             </ul>
           </div>
         </div>

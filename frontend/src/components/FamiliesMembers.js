@@ -109,7 +109,7 @@ const FamiliesMembers = () => {
                   <th scope="col">{listNumber++}</th>
                   <th scope="col">{person.firstNames}</th>
                   <th scope="col">{person.lastName}</th>
-                  <th scope="col">{person.birthTime}</th>
+                  <th scope="col">{person.birthTime.substr(-4)}</th>
                   <th scope="col">
                     <div className="d-flex">
                       <div className="mx-1" style={{ cursor: "pointer" }}>

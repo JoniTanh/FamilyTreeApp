@@ -124,7 +124,9 @@ const FamilyTables = () => {
                   <th scope="col">{listNumber++}</th>
                   <th scope="col">{familytable.person?.firstNames}</th>
                   <th scope="col">{familytable.person?.lastName}</th>
-                  <th scope="col">{familytable.person?.birthTime}</th>
+                  <th scope="col">
+                    {familytable.person?.birthTime.substr(-4)}
+                  </th>
                   <th scope="col">{familytable.person?.family}</th>
                   <th scope="col">
                     <div className="d-flex">

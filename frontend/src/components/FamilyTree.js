@@ -30,9 +30,13 @@ const FamilyTree = () => {
 
   const selectPeopleData = familytables
     .filter(({ person }) => person)
-    .map(({ _id, person }) => ({
+    .map(({ _id, person, spouse }) => ({
       value: _id,
-      label: `${person?.firstNames} ${person?.lastName}`,
+      label: `${person?.firstNames} ${person?.lastName} ${
+        person?.birthTime ? `s. ${person?.birthTime.substr(-4)}` : ""
+      } ${spouse ? `& ${spouse?.firstNames} ${spouse?.lastName}` : ""} ${
+        spouse?.birthTime ? `s. ${spouse?.birthTime.substr(-4)}` : ""
+      }`,
     }));
 
   const handleSelectChange = (field, selectedOption) => {
@@ -102,86 +106,10 @@ const FamilyTree = () => {
                       return {
                         name: childName,
                         class: "human",
-                        marriages: [
-                          {
-                            spouse: {
-                              name: "Tyttöystävä",
-                              class: "human",
-                            },
-                            children: [
-                              {
-                                name: "lapsi1",
-                                class: "human",
-                              },
-                              {
-                                name: "lapsi2",
-                                class: "human",
-                              },
-                            ],
-                          },
-                          {
-                            spouse: {
-                              name: "lapsen ex",
-                              class: "human",
-                            },
-                            children: [
-                              {
-                                name: "lapsi",
-                                class: "human",
-                              },
-                            ],
-                          },
-                        ],
                       };
                     }),
                   },
-                  {
-                    spouse: {
-                      name: "ex",
-                      class: "human",
-                    },
-                    children: [
-                      {
-                        name: "ex lapsi1",
-                        class: "human",
-                        marriages: [
-                          {
-                            spouse: {
-                              name: "lapsen kumppani",
-                              class: "human",
-                            },
-                            children: [
-                              {
-                                name: "lapsi",
-                                class: "human",
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  {
-                    spouse: {
-                      name: "ex2",
-                      class: "human",
-                    },
-                    children: [
-                      {
-                        name: "ex lapsi2",
-                        class: "human",
-                      },
-                    ],
-                  },
                 ],
-              },
-              {
-                name: "veli1",
-                class: "human",
-              },
-              {
-                name: "sisko1",
-                class: "human",
               },
             ],
           },
@@ -234,20 +162,28 @@ class FamilyTreeGraph extends React.Component {
     const { graphContainer, result, selectPeopleData, handleSelectChange } =
       this.props;
     const title = result
-      ? `${result?.firstNames} ${result?.lastName}'s Family Tree`
+      ? `${result?.firstNames} ${result?.lastName} -sukupuu`
       : "Valitse henkilö";
 
     return (
-      <>
+      <div
+        style={{
+          marginTop: "100px",
+          marginLeft: "100px",
+          marginRight: "100px",
+        }}
+      >
         <div className="familyTreesvg">
-          <SingleSelect
-            selectPeopleData={selectPeopleData}
-            handleSelectChange={handleSelectChange}
-          />
-          <h1 style={{ textAlign: "center" }}>{title}</h1>
+          <div>
+            <SingleSelect
+              selectPeopleData={selectPeopleData}
+              handleSelectChange={handleSelectChange}
+            />
+          </div>
+          <h2 style={{ textAlign: "center" }}>{title}</h2>
           <div ref={graphContainer} id="graph"></div>
         </div>
-      </>
+      </div>
     );
   }
 }
