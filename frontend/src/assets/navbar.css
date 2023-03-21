@@ -1,0 +1,126 @@
+.navBarContainer {
+  background: #0dcaf0;
+  border-bottom: 1px solid black;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navBarContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navSearchAndInformation {
+  display: flex;
+}
+
+.toggleButton {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  padding-top: 25px;
+}
+
+.firstNavItem {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.navItem {
+  margin: 0 15px;
+  list-style: none;
+}
+
+.navLink {
+  text-decoration: none;
+  color: black;
+}
+
+.navSearch {
+  padding-top: 15px;
+  margin-right: 25px;
+}
+
+.navUserInformation {
+  display: flex;
+  align-items: center;
+}
+
+.navUser {
+  margin-left: 5px;
+}
+
+.navLogoutButton {
+  padding: 15px 50px 0 15px;
+}
+
+.dropdown {
+  display: none;
+}
+
+.dropdownSearch {
+  display: none;
+}
+
+.dropdownUserInformation {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .navBarContent {
+    display: none;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .toggleButton {
+    display: block;
+  }
+
+  .navList {
+    padding: 0 0 0 5px;
+  }
+
+  .navItem {
+    margin: 0;
+    padding: 25px 25px 0 0;
+  }
+
+  .navBarContainer {
+    display: block;
+  }
+
+  .dropdownContainer {
+    padding: 15px;
+  }
+
+  .dropdownSearch {
+    display: block;
+    margin-left: 10px;
+  }
+
+  .dropdownUserInformation {
+    display: block;
+  }
+
+  .navMenuAndSearch {
+    display: flex;
+  }
+
+  .navOptions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navLogoutButton {
+    padding: 0 0 0 10px;
+  }
+}
+
+.backButton {
+  margin-left: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

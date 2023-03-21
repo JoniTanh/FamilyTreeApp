@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import peopleService from "../services/people";
 import familytableService from "../services/familytables";
 import HomeButton from "./buttons/HomeButton";
-import { InfoIcon } from "../assets/Icons";
+import { InfoIcon, SearchIcon } from "../assets/Icons";
 
 const SearchResults = () => {
   const { state } = useLocation();
@@ -69,7 +69,10 @@ const SearchResults = () => {
                 <div className="searchIdContainer">
                   <div>
                     <b>Henkilön ID-tunnus: </b>
-                    {person.id}
+                    {person.id}{" "}
+                    <Link to={`/search`} state={person.id}>
+                      <SearchIcon />
+                    </Link>
                   </div>
                   <Link to={`/people/${person.id}`} state={person.id}>
                     <button className="btn btn-outline-primary searchPageButton">
@@ -122,7 +125,10 @@ const SearchResults = () => {
                 <div className="searchIdContainer">
                   <div>
                     <b>Perhetaulun ID-tunnus: </b>
-                    {fb._id}
+                    {fb._id}{" "}
+                    <Link to={`/search`} state={fb._id}>
+                      <SearchIcon />
+                    </Link>
                   </div>
                   <Link to={`/familytables/${fb._id}`} state={fb}>
                     <button className="btn btn-outline-primary searchPageButton">

@@ -96,6 +96,7 @@ const FamiliesMembers = () => {
               <th scope="col">#</th>
               <th scope="col">Etunimet</th>
               <th scope="col">Sukunimi</th>
+              <th scope="col">Syntynyt</th>
               <th scope="col"></th>
             </tr>
             {people
@@ -108,6 +109,7 @@ const FamiliesMembers = () => {
                   <th scope="col">{listNumber++}</th>
                   <th scope="col">{person.firstNames}</th>
                   <th scope="col">{person.lastName}</th>
+                  <th scope="col">{person.birthTime}</th>
                   <th scope="col">
                     <div className="d-flex">
                       <div className="mx-1" style={{ cursor: "pointer" }}>

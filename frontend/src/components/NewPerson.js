@@ -43,13 +43,12 @@ const NewPerson = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setPerson({ ...person, [name]: value });
-  };
 
-  /*const handleChange = (event) => {
-    const { name, value } = event.target;
-    setPerson({ ...person, [name]: value.charAt(0).toUpperCase() + value.slice(1) });
-  };*/
+    setPerson({
+      ...person,
+      [name]: value.charAt(0).toUpperCase() + value.slice(1),
+    });
+  };
 
   const createPerson = useCallback(
     async (personObject) => {

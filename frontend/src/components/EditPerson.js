@@ -25,7 +25,10 @@ const EditPerson = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setPerson({ ...person, [name]: value });
+    setPerson({
+      ...person,
+      [name]: value.charAt(0).toUpperCase() + value.slice(1),
+    });
   };
 
   const handleSubmit = async (event) => {

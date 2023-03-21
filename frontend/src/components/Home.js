@@ -103,6 +103,14 @@ const Home = () => {
           <div>
             <ul className="list">
               <li>
+                <b>Uutta:</b>
+              </li>
+              <li>
+                Etsi -toimintoa parannettu, lisätty syntymäaika listoihin, iso
+                alkukirjain, kuollut kentän bugi korjattu, menun
+                responsiivisuutta parannettu{" "}
+              </li>
+              <li>
                 <b>To do:</b>
               </li>
               <li>

@@ -104,6 +104,7 @@ const People = () => {
               <th scope="col">#</th>
               <th scope="col">Etunimet</th>
               <th scope="col">Sukunimi</th>
+              <th scope="col">Syntynyt</th>
               <th scope="col">Suku</th>
               <th scope="col"></th>
             </tr>
@@ -116,6 +117,7 @@ const People = () => {
                   <th scope="col">{listNumber++}</th>
                   <th scope="col">{person.firstNames}</th>
                   <th scope="col">{person.lastName}</th>
+                  <th scope="col">{person.birthTime}</th>
                   <th scope="col">{person.family}</th>
                   <th scope="col">
                     <div className="d-flex">

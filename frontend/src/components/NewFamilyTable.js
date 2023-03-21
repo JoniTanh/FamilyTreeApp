@@ -89,7 +89,6 @@ const NewFamilyTable = () => {
       </div>
       <FamilyTableForm
         selectPeopleData={selectPeopleData}
-        handleClearInputs={handleClearInputs}
         handleSubmit={handleSubmit}
         setFamilytable={setFamilytable}
         familytable={familytable}

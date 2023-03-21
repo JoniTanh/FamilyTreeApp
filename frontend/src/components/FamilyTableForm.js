@@ -5,7 +5,6 @@ import Checkbox from "../components/checkbox/Checkbox";
 
 const FamilyTableForm = ({
   selectPeopleData,
-  handleClearInputs,
   handleSubmit,
   familytable,
   headerText,
@@ -17,7 +16,10 @@ const FamilyTableForm = ({
 }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFamilytable({ ...familytable, [name]: value });
+    setFamilytable({
+      ...familytable,
+      [name]: value.charAt(0).toUpperCase() + value.slice(1),
+    });
   };
 
   const handleSelectChange = (name, selectedOption) => {
