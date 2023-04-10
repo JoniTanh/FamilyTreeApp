@@ -125,7 +125,6 @@ const People = () => {
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
                           to={`/people/${person.id}`}
-                          state={person.id}
                         >
                           <ShowPersonIcon />
                         </Link>
@@ -134,7 +133,6 @@ const People = () => {
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
                           to={`/people/edit/${person.id}`}
-                          state={person.id}
                         >
                           <PencilIcon />
                         </Link>

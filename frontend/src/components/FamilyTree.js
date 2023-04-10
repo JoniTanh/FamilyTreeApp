@@ -44,10 +44,10 @@ const FamilyTree = () => {
   };
 
   const renderTree = () => {
-    let person = "Person";
-    let mother = "Mother";
-    let father = "Father";
-    let spouse = "Spouse";
+    let person = "valittu henkilö";
+    let mother = "äiti";
+    let father = "isä";
+    let spouse = "puoliso";
     let children = [];
 
     if (result) {

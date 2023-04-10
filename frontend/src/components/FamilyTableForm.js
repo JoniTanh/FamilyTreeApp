@@ -6,25 +6,25 @@ import Checkbox from "../components/checkbox/Checkbox";
 const FamilyTableForm = ({
   selectPeopleData,
   handleSubmit,
-  familytable,
+  familyTable,
   headerText,
   text,
   editMode,
   childrenOptions,
-  setFamilytable,
+  setFamilyTable,
   error,
 }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFamilytable({
-      ...familytable,
+    setFamilyTable({
+      ...familyTable,
       [name]: value.charAt(0).toUpperCase() + value.slice(1),
     });
   };
 
   const handleSelectChange = (name, selectedOption) => {
-    setFamilytable({
-      ...familytable,
+    setFamilyTable({
+      ...familyTable,
       [name]: selectedOption ? selectedOption.value : null,
     });
   };
@@ -33,8 +33,8 @@ const FamilyTableForm = ({
     const selectedValues = selectedOption
       ? selectedOption.map((option) => option.value)
       : [];
-    setFamilytable({
-      ...familytable,
+    setFamilyTable({
+      ...familyTable,
       [name]: selectedValues,
     });
   };
@@ -57,9 +57,9 @@ const FamilyTableForm = ({
                   name="personId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  value={familytable.personId}
+                  value={familyTable.personId}
                   text={"personId"}
-                  id={familytable.personId}
+                  id={familyTable.personId}
                 />
               </div>
             </div>
@@ -70,9 +70,9 @@ const FamilyTableForm = ({
                   name="motherId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  value={familytable.motherId}
+                  value={familyTable.motherId}
                   text={"motherId"}
-                  id={familytable.motherId}
+                  id={familyTable.motherId}
                 />
               </div>
             </div>
@@ -83,9 +83,9 @@ const FamilyTableForm = ({
                   name="fathedId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  value={familytable.fatherId}
+                  value={familyTable.fatherId}
                   text={"fatherId"}
-                  id={familytable.fatherId}
+                  id={familyTable.fatherId}
                 />
               </div>
             </div>
@@ -96,9 +96,9 @@ const FamilyTableForm = ({
                   name="spouseId"
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
-                  value={familytable.spouseId}
+                  value={familyTable.spouseId}
                   text={"spouseId"}
-                  id={familytable.spouseId}
+                  id={familyTable.spouseId}
                 />
               </div>
             </div>
@@ -107,7 +107,8 @@ const FamilyTableForm = ({
                 <div>
                   <div>vihkimisaika:</div>
                   <input
-                    value={familytable.marriedTime}
+                    className="familyTableFormInput"
+                    value={familyTable.marriedTime}
                     onChange={handleChange}
                     name="marriedTime"
                   />
@@ -115,7 +116,8 @@ const FamilyTableForm = ({
                 <div>
                   <div>vihkimispaikka:</div>
                   <input
-                    value={familytable.marriedPlace}
+                    className="familyTableFormInput"
+                    value={familyTable.marriedPlace}
                     onChange={handleChange}
                     name="marriedPlace"
                   />
@@ -130,7 +132,7 @@ const FamilyTableForm = ({
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
                   text={"spouseMotherId"}
-                  id={familytable.spouseMotherId}
+                  id={familyTable.spouseMotherId}
                 />
               </div>
             </div>
@@ -142,7 +144,7 @@ const FamilyTableForm = ({
                   selectPeopleData={selectPeopleData}
                   handleSelectChange={handleSelectChange}
                   text={"spouseFatherId"}
-                  id={familytable.spouseFatherId}
+                  id={familyTable.spouseFatherId}
                 />
               </div>
             </div>
@@ -163,6 +165,7 @@ const FamilyTableForm = ({
                     }
                     defaultValue={childrenOptions}
                     name="childrenIds"
+                    placeholder={"valitse..."}
                   />
                 ) : (
                   <Select
@@ -177,14 +180,15 @@ const FamilyTableForm = ({
                       handleMultiSelectChange("childrenIds", selectedOption)
                     }
                     value={
-                      familytable.childrenIds &&
-                      familytable.childrenIds.map((childId) =>
+                      familyTable.childrenIds &&
+                      familyTable.childrenIds.map((childId) =>
                         selectPeopleData.find(
                           (option) => option.value === childId
                         )
                       )
                     }
                     name="childrenIds"
+                    placeholder={"valitse..."}
                   />
                 )}
 
@@ -193,19 +197,19 @@ const FamilyTableForm = ({
                     checked={isClearable}
                     onChange={() => setIsClearable((state) => !state)}
                   >
-                    Tyhjennettävissä
+                    tyhjennettävissä
                   </Checkbox>
                   <Checkbox
                     checked={isSearchable}
                     onChange={() => setIsSearchable((state) => !state)}
                   >
-                    Hakuominaisuus
+                    hakuominaisuus
                   </Checkbox>
                   <Checkbox
                     checked={isDisabled}
                     onChange={() => setIsDisabled((state) => !state)}
                   >
-                    Lukitse
+                    lukitse
                   </Checkbox>
                 </div>
               </div>
@@ -216,7 +220,7 @@ const FamilyTableForm = ({
                 <input
                   className="familyTableSourceInput"
                   name="childrenInformation"
-                  value={familytable.childrenInformation}
+                  value={familyTable.childrenInformation}
                   onChange={handleChange}
                 />
               </div>
@@ -227,7 +231,7 @@ const FamilyTableForm = ({
                 <textarea
                   className="familyTableFormTextArea"
                   name="lifeStory"
-                  value={familytable.lifeStory}
+                  value={familyTable.lifeStory}
                   onChange={handleChange}
                 />
               </div>
@@ -238,7 +242,7 @@ const FamilyTableForm = ({
                 <input
                   className="familyTableSourceInput"
                   name="sources"
-                  value={familytable.sources}
+                  value={familyTable.sources}
                   onChange={handleChange}
                 />
               </div>

@@ -19,25 +19,26 @@ const SingleSelect = ({ selectPeopleData, handleSelectChange, text, id }) => {
         getOptionLabel={(option) => option.label}
         onChange={(selectedOption) => handleSelectChange(text, selectedOption)}
         value={id && selectPeopleData.find((option) => option.value === id)}
+        placeholder={"valitse..."}
       />
       <div className="selectCheckbox">
         <Checkbox
           checked={isClearable}
           onChange={() => setIsClearable((state) => !state)}
         >
-          Tyhjennettävissä
+          tyhjennettävissä
         </Checkbox>
         <Checkbox
           checked={isSearchable}
           onChange={() => setIsSearchable((state) => !state)}
         >
-          Hakuominaisuus
+          hakuominaisuus
         </Checkbox>
         <Checkbox
           checked={isDisabled}
           onChange={() => setIsDisabled((state) => !state)}
         >
-          Lukitse
+          lukitse
         </Checkbox>
       </div>
     </>

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import peopleService from "../services/people";
 import "../assets/person.css";
 import ReturnButton from "./buttons/ReturnButton";
 
 const Person = () => {
-  const { state } = useLocation();
+  const { id } = useParams();
   const [person, setPerson] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const person = await peopleService.getById(state);
+      const person = await peopleService.getById(id);
       setPerson(person);
     };
     fetchData();
@@ -27,8 +26,7 @@ const Person = () => {
           <div>
             <Link
               className="nav-link text-decoration-none text-dark fw-bold"
-              to={`/people/edit/${state}`}
-              state={state}
+              to={`/people/edit/${id}`}
             >
               <button
                 type="button"

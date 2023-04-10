@@ -106,19 +106,29 @@ const Home = () => {
                 <b>Uutta:</b>
               </li>
               <li>
-                Etsi -toimintoa parannettu, lisätty syntymäaika listoihin, iso
-                alkukirjain, kuollut kentän bugi korjattu, menun
-                responsiivisuutta parannettu{" "}
+                Responsiivisuutta parannettu esim. navigoinnivalikossa ja
+                etusivulla{" "}
               </li>
               <li>
-                <b>To do:</b>
+                Nyt uuteen välilehteen esim. henkilötiedot aukastessa tiedot
+                näkyvät, eikä tiedot jää lataamatta
+              </li>
+              <li>
+                Etsi -toimintoon lisätty, että näyttää enemmän tietoa yms.
+              </li>
+              <li>
+                <b>Tulossa:</b>
               </li>
               <li>Tulostus</li>
-              <li>Responsiivisuus paremmaksi</li>
-              <li>Ylipitkät nimet, vaikka niitä ei tod.näk. ole</li>
-              <li>Siivoa koodi/tyylittely</li>
-              <li>Required tiedot front/backend</li>
-              <li>Virheenkäsittely</li>
+              <li>Responsiivisuuden parantelua</li>
+              <li>
+                Käyttäjän token eli kirjautumisoikeus saattaa hukkua joissakin
+                yksittäisissä tilanteissa, ei vakava, mutta korjaus tulossa
+              </li>
+              <li>
+                Etsi -toiminnon parantelua, kuten yliviivaus selkotekstiin ja
+                mahdollista avata uusi hakutulos uuteen välilehteen
+              </li>
             </ul>
           </div>
         </div>

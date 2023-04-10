@@ -134,7 +134,6 @@ const FamilyTables = () => {
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
                           to={`/familytables/${familytable._id}`}
-                          state={familytable}
                         >
                           <ShowPersonIcon />
                         </Link>
@@ -143,7 +142,6 @@ const FamilyTables = () => {
                         <Link
                           className="nav-link text-decoration-none text-dark fw-bold"
                           to={`/familytables/edit/${familytable._id}`}
-                          state={familytable}
                         >
                           <PencilIcon />
                         </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useParams } from "react-router-dom";
 import peopleService from "../services/people";
 import Notification from "../components/notification/Notification";
 import PersonForm from "./PersonForm";
@@ -8,7 +8,7 @@ import ReturnButton from "./buttons/ReturnButton";
 import ResetButton from "./buttons/ResetButton";
 
 const EditPerson = () => {
-  const { state } = useLocation();
+  const { id } = useParams();
 
   const [person, setPerson] = useState();
   const [initialPerson, setInitialPerson] = useState();
@@ -16,7 +16,7 @@ const EditPerson = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const person = await peopleService.getById(state);
+      const person = await peopleService.getById(id);
       setPerson(person);
       setInitialPerson(person);
     };
@@ -33,7 +33,7 @@ const EditPerson = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await peopleService.update(state, person);
+    await peopleService.update(id, person);
     setMessage({
       type: "changed",
       text: `Henkilö ${person.firstNames.split(" ")[0]} ${

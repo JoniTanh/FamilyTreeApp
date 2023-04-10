@@ -42,6 +42,7 @@
 
 .familyTableSourceInput {
   width: 40rem;
+  margin-left: 0;
 }
 
 .familyTableFormValueGroup {
@@ -55,4 +56,8 @@
 
 .marriageInputFields {
   display: flex;
+}
+
+.familyTableFormInput {
+  margin-left: 0;
 }

@@ -29,7 +29,7 @@ const NewFamilyTable = () => {
 
   const [familytables, setFamilytables] = useState([]);
   const [people, setPeople] = useState([]);
-  const [familytable, setFamilytable] = useState(initialState);
+  const [familyTable, setFamilytable] = useState(initialState);
   const [error, setError] = useState();
   const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ const NewFamilyTable = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await addFamilytable(familytable);
+      await addFamilytable(familyTable);
       setFamilytable(initialState);
     } catch (error) {
       setError("Tarkista, että olet valinnut henkilön!");
@@ -90,8 +90,8 @@ const NewFamilyTable = () => {
       <FamilyTableForm
         selectPeopleData={selectPeopleData}
         handleSubmit={handleSubmit}
-        setFamilytable={setFamilytable}
-        familytable={familytable}
+        setFamilyTable={setFamilytable}
+        familyTable={familyTable}
         headerText={"Uusi perhetaulu"}
         text={"Luo perhetaulu"}
         error={error}

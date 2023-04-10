@@ -70,11 +70,11 @@ const SearchResults = () => {
                   <div>
                     <b>Henkilön ID-tunnus: </b>
                     {person.id}{" "}
-                    <Link to={`/search`} state={person.id}>
+                    <Link to={`/search`}>
                       <SearchIcon />
                     </Link>
                   </div>
-                  <Link to={`/people/${person.id}`} state={person.id}>
+                  <Link to={`/people/${person.id}`}>
                     <button className="btn btn-outline-primary searchPageButton">
                       Näytä henkilö
                     </button>

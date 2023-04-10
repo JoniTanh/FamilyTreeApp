@@ -12,7 +12,7 @@ const Logout = () => {
   return (
     <>
       <button className="btn btn-outline-danger fw-bold" onClick={handleLogout}>
-        Logout
+        Kirjaudu ulos
       </button>
     </>
   );

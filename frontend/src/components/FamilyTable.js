@@ -1,10 +1,20 @@
-import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../assets/familyTable.css";
 import ReturnButton from "./buttons/ReturnButton";
+import { useState, useEffect } from "react";
+import familyTableService from "../services/familytables";
 
 const FamilyTable = () => {
-  const { state } = useLocation();
+  const { id } = useParams();
+  const [familyTable, setFamilyTable] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const familyTable = await familyTableService.getById(id);
+      setFamilyTable(familyTable);
+    };
+    fetchData();
+  }, []);
 
   const {
     person,
@@ -19,7 +29,7 @@ const FamilyTable = () => {
     marriedTime,
     marriedPlace,
     childrenInformation,
-  } = state;
+  } = familyTable;
 
   return (
     <>
@@ -31,8 +41,7 @@ const FamilyTable = () => {
           <div>
             <Link
               className="nav-link text-decoration-none text-dark fw-bold"
-              to={`/familytables/edit/${state._id}`}
-              state={state}
+              to={`/familytables/edit/${familyTable._id}`}
             >
               <button
                 type="button"
