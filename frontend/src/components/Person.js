@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import peopleService from "../services/people";
 import "../assets/person.css";
 import ReturnButton from "./buttons/ReturnButton";
+import { useReactToPrint } from "react-to-print";
 
 const Person = () => {
   const { id } = useParams();
@@ -15,6 +16,12 @@ const Person = () => {
     };
     fetchData();
   }, []);
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "",
+  });
 
   return (
     <>
@@ -38,7 +45,10 @@ const Person = () => {
           </div>
         </div>
       </div>
-      <div className="container personContainer pageContainer">
+      <div
+        className="container personContainer pageContainer"
+        ref={componentRef}
+      >
         {person && (
           <>
             <h1 className="personHeader">
@@ -93,7 +103,11 @@ const Person = () => {
       <div className="container">
         <div className="personEndOptions">
           <div>
-            <button type="button" className="btn btn-outline-info personButton">
+            <button
+              type="button"
+              className="btn btn-outline-info personButton"
+              onClick={handlePrint}
+            >
               Tulosta
             </button>
           </div>

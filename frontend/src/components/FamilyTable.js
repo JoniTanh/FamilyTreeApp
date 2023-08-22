@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import "../assets/familyTable.css";
 import ReturnButton from "./buttons/ReturnButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import familyTableService from "../services/familytables";
+import { useReactToPrint } from "react-to-print";
 
 const FamilyTable = () => {
   const { id } = useParams();
@@ -31,6 +32,12 @@ const FamilyTable = () => {
     childrenInformation,
   } = familyTable;
 
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "",
+  });
+
   return (
     <>
       <div className="container">
@@ -53,7 +60,7 @@ const FamilyTable = () => {
           </div>
         </div>
       </div>
-      <div className="container familyTableContainer">
+      <div className="container familyTableContainer" ref={componentRef}>
         <h1 className="familyTableHeader">
           Henkilön {person?.firstNames?.split(" ")[0] || person?.firstNames}{" "}
           {person?.lastName} perhetaulu
@@ -171,6 +178,7 @@ const FamilyTable = () => {
             <button
               type="button"
               className="btn btn-outline-info familyTableButton"
+              onClick={handlePrint}
             >
               Tulosta
             </button>
