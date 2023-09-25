@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Filter from "../components/filter/Filter";
+import Filter from "../components/Filter";
 import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import familytableService from "../services/familytables";
-import Notification from "../components/notification/Notification";
+import Notification from "../components//Notification";
 import "../assets/familyTables.css";
-import PageOptions from "./options/PageOptions";
+import PageOptions from "../components/PageOptions";
 import NewTableButton from "./buttons/NewTableButton";
-import DeleteModal from "./modal/DeleteModal";
+import DeleteModal from "../components/DeleteModal";
 
 const FamilyTables = () => {
   let listNumber = 1;

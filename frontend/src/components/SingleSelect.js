@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import Checkbox from "../checkbox/Checkbox";
-import "../../assets/selectCheckbox.css";
+import Checkbox from "../components/Checkbox";
+import "../assets/selectCheckbox.css";
 
 const SingleSelect = ({ selectPeopleData, handleSelectChange, text, id }) => {
   const [isClearable, setIsClearable] = useState(true);

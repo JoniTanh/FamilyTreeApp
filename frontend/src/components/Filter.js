@@ -1,4 +1,4 @@
-import FilterClearButton from "../buttons/FilterClearButton";
+import FilterClearButton from "../components/buttons/FilterClearButton";
 
 const Filter = ({
   filter,

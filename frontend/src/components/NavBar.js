@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import Search from "../Search";
-import Logout from "../Logout";
+import Search from "./Search";
+import Logout from "./Logout";
 import { useState } from "react";
-import "../../assets/navbar.css";
-import { ListIcon } from "../../assets/Icons";
+import "../assets/navbar.css";
+import { ListIcon } from "../assets/Icons";
 
 const NavBar = () => {
   const user = JSON.parse(localStorage.getItem("token"))?.name;

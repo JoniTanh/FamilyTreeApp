@@ -3,8 +3,8 @@ import personService from "../services/people";
 import { useState, useEffect } from "react";
 import FamilyBanner from "../assets/FamilyBanner.svg";
 import "../assets/families.css";
-import Filter from "../components/filter/Filter";
-import PageOptions from "../components/options/PageOptions";
+import Filter from "../components/Filter";
+import PageOptions from "../components/PageOptions";
 
 const Families = () => {
   const [people, setPeople] = useState([]);

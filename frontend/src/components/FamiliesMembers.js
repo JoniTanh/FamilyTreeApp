@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import Filter from "../components/filter/Filter";
+import Filter from "../components/Filter";
 import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import personService from "../services/people";
 import "../assets/familiesMembers.css";
-import PageOptions from "../components/options/PageOptions";
+import PageOptions from "../components/PageOptions";
 import ReturnButton from "./buttons/ReturnButton";
 import ShowAllFamiliesButton from "./buttons/ShowAllFamiliesButton";
 

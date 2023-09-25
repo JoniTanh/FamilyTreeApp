@@ -1,4 +1,4 @@
-import "../../assets/notification.css";
+import "../assets/notification.css";
 
 const Notification = ({ message, hasErrors, type }) => {
   if (!message) {

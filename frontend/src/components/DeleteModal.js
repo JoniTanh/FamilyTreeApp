@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { TrashIcon } from "../../assets/Icons";
+import { TrashIcon } from "../assets/Icons";
 import Modal from "react-modal";
-import "../../assets/deleteModal.css";
+import "../assets/deleteModal.css";
 
 const customStyles = {
   content: {

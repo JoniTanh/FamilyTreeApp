@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import peopleService from "../services/people";
-import Notification from "../components/notification/Notification";
+import Notification from "../components/Notification";
 import PersonForm from "./PersonForm";
 import "../assets/person.css";
 import ReturnButton from "./buttons/ReturnButton";

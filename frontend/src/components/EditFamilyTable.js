@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FamilyTableForm from "./FamilyTableForm";
 import familyTableService from "../services/familytables";
 import peopleService from "../services/people";
-import Notification from "../components/notification/Notification";
+import Notification from "../components/Notification";
 import ReturnButton from "./buttons/ReturnButton";
 import ResetButton from "./buttons/ResetButton";
 import { useParams } from "react-router";

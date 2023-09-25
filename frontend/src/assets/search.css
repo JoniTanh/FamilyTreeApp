@@ -44,6 +44,11 @@
   font-size: 18px;
 }
 
+.searchCounts {
+  margin-top: 20px;
+  padding-left: 5px;
+}
+
 .shortInformation {
   padding-bottom: 10px;
 }
@@ -80,3 +85,28 @@
   transition-delay: 0.2s;
 }
 
+.personSearchHeader,
+.fbSearchHeader {
+  font-weight: bold !important;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.fbSearchHeader {
+  margin-top: 20px;
+}
+
+.fbChildHeader {
+  font-weight: bold !important;
+  margin-bottom: 10px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.searchCardContent {
+  border: solid 1px grey;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+}

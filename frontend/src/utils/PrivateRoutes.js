@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import NavBar from "../components/navBar/NavBar";
+import NavBar from "../components/NavBar";
 
 const PrivateRoutes = () => {
   const token = JSON.parse(localStorage.getItem("token"))?.token;

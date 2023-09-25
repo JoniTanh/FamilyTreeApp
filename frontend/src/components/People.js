@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Filter from "../components/filter/Filter";
+import Filter from "../components/Filter";
 import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import peopleService from "../services/people";
-import Notification from "../components/notification/Notification";
+import Notification from "../components/Notification";
 import NewPersonButton from "./buttons/NewPersonButton";
 import "../assets/people.css";
-import PageOptions from "./options/PageOptions";
-import DeleteModal from "./modal/DeleteModal";
+import PageOptions from "../components/PageOptions";
+import DeleteModal from "../components/DeleteModal";
 
 const People = () => {
   let listNumber = 1;
