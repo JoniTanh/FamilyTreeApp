@@ -110,3 +110,22 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   margin: 10px;
 }
+
+.searchPageSearch {
+  margin-top: 20px;
+}
+
+.searchPageSearchButton {
+margin-left: 5px;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+border-radius: 5px;
+}
+
+.searchPageSearcContainer {
+  display: flex;
+}
+
+.searchButton {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}

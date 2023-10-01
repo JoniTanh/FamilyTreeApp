@@ -5,6 +5,7 @@ import peopleService from "../services/people";
 import familytableService from "../services/familytables";
 import HomeButton from "./buttons/HomeButton";
 import { SearchIcon } from "../assets/Icons";
+import Search from "./Search";
 
 const SearchResults = () => {
   const { state } = useLocation();
@@ -249,7 +250,7 @@ const SearchResults = () => {
               <div>
                 <div className="fbSearchHeader">Lapset</div>
                 {fb.children.map((child, i) => (
-                  <div>
+                  <div key={i}>
                     <div className="fbChildHeader">Lapsi #{i + 1}</div>
                     <RenderPerson key={i} person={child} />
                   </div>
@@ -315,6 +316,9 @@ const SearchResults = () => {
           <br />
           <b>Hakusana(t) esiintyivät perhetauluissa:</b>{" "}
           {totalFamilyTableOccurrences} kertaa
+        </div>
+        <div className="searchPageSearch">
+          <Search searchPage={true} />
         </div>
         <div>
           {filteredPeople.length > 0 && (

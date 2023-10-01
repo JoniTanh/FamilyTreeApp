@@ -13,6 +13,7 @@
   border-style: solid;
   border-width: 1px;
   box-sizing: border-box;
+  border-radius: 5px;
 }
 
 .person {
@@ -21,13 +22,74 @@
 }
 
 .familyTreesvg {
-  background-color: mintcream;
+  background-color: white;
   border-style: solid;
   border-width: 1px;
   margin: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 10px 25px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 60vh;
+  overflow: hidden;
 }
 
 p {
   padding: 8px;
   margin-bottom: 0;
+}
+
+foreignObject:hover {
+  cursor: pointer;
+}
+
+.familyTreesvg:hover {
+  cursor: grab;
+}
+
+.familyTreesvg:active {
+  cursor: grabbing;
+}
+
+.nodeText, .person, .node {
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.node:hover {
+  cursor: pointer;
+}
+
+.pageWrapper {
+  margin: 100px 100px 0 100px;
+  display: flex;
+  height: 750px;
+}
+
+.selectedTreePersonContainer {
+  border: 1px solid black;
+  width: 35vh;
+  min-height: 40vh;
+  height: auto;
+  margin: 10px;
+  position: relative;
+}
+
+.closeSelectedPerson {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: red;
+}
+
+.selectedTreePerson {
+  padding: 30px 20px 20px 20px;
+}
+
+.selectedTreePersonHeader {
+  font-weight: bold;
+  padding-bottom: 5px;
+  padding-top: 10px;
 }

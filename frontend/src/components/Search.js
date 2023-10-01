@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SearchButton from "./buttons/SearchButton";
 import "../assets/search.css";
 
-const Search = () => {
+const Search = ({ searchPage = false }) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -25,8 +25,8 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <SearchButton handleSearch={handleSearch} />
+    <div className={searchPage ? "searchPageSearcContainer" : ""}>
+      {!searchPage && <SearchButton handleSearch={handleSearch} />}
       <input
         className="searchInput"
         value={searchValue}
@@ -34,6 +34,11 @@ const Search = () => {
         ref={searchRef}
         onKeyDown={handleKeyDown}
       />
+      {searchPage && (
+        <div className="searchPageSearchButton">
+          <SearchButton handleSearch={handleSearch} />
+        </div>
+      )}
     </div>
   );
 };
