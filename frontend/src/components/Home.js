@@ -99,38 +99,8 @@ const Home = () => {
           </div>
         </div>
         <div className="homeColumn">
-          <h3 className="homeHeader">Viimeisimmät & tulevat muutokset</h3>
-          <div>
-            <ul className="list">
-              <li>
-                <b>Uutta:</b>
-              </li>
-              <li>
-                Responsiivisuutta parannettu esim. navigoinnivalikossa ja
-                etusivulla{" "}
-              </li>
-              <li>
-                Nyt uuteen välilehteen esim. henkilötiedot aukastessa tiedot
-                näkyvät, eikä tiedot jää lataamatta
-              </li>
-              <li>
-                Etsi -toimintoon lisätty, että näyttää enemmän tietoa yms.
-              </li>
-              <li>
-                <b>Tulossa:</b>
-              </li>
-              <li>Tulostus</li>
-              <li>Responsiivisuuden parantelua</li>
-              <li>
-                Käyttäjän token eli kirjautumisoikeus saattaa hukkua joissakin
-                yksittäisissä tilanteissa, ei vakava, mutta korjaus tulossa
-              </li>
-              <li>
-                Etsi -toiminnon parantelua, kuten yliviivaus selkotekstiin ja
-                mahdollista avata uusi hakutulos uuteen välilehteen
-              </li>
-            </ul>
-          </div>
+          <h3 className="homeHeader">Päivitykset</h3>
+          <div></div>
         </div>
       </div>
     </>
