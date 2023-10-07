@@ -14,6 +14,7 @@ Features of the family tree application include:
 - Search for individuals, family charts, words using keywords
 - Filtering of person lists and family charts
 - In the family tree chart, you can click on an individual to view their details.
+- For now, a user can be added by slightly modifying the code and using, for example, Postman.
 
 ### Project Setup
 
