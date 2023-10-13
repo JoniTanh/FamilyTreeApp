@@ -13,8 +13,9 @@ Features of the family tree application include:
 - View a person either through different lists or via the family tree chart
 - Search for individuals, family charts, words using keywords
 - Filtering of person lists and family charts
-- In the family tree chart, you can click on an individual to view their details.
-- For now, a user can be added by slightly modifying the code and using, for example, Postman.
+- In the family tree chart, you can click on an individual to view their details
+- For now, a user can be added by slightly modifying the code and using, for example, Postman
+- You can view people's places of birth on the map and add a temporary location to the map
 
 ### Project Setup
 
@@ -54,3 +55,4 @@ Some images of the application. Note! The images contain fictional data.
 ![Alt text](frontend/src/assets/Readme/people.png)
 ![Alt text](frontend/src/assets/Readme/search.png)
 ![Alt text](frontend/src/assets/Readme/familyTree.png)
+![Alt text](frontend/src/assets/Readme/map.png)

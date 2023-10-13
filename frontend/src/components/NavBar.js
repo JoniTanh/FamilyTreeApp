@@ -45,6 +45,11 @@ const NavBar = () => {
                 <h6>Sukupuu</h6>
               </Link>
             </li>
+            <li className="navItem">
+              <Link className="navLink" to="/map">
+                <h6>Kartta</h6>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="navSearchAndInformation">
@@ -114,6 +119,11 @@ const NavBar = () => {
                 <li className="navItem">
                   <Link className="navLink" to="/familytree">
                     <h6>Sukupuu</h6>
+                  </Link>
+                </li>
+                <li className="navItem">
+                  <Link className="navLink" to="/map">
+                    <h6>Kartta</h6>
                   </Link>
                 </li>
               </ul>

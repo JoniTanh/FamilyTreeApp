@@ -14,6 +14,7 @@ import FamiliesMembers from "./components/FamiliesMembers";
 import EditFamilyTable from "./components/EditFamilyTable";
 import Login from "./components/Login";
 import SearchResults from "./components/SearchResults";
+import MapPage from "./components/MapPage";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
           />
           <Route path="/familytree" exact element={<FamilyTree />} />
           <Route path="/search" exact element={<SearchResults />} />
+          <Route path="/map" exact element={<MapPage />} />
           <Route path="/" exact element={<Home />} />
         </Route>
         <Route path="/login" exact element={<Login />} />
