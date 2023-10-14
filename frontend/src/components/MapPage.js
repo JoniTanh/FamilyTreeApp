@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "leaflet/dist/images/marker-shadow.png";
+import "../assets/worldMap.css";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -12,50 +13,70 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+const USER_AGENT = "FamilyTreeApp/1.0 (LocalHostForNow)";
+
 const MapPage = () => {
   const [locationName, setLocationName] = useState("");
-  //const [markers, setMarkers] = useState([[60.1695, 24.9354]]);
   const [markers, setMarkers] = useState([]);
   const [people, setPeople] = useState([]);
 
+  const geocodeCache = {};
+
+  const geocodeLocationName = async (locationName) => {
+    if (geocodeCache[locationName]) {
+      return geocodeCache[locationName];
+    }
+
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${locationName}`,
+      {
+        headers: {
+          "User-Agent": USER_AGENT,
+        },
+      }
+    );
+
+    const data = await response.json();
+    if (data && data.length > 0) {
+      const { lat, lon } = data[0];
+      const result = [parseFloat(lat), parseFloat(lon)];
+      geocodeCache[locationName] = result;
+      return result;
+    }
+
+    return null;
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const people = await peopleService.getAll();
-      setPeople(people);
+      const fetchedPeople = await peopleService.getAll();
+      setPeople(fetchedPeople);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    const geocodeLocationName = async (locationName) => {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${locationName}`
-      );
-      const data = await response.json();
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0];
-        setMarkers((prevMarkers) => [
-          ...prevMarkers,
-          [parseFloat(lat), parseFloat(lon)],
-        ]);
-      } else {
-        console.error(`Location ${locationName} not found!`);
+    const fetchGeoData = async () => {
+      if (people.length > 0) {
+        const uniqueAndNotEmptyBirthPlaces = Array.from(
+          new Set(
+            people
+              .map((x) => x?.birthPlace)
+              .filter((birthPlace) => birthPlace && birthPlace.trim() !== "")
+          )
+        );
+
+        for (let place of uniqueAndNotEmptyBirthPlaces) {
+          const coords = await geocodeLocationName(place);
+          if (coords) {
+            setMarkers((prevMarkers) => [...prevMarkers, coords]);
+          }
+          await new Promise((r) => setTimeout(r, 1000)); // wait for 1 second before the next request
+        }
       }
     };
 
-    if (people.length > 0) {
-      const uniqueAndNotEmptyBirthPlaces = Array.from(
-        new Set(
-          people
-            .map((x) => x?.birthPlace)
-            .filter((birthPlace) => birthPlace && birthPlace.trim() !== "")
-        )
-      );
-
-      uniqueAndNotEmptyBirthPlaces.forEach((place) => {
-        geocodeLocationName(place);
-      });
-    }
+    fetchGeoData();
   }, [people]);
 
   const handleMapCreated = (map) => {
@@ -70,13 +91,9 @@ const MapPage = () => {
   };
 
   const submitLocation = async () => {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${locationName}`
-    );
-    const data = await response.json();
-    if (data && data.length > 0) {
-      const { lat, lon } = data[0];
-      setMarkers([...markers, [parseFloat(lat), parseFloat(lon)]]);
+    const coords = await geocodeLocationName(locationName);
+    if (coords) {
+      setMarkers([...markers, coords]);
     } else {
       alert("Location not found!");
     }
@@ -84,18 +101,14 @@ const MapPage = () => {
 
   return (
     <div>
-      <div style={{ textAlign: "center", margin: "10px" }}>
+      <div className="mapOptionsContainer">
         <input
           value={locationName}
           onChange={handleLocationChange}
           placeholder="Kirjoita sijainti..."
-          style={{ padding: "10px", width: "200px" }}
+          className="mapInput"
         />
-        <button
-          className="btn btn-primary"
-          onClick={submitLocation}
-          style={{ margin: "10px" }}
-        >
+        <button className="btn btn-primary mapButton" onClick={submitLocation}>
           Lisää sijainti
         </button>
         <div>
@@ -109,7 +122,7 @@ const MapPage = () => {
       <MapContainer
         center={[60.1695, 24.9354]}
         zoom={5}
-        style={{ width: "80%", height: "1000px", margin: "20px auto" }}
+        className="mapContainer"
         whenCreated={handleMapCreated}
       >
         <TileLayer
@@ -122,6 +135,13 @@ const MapPage = () => {
           </Marker>
         ))}
       </MapContainer>
+      <div className="attributionContainer">
+        Map data ©{" "}
+        <a href="https://www.openstreetmap.org/copyright">
+          OpenStreetMap contributors
+        </a>{" "}
+        under ODbL. Shared under ODbL.
+      </div>
     </div>
   );
 };

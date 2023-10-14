@@ -1,0 +1,24 @@
+.mapContainer {
+  width: 80%;
+  height: 1000px;
+  margin: 20px auto;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mapOptionsContainer {
+  text-align: center;
+  margin: 10px;
+}
+
+.mapInput {
+  padding: 10px;
+  width: 400px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mapButton {
+  margin: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
