@@ -12,6 +12,7 @@ const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
 const { authRequired } = require("./utils/authRequired");
+const path = require("path");
 
 mongoose.set("strictQuery", false);
 
@@ -36,6 +37,9 @@ app.use("/api/people", authRequired, peopleRouter);
 app.use("/api/users", authRequired, usersRouter);
 app.use("/api/familytables", authRequired, familytableRouter);
 app.use("/api/notes", authRequired, notesRouter);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

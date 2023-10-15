@@ -22,3 +22,12 @@
   margin: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+
+.attributionContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.custom-icon {
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+}
