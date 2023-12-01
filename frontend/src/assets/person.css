@@ -52,35 +52,3 @@
 .personButton {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
-
-.formContainer {
-  display: grid;
-}
-
-.formValueGroup {
-  display: flex;
-  padding-left: 50px;
-  margin: 20px 0 10px 0;
-}
-
-.formInput {
-  margin-right: 20px;
-  width: 15rem;
-  margin-left: 0;
-}
-
-.formTextArea {
-  width: 40rem;
-  height: 10rem;
-}
-
-.formCreateButton {
-  margin: 20px 0 20px 50px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.inputInfoText {
-  color: blue;
-  font-size: 11px;
-  width: 240px;
-}

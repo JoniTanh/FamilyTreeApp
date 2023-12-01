@@ -1,185 +1,114 @@
-import "../assets/person.css";
+import styles from "../assets/personForm.module.css";
+import PersonFormInput from "./UI/PersonFormInput";
 
 const PersonForm = ({ handleSubmit, handleChange, person, buttonText }) => (
-  <div className="formContainer">
+  <div className={styles.container}>
     <form onSubmit={handleSubmit}>
-      <div className="formValueGroup">
-        <div>
-          <div>kutsumanimi: </div>
-          <div>
-            <input
-              className="formInput"
-              name="nickname"
-              value={person.nickname}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div>kaikki etunimet: </div>
-          <div>
-            <input
-              className="formInput"
-              name="firstNames"
-              value={person.firstNames}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="kutsumanimi"
+          name="nickname"
+          value={person.nickname}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="kaikki etunimet"
+          name="firstNames"
+          value={person.firstNames}
+          onChange={handleChange}
+          required
+        />
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>sukunimi: </div>
-          <div>
-            <input
-              className="formInput"
-              name="lastName"
-              value={person.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="inputInfoText">Henkilön nykyinen sukunimi</div>
-        </div>
-        <div>
-          <div>oma suku: </div>
-          <div>
-            <input
-              className="formInput"
-              name="family"
-              value={person.family}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="inputInfoText">Suku, johon henkilö syntynyt</div>
-        </div>
-        <div>
-          <div>muut omat suvut: </div>
-          <div>
-            <input
-              className="formInput"
-              name="allFamilies"
-              value={person.allFamilies}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="inputInfoText">
-            Muut suvut, joihin henkilö kuuluu. Erota suvut pilkulla. Esim.
-            Suku1, Suku2
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="sukunimi"
+          name="lastName"
+          value={person.lastName}
+          onChange={handleChange}
+          required
+          infoText="Henkilön nykyinen sukunimi"
+        />
+        <PersonFormInput
+          label="sukunimi"
+          name="family"
+          value={person.family}
+          onChange={handleChange}
+          required
+          infoText="Suku, johon henkilö syntynyt"
+        />
+        <PersonFormInput
+          label="muut omat suvut"
+          name="allFamilies"
+          value={person.allFamilies}
+          onChange={handleChange}
+          infoText="Muut suvut, joihin henkilö kuuluu. Erota suvut pilkulla. Esim. Suku1, Suku2"
+        />
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>syntymäpaikka: </div>
-          <div>
-            <input
-              className="formInput"
-              name="birthPlace"
-              value={person.birthPlace}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div>syntymäaika: </div>
-          <div>
-            <input
-              className="formInput"
-              name="birthTime"
-              value={person.birthTime}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="syntymäpaikka"
+          name="birthPlace"
+          value={person.birthPlace}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="syntymäaika"
+          name="birthTime"
+          value={person.birthTime}
+          onChange={handleChange}
+        />
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>kummit: </div>
-          <div>
-            <input
-              className="formInput"
-              name="godparents"
-              value={person.godparents}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div> kastepäivä: </div>
-          <div>
-            <input
-              className="formInput"
-              name="baptismDay"
-              value={person.baptismDay}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="kummit"
+          name="godparents"
+          value={person.godparents}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="kastepäivä"
+          name="baprismDay"
+          value={person.baptismDay}
+          onChange={handleChange}
+        />
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>kuolinpaikka: </div>
-          <div>
-            <input
-              className="formInput"
-              name="deathPlace"
-              value={person.deathPlace}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div>kuolinaika: </div>
-          <div>
-            <input
-              className="formInput"
-              name="deathTime"
-              value={person.deathTime}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div>kuolinsyy: </div>
-          <div>
-            <input
-              className="formInput"
-              name="deathReason"
-              value={person.deathReason}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="kuolinpaikka"
+          name="deathPlace"
+          value={person.deathPlace}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="kuolinaika"
+          name="deathTime"
+          value={person.deathTime}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="kuolinsyy"
+          name="deathReason"
+          value={person.deathReason}
+          onChange={handleChange}
+        />
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>hautapaikka: </div>
-          <div>
-            <input
-              className="formInput"
-              name="burialPlot"
-              value={person.burialPlot}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div>hautausaika: </div>
-          <div>
-            <input
-              className="formInput"
-              name="burialTime"
-              value={person.burialTime}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="hautapaikka"
+          name="burialPlot"
+          value={person.burialPlot}
+          onChange={handleChange}
+        />
+        <PersonFormInput
+          label="hautausaika"
+          name="burialTime"
+          value={person.burialTime}
+          onChange={handleChange}
+        />
       </div>
-      <div className="formValueGroup">
+      <div className={styles.valueGroup}>
         <div>
-          <div>elämänkerta: </div>
+          <div>elämänkerta:</div>
           <div>
             <textarea
               className="formTextArea"
@@ -190,21 +119,16 @@ const PersonForm = ({ handleSubmit, handleChange, person, buttonText }) => (
           </div>
         </div>
       </div>
-      <div className="formValueGroup">
-        <div>
-          <div>lähteet: </div>
-          <div>
-            <input
-              className="formInput"
-              name="sources"
-              value={person.sources}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+      <div className={styles.valueGroup}>
+        <PersonFormInput
+          label="lähteet"
+          name="sources"
+          value={person.sources}
+          onChange={handleChange}
+        />
       </div>
       <button
-        className="btn btn-outline-success formCreateButton"
+        className={`btn btn-outline-success ${styles.createButton}`}
         type="submit"
       >
         {buttonText}

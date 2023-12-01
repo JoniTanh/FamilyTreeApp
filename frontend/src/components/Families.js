@@ -71,7 +71,7 @@ const Families = () => {
                     <img
                       className="card-img-top"
                       src={FamilyBanner}
-                      alt="Card image cap"
+                      alt="Card cap"
                     />
                     <div className="card-body">
                       <p className="card-text">{family}</p>

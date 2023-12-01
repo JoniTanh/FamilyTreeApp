@@ -1,0 +1,121 @@
+.navBarContainer {
+    background: #0dcaf0;
+    border-bottom: 1px solid black;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navBarContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list {
+    display: flex;
+    padding-top: 25px;
+}
+
+.listItem {
+    list-style: none;
+    margin-right: 20px;
+}
+
+.firstListItem {
+    list-style: none;
+    margin-right: 20px;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.infoContainer {
+    display: flex;
+}
+
+.search {
+    padding-top: 15px;
+    margin-right: 25px;
+}
+
+.userInformation {
+    display: flex;
+    align-items: center;
+}
+
+.user {
+    margin-left: 5px;
+}
+
+.logoutButton {
+    padding: 15px 50px 0 15px;
+}
+
+.toggleButton {
+    display: none;
+}
+
+.dropdownSearch {
+    display: none;
+}
+
+.dropdownUserInfo {
+    display: none;
+}
+
+.dropdown {
+    display: none;
+}
+
+@media screen and (max-width: 1300px) {
+    .navBarContainer {
+        display: block;
+    }
+
+    .navBarContent {
+        display: none;
+    }
+
+    .list {
+        padding: 0 0 0 5px;
+    }
+
+    .listItem {
+        margin: 0;
+        padding: 25px 25px 0 0;
+    }
+
+    .dropdownContainer {
+        padding: 15px;
+    }
+
+    .toggleButton {
+        display: block;
+    }
+
+    .dropdownSearch {
+        display: block;
+        margin-left: 10px;
+    }
+
+    .logoutButton {
+        padding: 0 0 0 10px;
+    }
+
+    .dropdown {
+        display: block;
+    }
+
+    .options {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menuSearch {
+        display: flex;
+    }
+
+    .dropdownUserInfo {
+        display: block;
+    }
+}

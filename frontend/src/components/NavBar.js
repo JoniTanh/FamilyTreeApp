@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import Search from "./Search";
 import Logout from "./Logout";
 import { useState } from "react";
-import "../assets/navbar.css";
+import styles from "../assets/navbar.module.css";
 import { ListIcon } from "../assets/Icons";
+import NavItem from "./UI/NavItem";
 
 const NavBar = () => {
   const user = JSON.parse(localStorage.getItem("token"))?.name;
@@ -16,116 +16,68 @@ const NavBar = () => {
   const isNavContentVisible = { display: !isNavOpen ? "none" : "" };
 
   return (
-    <div className="navBarContainer">
-      <div className="navBarContent">
+    <div className={styles.navBarContainer}>
+      <div className={styles.navBarContent}>
         <div>
-          <ul className="navList">
-            <li className="firstNavItem">
-              <Link className="navLink" to="/">
-                <h6>Etusivu</h6>
-              </Link>
-            </li>
-            <li className="navItem">
-              <Link className="navLink" to="/people">
-                <h6>Henkilöt</h6>
-              </Link>
-            </li>
-            <li className="navItem">
-              <Link className="navLink" to="/familytables">
-                <h6>Perhetaulut</h6>
-              </Link>
-            </li>
-            <li className="navItem">
-              <Link className="navLink" to="/families">
-                <h6>Suvut</h6>
-              </Link>
-            </li>
-            <li className="navItem">
-              <Link className="navLink" to="/familytree">
-                <h6>Sukupuu</h6>
-              </Link>
-            </li>
-            <li className="navItem">
-              <Link className="navLink" to="/map">
-                <h6>Kartta</h6>
-              </Link>
-            </li>
+          <ul className={styles.list}>
+            <NavItem navigateTo="/" headerText="Etusivu" firstItem={true} />
+            <NavItem navigateTo="/people" headerText="Henkilöt" />
+            <NavItem navigateTo="/familytables" headerText="Perhetaulut" />
+            <NavItem navigateTo="/families" headerText="Suvut" />
+            <NavItem navigateTo="/familytree" headerText="Sukupuu" />
+            <NavItem navigateTo="/map" headerText="Kartta" />
           </ul>
         </div>
-        <div className="navSearchAndInformation">
-          <span className="navSearch">
+        <div className={styles.infoContainer}>
+          <span className={styles.search}>
             <Search />
           </span>
-          <span className="navUserInformation">
+          <span className={styles.userInformation}>
             <span>Olet kirjautunut sisään käyttäjällä</span>
-            <span className="fw-bold navUser">{user}</span>
+            <span className={`fw-bold ${styles.user}`}>{user}</span>
           </span>
-          <span className="navLogoutButton">
+          <span className={styles.logoutButton}>
             <Logout />
           </span>
         </div>
       </div>
 
-      <div className="dropdownContainer">
-        <div className="navOptions">
-          <div className="navMenuAndSearch">
+      <div className={styles.dropdownContainer}>
+        <div className={styles.options}>
+          <div className={styles.menuSearch}>
             <div>
               <button
-                className="btn btn-outline-dark toggleButton"
+                className={`btn btn-outline-dark ${styles.toggleButton}`}
                 onClick={handleToggleClick}
               >
                 <ListIcon />
               </button>
             </div>
-            <div className="dropdownSearch">
+            <div className={styles.dropdownSearch}>
               <Search />
             </div>
           </div>
           <div>
-            <div className="dropdownUserInformation">
+            <div className={styles.dropdownUserInfo}>
               Olet kirjautunut sisään käyttäjällä{" "}
               <span className="fw-bold">{user}</span>
-              <span className="navLogoutButton">
+              <span className={styles.logoutButton}>
                 <Logout />
               </span>
             </div>
           </div>
         </div>
 
-        <div style={isNavContentVisible} className="dropdown">
+        <div style={isNavContentVisible} className={styles.dropdown}>
           <div>
             <div>
-              <ul className="navList">
-                <li className="navItem">
-                  <Link className="navLink" to="/">
-                    <h6>Etusivu</h6>
-                  </Link>
-                </li>
-                <li className="navItem">
-                  <Link className="navLink" to="/people">
-                    <h6>Henkilöt</h6>
-                  </Link>
-                </li>
-                <li className="navItem">
-                  <Link className="navLink" to="/familytables">
-                    <h6>Perhetaulut</h6>
-                  </Link>
-                </li>
-                <li className="navItem">
-                  <Link className="navLink" to="/families">
-                    <h6>Suvut</h6>
-                  </Link>
-                </li>
-                <li className="navItem">
-                  <Link className="navLink" to="/familytree">
-                    <h6>Sukupuu</h6>
-                  </Link>
-                </li>
-                <li className="navItem">
-                  <Link className="navLink" to="/map">
-                    <h6>Kartta</h6>
-                  </Link>
-                </li>
+              <ul className={styles.list}>
+                <NavItem navigateTo="/" headerText="Etusivu" />
+                <NavItem navigateTo="/people" headerText="Henkilöt" />
+                <NavItem navigateTo="/familytables" headerText="Perhetaulut" />
+                <NavItem navigateTo="/families" headerText="Suvut" />
+                <NavItem navigateTo="/familytree" headerText="Sukupuu" />
+                <NavItem navigateTo="/map" headerText="Kartta" />
               </ul>
             </div>
           </div>

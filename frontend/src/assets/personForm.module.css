@@ -1,0 +1,31 @@
+.container {
+    display: grid;
+}
+
+.valueGroup {
+    display: flex;
+    padding-left: 50px;
+    margin: 20px 0 10px 0;
+}
+
+.input {
+    margin-right: 20px;
+    width: 15rem;
+    margin-left: 0;
+}
+
+.textArea {
+    width: 40rem;
+    height: 10rem;
+}
+
+.createButton {
+    margin: 20px 0 20px 50px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.infoText {
+    color: blue;
+    font-size: 11px;
+    width: 240px;
+}
