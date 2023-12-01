@@ -4,6 +4,7 @@ import ReturnButton from "./buttons/ReturnButton";
 import { useState, useEffect, useRef } from "react";
 import familyTableService from "../services/familytables";
 import { useReactToPrint } from "react-to-print";
+import PersonInfo from "./common/PersonInfo";
 
 const FamilyTable = () => {
   const { id } = useParams();
@@ -79,24 +80,8 @@ const FamilyTable = () => {
           <div>
             <b>sukunimi tai talonnimi (oma, ei puoliso): </b> {person?.family}
           </div>
-          <div>
-            <b>äiti: </b>
-            {mother?.firstNames} {mother?.nickname && `"${mother?.nickname}"`}{" "}
-            {mother?.lastName}{" "}
-            {(mother?.birthPlace || mother?.birthTime) &&
-              `s. ${mother?.birthPlace} ${mother?.birthTime}`}{" "}
-            {(mother?.deathPlace || mother?.deathTime || mother?.deathReason) &&
-              `k. ${mother?.deathPlace} ${mother?.deathTime} ${mother?.deathReason}`}
-          </div>
-          <div className="pb-4">
-            <b>isä: </b>
-            {father?.firstNames} {father?.nickname && `"${father?.nickname}"`}{" "}
-            {father?.lastName}{" "}
-            {(father?.birthPlace || father?.birthTime) &&
-              `s. ${father?.birthPlace} ${father?.birthTime}`}{" "}
-            {(father?.deathPlace || father?.deathTime || father?.deathReason) &&
-              `k. ${father?.deathPlace} ${father.deathTime} ${father?.deathReason}`}
-          </div>
+          <PersonInfo person={mother} title="äiti" />
+          <PersonInfo person={father} title="isä" paddingBottom />
           <div>
             <b>syntynyt (paikka, aika): </b>
             {person?.birthPlace} {person?.birthTime}
@@ -113,30 +98,12 @@ const FamilyTable = () => {
             <b>puoliso: </b> {spouse?.firstNames}{" "}
             {spouse?.nickname && `"${spouse?.nickname}"`} {spouse?.lastName}
           </div>
-          <div>
-            <b>puolison äiti: </b>
-            {spouseMother?.firstNames}{" "}
-            {spouseMother?.nickname && `"${spouseMother?.nickname}"`}{" "}
-            {spouseMother?.lastName}{" "}
-            {(spouseMother?.birthPlace || spouseMother?.birthTime) &&
-              `s. ${spouseMother?.birthPlace} ${spouseMother?.birthTime}`}
-            {(spouseMother?.deathPlace ||
-              spouseMother?.deathTime ||
-              spouseMother?.deathReason) &&
-              `k. ${spouseMother?.deathPlace} ${spouseMother?.deathTime} ${spouseMother?.deathReason}`}
-          </div>
-          <div className="pb-4">
-            <b>puolison isä: </b>
-            {spouseFather?.firstNames}{" "}
-            {spouseFather?.nickname && `"${spouseFather?.nickname}"`}{" "}
-            {spouseFather?.lastName}{" "}
-            {(spouseFather?.birthPlace || spouseFather?.birthTime) &&
-              `s. ${spouseFather?.birthPlace} ${spouseFather?.birthTime}`}
-            {(spouseFather?.deathPlace ||
-              spouseFather?.deathTime ||
-              spouseFather?.deathReason) &&
-              `k. ${spouseFather?.deathPlace} ${spouseFather?.deathTime} ${spouseFather?.deathReason}`}
-          </div>
+          <PersonInfo person={spouseMother} title="puolison äiti" />
+          <PersonInfo
+            person={spouseFather}
+            title="puolison isä"
+            paddingBottom
+          />
           <div>
             <b>syntynyt (paikka, aika): </b>
             {spouse?.birthPlace} {spouse?.birthTime}
@@ -148,14 +115,7 @@ const FamilyTable = () => {
           <div className="pb-4">
             <b>lapset: </b>
             {children.map((child, i) => (
-              <div key={i}>
-                {child?.firstNames} {child?.nickname && `"${child?.nickname}"`}{" "}
-                {child?.lastName}{" "}
-                {(child?.birthPlace || child?.birthTime) &&
-                  `s. ${child?.birthPlace} ${child?.birthTime}`}{" "}
-                {(child?.deathPlace || child?.deathTime) &&
-                  `k. ${child?.deathPlace} ${child?.deathTime}`}
-              </div>
+              <PersonInfo key={i} person={child} />
             ))}
           </div>
           <div className="pb-4">
