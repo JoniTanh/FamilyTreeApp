@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from "react";
-import "../assets/home.css";
+import { useState } from "react";
+import styles from "../assets/home.module.css";
 import notesService from "../services/notes";
 import DeleteModal from "../components/DeleteModal";
+import { Await, useLoaderData } from "react-router";
 
 const Home = () => {
-  const [notes, setNotes] = useState([]);
+  const data = useLoaderData();
+  const [notes, setNotes] = useState(data || []);
   const [newNote, setNewNote] = useState("");
   const [inputVisible, setInputVisible] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 
   const showWhenVisible = { display: inputVisible ? "" : "none" };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const notes = await notesService.getAll();
-      setNotes(notes);
-    };
-    fetchData();
-  }, []);
 
   const addNote = async (event) => {
     event.preventDefault();
@@ -38,21 +32,21 @@ const Home = () => {
 
   return (
     <>
-      <div className="homeContainer">
-        <div className="homeColumn">
+      <div className={styles.container}>
+        <div className={styles.column}>
           <div>
-            <div className="homeHeaderContainer">
+            <div className={styles.headerContainer}>
               <div>
-                <h3 className="homeHeader">Muistiinpanot</h3>
+                <h3 className={styles.header}>Muistiinpanot</h3>
               </div>
-              <div className="noteButtonContainer">
+              <div>
                 <button
                   onClick={() => {
                     inputVisible
                       ? setInputVisible(false)
                       : setInputVisible(true);
                   }}
-                  className="btn noteButton"
+                  className={`btn ${styles.noteButton}`}
                 >
                   {inputVisible ? "-" : "+"}
                 </button>
@@ -60,7 +54,7 @@ const Home = () => {
                   onClick={() => {
                     deleteMode ? setDeleteMode(false) : setDeleteMode(true);
                   }}
-                  className="btn noteDeleteModeButton"
+                  className={`btn ${styles.deleteModeButton}`}
                 >
                   {deleteMode ? "_" : "x"}
                 </button>
@@ -68,38 +62,40 @@ const Home = () => {
             </div>
           </div>
           <div>
-            <ul className="list">
-              {notes.map((note) => (
-                <li key={note.id}>
-                  <div className="noteContainer">
-                    {note.text}
-                    {deleteMode && (
-                      <DeleteModal
-                        headerTextPart={"muistiinpanon"}
-                        removeNote={removeNote}
-                        note={note}
-                      />
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <Await resolve={notes}>
+              <ul className="list">
+                {notes.map((note) => (
+                  <li key={note.id}>
+                    <div className={styles.noteContainer}>
+                      {note.text}
+                      {deleteMode && (
+                        <DeleteModal
+                          headerTextPart={"muistiinpanon"}
+                          removeNote={removeNote}
+                          note={note}
+                        />
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Await>
           </div>
           <div style={showWhenVisible}>
             <form onSubmit={addNote}>
               <input
-                className="homeInput"
+                className={styles.homeInput}
                 value={newNote}
                 onChange={handleNoteChange}
               />
-              <button type="submit" className="btn noteInputButton">
+              <button type="submit" className={`btn ${styles.noteButton}`}>
                 +
               </button>
             </form>
           </div>
         </div>
-        <div className="homeColumn">
-          <h3 className="homeHeader">Päivitykset</h3>
+        <div className={styles.column}>
+          <h3 className={styles.header}>Päivitykset</h3>
           <div></div>
         </div>
       </div>
@@ -108,3 +104,12 @@ const Home = () => {
 };
 
 export default Home;
+
+async function loadNotes() {
+  const data = await notesService.getAll();
+  return data;
+}
+
+export function loader() {
+  return loadNotes();
+}

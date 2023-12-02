@@ -1,5 +1,5 @@
 import { TreeIcon } from "../assets/Icons";
-import "../assets/home.css";
+import styles from "../assets/home.module.css";
 
 const LoginForm = ({
   handleLogin,
@@ -19,7 +19,9 @@ const LoginForm = ({
             </h2>
             <p className="text-black-50 mb-5 text-center">
               {message ? (
-                <label className="loginErrorMessage">{message.text}!</label>
+                <label className={styles.loginErrorMessage}>
+                  {message.text}!
+                </label>
               ) : (
                 "Syötä käyttäjätunnus ja salasana."
               )}
