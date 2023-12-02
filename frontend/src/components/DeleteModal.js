@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TrashIcon } from "../assets/Icons";
 import Modal from "react-modal";
-import "../assets/deleteModal.css";
+import styles from "../assets/deleteModal.module.css";
 
 const customStyles = {
   content: {
@@ -19,7 +19,7 @@ Modal.setAppElement("#root");
 
 const DeleteButton = ({ onClick }) => (
   <button
-    className="btn btn-outline-danger modalDeleteButton"
+    className={`btn btn-outline-danger ${styles.deleteButton}`}
     onClick={onClick}
   >
     Poista
@@ -48,7 +48,7 @@ const DeleteModal = ({
   return (
     <>
       {note && (
-        <button className="modalXButton" onClick={openModal}>
+        <button className={styles.modalXButton} onClick={openModal}>
           x
         </button>
       )}
@@ -63,10 +63,10 @@ const DeleteModal = ({
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <h4 className="modalHeader">
+        <h4 className={styles.header}>
           Haluatko varmasti poistaa {headerTextPart}?
         </h4>
-        <div className="modalText">
+        <div className={styles.text}>
           <p>
             {note?.text} {person?.firstNames} {person?.lastName}{" "}
             {familytable?.person.firstNames} {familytable?.person.lastName}
@@ -91,7 +91,7 @@ const DeleteModal = ({
             />
           ) : null}
           <button
-            className="btn btn-outline-secondary modalCancelButton"
+            className={`btn btn-outline-secondary ${styles.cancelButton}`}
             onClick={closeModal}
           >
             Peruuta

@@ -49,10 +49,10 @@ npm run build
 
 Some images of the application. Note! The images contain fictional data.
 
-![Alt text](frontend/src/assets/Readme/login.png)
-![Alt text](frontend/src/assets/Readme/home.png)
-![Alt text](frontend/src/assets/Readme/newPerson.png)
-![Alt text](frontend/src/assets/Readme/people.png)
-![Alt text](frontend/src/assets/Readme/search.png)
-![Alt text](frontend/src/assets/Readme/familyTree.png)
-![Alt text](frontend/src/assets/Readme/map.png)
+![Alt text](frontend/public/Readme/login.png)
+![Alt text](frontend/public/Readme/home.png)
+![Alt text](frontend/public/Readme/newPerson.png)
+![Alt text](frontend/public/Readme/people.png)
+![Alt text](frontend/public/Readme/search.png)
+![Alt text](frontend/public/Readme/familyTree.png)
+![Alt text](frontend/public/Readme/map.png)

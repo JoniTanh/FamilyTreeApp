@@ -5,7 +5,7 @@ import { PencilIcon, ShowPersonIcon } from "../assets/Icons";
 import peopleService from "../services/people";
 import Notification from "../components/Notification";
 import NewPersonButton from "./buttons/NewPersonButton";
-import "../assets/people.css";
+import styles from "../assets/people.module.css";
 import PageOptions from "../components/PageOptions";
 import DeleteModal from "../components/DeleteModal";
 
@@ -82,13 +82,13 @@ const People = () => {
         type={message?.type}
       />
       <div className="container">
-        <div className="peopleOptions">
+        <div className={styles.options}>
           <div>
             <NewPersonButton />
           </div>
-          <div className="peopleFilter">
+          <div className={styles.filter}>
             <Filter
-              styleName={"peopleFilterInput"}
+              styleName={styles.filterInput}
               filter={filter}
               handleFilterChange={handleFilterChange}
               handleClearFilter={handleClearFilter}
@@ -96,8 +96,8 @@ const People = () => {
           </div>
         </div>
       </div>
-      <div className="container peopleContainer">
-        <h1 className="peopleHeader">Henkilöt</h1>
+      <div className={`container ${styles.container}`}>
+        <h1 className={styles.header}>Henkilöt</h1>
         <table className="table">
           <thead>
             <tr>

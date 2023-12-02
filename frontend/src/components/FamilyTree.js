@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import familytableService from "../services/familytables";
 import SingleSelect from "../components/SingleSelect";
 import "../assets/familyTree.css";
@@ -25,7 +25,7 @@ const FamilyTree = () => {
     });
 
     setSelectedPersonData(filteredFamilyTables);
-  }, [selectedPerson]);
+  }, [selectedPerson, familytables]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,11 +34,6 @@ const FamilyTree = () => {
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    d3.select(graphContainer.current).selectAll("*").remove();
-    renderTree(result, familytables, setSelectedPerson);
-  }, [familytables, result]);
 
   const selectPeopleData = familytables
     .filter(({ person }) => person)
@@ -55,7 +50,7 @@ const FamilyTree = () => {
     setSelectedFamilyTable(selectedOption?.value);
   };
 
-  const renderTree = (result, familytables, setSelectedPerson) => {
+  const renderTree = useCallback((result, familytables, setSelectedPerson) => {
     if (!result || familytables.length === 0) {
       return;
     }
@@ -162,7 +157,12 @@ const FamilyTree = () => {
         node: "node", // testing
       },
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    d3.select(graphContainer.current).selectAll("*").remove();
+    renderTree(result, familytables, setSelectedPerson);
+  }, [familytables, renderTree, result]);
 
   useEffect(() => {
     const handleResize = () => {
